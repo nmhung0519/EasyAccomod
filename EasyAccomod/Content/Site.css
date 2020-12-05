@@ -17,11 +17,6 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
 body {
     padding-top: 50px;
     padding-bottom: 0;
@@ -48,16 +43,6 @@ body {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 576px) {
-    #acc-menu {
-        visibility: hidden;
-    }
-
-    #side-nav {
-        display: block;
-    }
-}
-
 #acc-menu > li > a {
     text-decoration: none;
     color: black;
@@ -79,14 +64,8 @@ body {
 
 #picture {
     height: 400px;
-    background: #28282e url(https://42796r1ctbz645bo223zkcdl-wpengine.netdna-ssl.com/wp-content/uploads/2020/03/sean-pollock-PhYq704ffdA-unsplash-2-1281x612.jpg) center no-repeat;
+    background: #28282e url('../Picture/banner.jpg') center no-repeat;
     background-size: cover;
-}
-
-@media only screen and (max-width: 576px) {
-    #picture {
-        height: 300px;
-    }
 }
 
 #btn-dang-tin {
@@ -160,6 +139,19 @@ body {
         -o-transition: all .5s;
         transition: all .5s;
     }
+    #title {
+        font-size: 18px;
+    }
+    #picture {
+        height: 300px;
+    }
+    #acc-menu {
+        visibility: hidden;
+    }
+
+    #side-nav {
+        display: block;
+    }
 }
 
 #picture {
@@ -191,12 +183,6 @@ body {
     text-align: center;
     padding: 0 50px;
     top: 50px;
-}
-
-@media only screen and (max-width: 576px) {
-    #title {
-        font-size: 18px;
-    }
 }
 
 #top-search {
@@ -242,7 +228,7 @@ body {
         border: none;
         font-size: 16px;
         padding: 0;
-        padding: 0 10px 0 36px;
+        padding: 0 115px 0 36px;
         border: none;
         line-height: 46px;
         color: #262637;
