@@ -12,16 +12,7 @@
     <div id="picture" class="container-fluid">
         <div id="overlay"></div>
         <h1 id="title">Tìm nhà trọ thích hợp</h1>
-        <div id="top-search" class="container pt-2 px-2 px-sm-5">
-            <div id="search-bar" class="h-50 mx-auto mt-5 px-2 pt-3">
-                <div id="search-keyword" class="w-100 mx-auto bg-white h-25 mt-3">
-                    <i class="fa fa-search"></i>
-                    <input type="text" id="text-search" placeholder="Từ khoá">
-                    <div class="btn-search">Tìm kiếm</div>
-                </div>
-
-            </div>
-        </div>
+        @Html.Partial("SearchContainer")
     </div>
 </div>
 <script>
@@ -38,3 +29,4 @@
         }
     })
 </script>
+<script src="~/Scripts/address.control.js"></script>

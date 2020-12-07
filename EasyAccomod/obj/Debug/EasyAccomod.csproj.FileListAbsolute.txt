@@ -61,7 +61,6 @@ E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\K4os.Hash.xxHash.dll
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Microsoft.Web.Infrastructure.dll
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Data.dll
-E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Data.EntityFramework.dll
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Newtonsoft.Json.dll
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Renci.SshNet.dll
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\System.Buffers.dll
@@ -86,7 +85,6 @@ E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\K4os.Compression.LZ4
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\K4os.Compression.LZ4.Streams.xml
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\K4os.Hash.xxHash.xml
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Data.xml
-E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Data.EntityFramework.xml
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Renci.SshNet.xml
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\System.Buffers.xml
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\System.Memory.xml
@@ -107,3 +105,11 @@ E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.cs
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.csproj.CopyComplete
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.dll
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.pdb
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\WebMatrix.Data.dll
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\WebMatrix.WebData.dll
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\WebMatrix.Data.xml
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\WebMatrix.WebData.xml
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Web.dll
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Web.xml
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Data.EntityFramework.dll
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\MySql.Data.EntityFramework.xml

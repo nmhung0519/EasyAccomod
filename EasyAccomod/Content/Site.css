@@ -253,3 +253,14 @@ body {
 .slide-menu-active {
     left: 0 !important;
 }
+
+#search-bar > form {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#filter-container > select {
+    margin-bottom: 5px;
+    outline: none
+}

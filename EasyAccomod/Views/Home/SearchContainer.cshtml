@@ -1,0 +1,36 @@
+﻿@model EasyAccomod.Models.SearchModel
+
+    <div id="top-search" class="container pt-2 px-2 px-sm-5">
+        
+        <div id="search-bar" class="h-50 mx-auto mt-5 px-2 pt-3">
+            @using (Html.BeginForm("Search", "Home"))
+            {
+                <div id="search-keyword" class="w-100 mx-auto bg-white h-25 mt-3" style="margin-bottom: 10px">
+
+                    <i class="fa fa-search"></i>
+                    <input id="text-search" name="keyWord" placeholder="Từ khoá" />
+                    <button class="btn-search">Tìm kiếm</button>
+                </div>
+                <div id="filter-container" style="position: relative; z-index: 10">
+                    <select class="type-filter" name="type">
+                        <option value="-1">Tất cả loại BĐS</option>
+                        <option value="1">Phòng trọ</option>
+                        <option value="2">Chung cư mini</option>
+                        <option value="3">Nhà nguyên căn</option>
+                        <option value="4">Chung cư nguyên căn</option>
+                    </select>
+                    <select class="city-filter" name="cityId">
+                        <option value="-1">Toàn quốc</option>
+                    </select>
+                    <select class="district-filter" name="districtId" disabled>
+                        <option value="-1">Tất cả Quận/Huyện/Thị xã</option>
+
+                    </select>
+                    <select class="ward-filter" disabled>
+                        <option value="-1">Tất cả Phường/Xã</option>
+                    </select>
+                </div>
+            }
+        </div>
+        </div>
+
