@@ -16,7 +16,6 @@ namespace EasyAccomod.Controllers
 
         public ActionResult Search(SearchModel model)
         {
-
             return RedirectToAction("Index");
         }
     }
