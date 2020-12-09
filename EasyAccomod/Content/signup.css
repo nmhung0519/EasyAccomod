@@ -1,0 +1,62 @@
+﻿.page-container {
+    background: url("https://cdn.asiatatler.com/asiatatler/i/hk/2020/01/20123811-hong-kong-most-expensive-city-julius-baer-hong-kong-tatler_cover_2000x1342.jpg")center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+}
+
+#overlay {
+    z-index: 1;
+    background-color: rgba(52, 52, 95, 0.33);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.form-container {
+    z-index: 2;
+    position: relative;
+    width: 70%;
+}
+
+.form-check-user-type {
+    text-align: center;
+}
+
+@media only screen and (min-width: 1000px) {
+    .form-check-user-type {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .form-container {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .form-container {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .form-container {
+        width: 95%;
+    }
+}
+
+#header {
+    display: contents;
+}
+
+.err-msg {
+    color: red;
+}

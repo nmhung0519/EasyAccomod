@@ -1,0 +1,65 @@
+﻿@model EasyAccomod.Models.SignInModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>EasyAccomod</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/signin.css" />
+</head>
+<body>
+    <div class="page-container container-fluid w-100 vh-100 " style="overflow: hidden;">
+        <div id="overlay" style="display: none"></div>
+        <div class="form-container container mx-auto  bg-light mt-5 px-0 px-lg-5 rounded py-3">
+            <div id="header" class="container">
+                <h4 class="font-weight-bold text-center">Đăng nhập</h4>
+                <div id="login-form-container" class="container pt-3">
+                    @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.username)
+                            @Html.TextBoxFor(m => m.username, new { @class = "form-control" })<br />
+                            @Html.ValidationMessageFor(m => m.username, null, new { @class = "err-msg" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.password)
+                            @Html.TextBoxFor(m => m.password, new { @class = "form-control" })<br />
+                            @Html.ValidationMessageFor(m => m.password, null, new { @class = "err-msg" })
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox"><span class="pl-1">Hiện mật khẩu</span>
+                        </div>
+                        <div class="container text-center">
+                            <span class="err-msg"></span>
+                            <button type="submit" id="submit-btn" value="submit" name="submit" class="btn btn-primary ">Đăng nhập</button>
+                        </div>
+                        <div class="form-group mt-3">
+                            <span id="forgot-password">
+                                <a class="text-decoration-none" href="/">Quên mật khẩu?</a>
+                            </span>
+                        </div>
+
+                    }
+                    <div id="guess-sign-up" class="container pt-2">
+                        <div id="message" class="text-center text-danger">
+                            <p>
+                                Mật khẩu sai
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <span>Chưa có tài khoản? </span><span id="link-to-sign-up">
+                                <a class="text-decoration-none" href="/">Đăng ký ngay</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

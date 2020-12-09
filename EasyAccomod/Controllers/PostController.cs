@@ -25,5 +25,17 @@ namespace EasyAccomod.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public ActionResult CreatePost()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePost(EditPostModel model)
+        {
+            return View();
+        }
     }
 }
