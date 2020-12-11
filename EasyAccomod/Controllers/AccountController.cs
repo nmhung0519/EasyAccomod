@@ -19,8 +19,20 @@ namespace EasyAccomod.Controllers
         public ActionResult SignIn(SignInModel model)
         {
             if (!ModelState.IsValid) return View(model);
-            //Xử lý đăng nhập
-            return View();
+            using (var db = new DBContext())
+            {
+                var account = (from a in db.Accounts
+                               where a.username == model.username && a.password == model.password
+                               select a).FirstOrDefault();
+                if (account == null)
+                {
+                    ModelState.AddModelError("err-msg", "Tài khoản hoặc mật khẩu không chính xác");
+                    return View(model);
+                }
+
+                Session["userid"] = account.Id;
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -33,7 +45,7 @@ namespace EasyAccomod.Controllers
         public ActionResult SignUp(SignUpModel model)
         {
             if (!ModelState.IsValid) return (View(model));
-            return View();
+            return RedirectToAction("SignIn");
         }
     }
 }

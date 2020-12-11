@@ -1,0 +1,15 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}    
+<head>
+        <link rel="stylesheet" type="text/css" href="~/Content/signin.css" />
+    </head>
+    <div class="page-container container-fluid w-100 vh-100 " style="overflow: hidden;">
+        <div class="form-container container mx-auto  bg-light mt-5 px-0 px-lg-5 rounded py-3" style="max-height: 80%; overflow: auto">
+            <div style="overflow: hidden">
+                <div id="account-header" class="container">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>

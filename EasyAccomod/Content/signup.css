@@ -55,6 +55,7 @@
 
 #header {
     display: contents;
+    margin: 0 10px
 }
 
 .err-msg {

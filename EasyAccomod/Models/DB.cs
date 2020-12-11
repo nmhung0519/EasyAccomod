@@ -24,7 +24,7 @@ namespace EasyAccomod.Models
     public class DistrictModel
     {
         [Key]
-        [Column]
+        [Column("id")]
         public int Id { get; set; }
 
         [Column("districtname")]

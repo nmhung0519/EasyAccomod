@@ -1,127 +1,106 @@
-﻿@model EasyAccomod.Models.SignUpModel
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>EasyAccomod</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/address.control.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/Content/signup.css" />
-</head>
-<body>
-    <div class="page-container container-fluid w-100 h-100 py-1 ">
-        <div id="overlay"></div>
-        <div class="form-container container mx-auto  bg-light px-1  px-lg-5 py-3 rounded ">
-            <div id="header" class="container">
-                <div id="above-sign-up-form" class="row">
-                    <div class="col-12 col-lg-6">
-                        <h4 class="font-weight-bold text-center">Đăng ký thành viên</h4>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="form-check-user-type">
-                            <span>Bạn là? </span>
-                            <div class="d-inline-block">
-                                <div class="d-inline-block mr-2">
-                                    <input type="radio" id="type-owner" name="user-type">
-                                    <label for="type-owner">Chủ nhà trọ</label>
-                                </div>
-                                <div class="d-inline-block">
-                                    <input type="radio" id="type-normal-user" name="user-type">
-                                    <label for="type-normal-user">Người thuê trọ</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+﻿@{ 
+    Layout = "~/Views/Account/_LayoutAccount.cshtml";
+}
+@model EasyAccomod.Models.SignUpModel
+
+<div id="above-sign-up-form" class="row">
+    <div class="col-12 col-lg-6">
+        <h4 class="font-weight-bold text-center">Đăng ký thành viên</h4>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="form-check-user-type">
+            <span>Bạn là? </span>
+            <div class="d-inline-block">
+                <div class="d-inline-block mr-2">
+                    <input type="radio" id="type-owner" name="user-type">
+                    <label for="type-owner">Chủ nhà trọ</label>
                 </div>
-
-                <div id="login-form-container" class="container py-3">
-                    @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
-                    {
-                        <div class="form-group row">
-                            <div class="col-12 col-lg-6">
-                                @Html.LabelFor(m => m.fullname, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.fullname, new { @class= "form-control" })
-                                @Html.ValidationMessageFor(m => m.fullname, null, new { @class = "err-msg" })
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                @Html.LabelFor(m => m.phone, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.phone, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.phone, null, new { @class = "err-msg" })
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12 col-lg-6">
-                                @Html.LabelFor(m => m.email, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.email, null, new { @class = "err-msg" })
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                @Html.LabelFor(m => m.idCard, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.idCard, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.idCard, null, new { @class = "err-msg" })
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-6 col-lg-3">
-                                <label for="city" style="white-space: nowrap;">Tỉnh/Thành phố</label>
-                                <select class="city-filter form-control" name="cityId">
-                                    <option value="-1">Chọn Tỉnh/Thành phố</option>
-                                </select>
-                                @Html.ValidationMessageFor(m => m.cityId, null, new { @class = "err-msg" })
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <label for="district">Quận/Huyện</label>
-                                <select class="district-filter form-control" name="districtId">
-                                    <option value="-1">Chọn Quận/Huyện</option>
-                                </select>
-                                @Html.ValidationMessageFor(m => m.districtId, null, new { @class = "err-msg" })
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <label for="ward">Phường/Xã</label>
-                                <select class="ward-filter form-control" name="wardId">
-                                    <option value="-1">Chọn Phường/Xã</option>
-                                </select>
-                                @Html.ValidationMessageFor(m => m.wardId, null, new { @class = "err-msg" })
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                @Html.LabelFor(m => m.address, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.address, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.address, null, new { @class = "err-msg" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.usernname, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.usernname, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.usernname, null, new { @class = "err-msg" })
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12 col-lg-6">
-                                @Html.LabelFor(m => m.password, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.password, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.password, null, new { @class = "err-msg" })
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                @Html.LabelFor(m => m.repassword, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.repassword, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.repassword, null, new { @class = "err-msg" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="checkbox"><span class="pl-1">Hiện mật khẩu</span>
-                        </div>
-                        <div class="container text-center">
-                            <button class="btn btn-primary" type="submit">Đăng ký</button>
-                        </div>
-                    }
+                <div class="d-inline-block">
+                    <input type="radio" id="type-normal-user" name="user-type">
+                    <label for="type-normal-user">Người thuê trọ</label>
                 </div>
             </div>
         </div>
-
     </div>
+</div>
+<div id="login-form-container" class="container py-3">
+    @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
+    {
+        <div class="form-group row">
+            <div class="col-12 col-lg-6">
+                @Html.LabelFor(m => m.fullname, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.fullname, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.fullname, null, new { @class = "err-msg" })
+            </div>
+            <div class="col-12 col-lg-6">
+                @Html.LabelFor(m => m.phone, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.phone, null, new { @class = "err-msg" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-lg-6">
+                @Html.LabelFor(m => m.email, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.email, null, new { @class = "err-msg" })
+            </div>
+            <div class="col-12 col-lg-6">
+                @Html.LabelFor(m => m.idCard, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.idCard, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.idCard, null, new { @class = "err-msg" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-6 col-lg-3">
+                <label for="city" style="white-space: nowrap;">Tỉnh/Thành phố</label>
+                <select class="city-filter form-control" name="cityId">
+                    <option value="-1">Chọn Tỉnh/Thành phố</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.cityId, null, new { @class = "err-msg" })
+            </div>
+            <div class="col-6 col-lg-3">
+                <label for="district">Quận/Huyện</label>
+                <select class="district-filter form-control" name="districtId">
+                    <option value="-1">Chọn Quận/Huyện</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.districtId, null, new { @class = "err-msg" })
+            </div>
+            <div class="col-6 col-lg-3">
+                <label for="ward">Phường/Xã</label>
+                <select class="ward-filter form-control" name="wardId">
+                    <option value="-1">Chọn Phường/Xã</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.wardId, null, new { @class = "err-msg" })
+            </div>
+            <div class="col-6 col-lg-3">
+                @Html.LabelFor(m => m.address, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.address, null, new { @class = "err-msg" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.usernname, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.usernname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.usernname, null, new { @class = "err-msg" })
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-lg-6">
+                @Html.LabelFor(m => m.password, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.password, null, new { @class = "err-msg" })
+            </div>
+            <div class="col-12 col-lg-6">
+                @Html.LabelFor(m => m.repassword, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.repassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.repassword, null, new { @class = "err-msg" })
+            </div>
+        </div>
 
-</body>
-</html>
+        <div class="form-group">
+            <input type="checkbox"><span class="pl-1">Hiện mật khẩu</span>
+        </div>
+        <div class="container text-center">
+            <button class="btn btn-primary" type="submit">Đăng ký</button>
+        </div>
+    }
+</div>
