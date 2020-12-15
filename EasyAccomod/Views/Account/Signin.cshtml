@@ -14,14 +14,15 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.password)
-            @Html.TextBoxFor(m => m.password, new { @class = "form-control" })<br />
+            @Html.PasswordFor(m => m.password, new { @class = "form-control" })<br />
             @Html.ValidationMessageFor(m => m.password, null, new { @class = "err-msg" })
         </div>
         <div class="form-group">
-            <input type="checkbox"><span class="pl-1">Hiện mật khẩu</span>
+            <input class="show-password" type="checkbox"><span class="pl-1">Hiện mật khẩu</span>
         </div>
         <div class="container text-center">
-            <span class="err-msg"></span>
+            @Html.ValidationMessage("err-msg", new { @class = "err-msg" })
+            <br />
             <button type="submit" id="submit-btn" value="submit" name="submit" class="btn btn-primary ">Đăng nhập</button>
         </div>
         <div class="form-group mt-3">
@@ -42,3 +43,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(".show-password").change(function (e) {
+        if ($(e.target).prop("checked")) {
+            $("#password").prop("type", "");
+        }
+        else {
+            $("#password").prop("type", "password");
+        }
+    })
+</script>

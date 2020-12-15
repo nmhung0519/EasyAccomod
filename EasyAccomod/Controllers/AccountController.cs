@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EasyAccomod.Helpers;
 
 namespace EasyAccomod.Controllers
 {
@@ -21,8 +22,9 @@ namespace EasyAccomod.Controllers
             if (!ModelState.IsValid) return View(model);
             using (var db = new DBContext())
             {
+                string password = model.password.ToMD5();
                 var account = (from a in db.Accounts
-                               where a.username == model.username && a.password == model.password
+                               where a.username == model.username && a.password == password
                                select a).FirstOrDefault();
                 if (account == null)
                 {
@@ -31,6 +33,7 @@ namespace EasyAccomod.Controllers
                 }
 
                 Session["userid"] = account.Id;
+                Session["fullname"] = account.LastName + " " + account.FirstName;
             }
             return RedirectToAction("Index", "Home");
         }
@@ -45,6 +48,13 @@ namespace EasyAccomod.Controllers
         public ActionResult SignUp(SignUpModel model)
         {
             if (!ModelState.IsValid) return (View(model));
+            return RedirectToAction("SignIn");
+        }
+
+        public ActionResult Signout()
+        {
+            Session["userid"] = null;
+            Session["fullname"] = null;
             return RedirectToAction("SignIn");
         }
     }

@@ -12,9 +12,9 @@
     $(".city-filter").change(function (e) {
         console.log("a");
         $(".district-filter").empty();
-        $(".district-filter").append("<option value='-1'>Chọn Quận/Huyện</option>");
+        $(".district-filter").append("<option value='0'>Chọn Quận/Huyện</option>");
         $(".ward-filter").empty();
-        $(".ward-filter").append("<option value='-1'>Chọn Phường/Xã</option>");
+        $(".ward-filter").append("<option value='0'>Chọn Phường/Xã</option>");
         $(".ward-filter").prop("disabled", true);
         if ($(e.target).val() == -1) {
             $(".district-filter").prop("disabled", true);
@@ -38,7 +38,7 @@
 $(".district-filter").ready(function () {
     $(".district-filter").change(function (e) {
         $(".ward-filter").empty();
-        $(".ward-filter").append("<option value='-1'>Chọn Phường/Xã</option>");
+        $(".ward-filter").append("<option value='0'>Chọn Phường/Xã</option>");
         if ($(e.target).val() == -1) {
             $(".ward-filter").prop("disabled", true);
             return;

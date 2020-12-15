@@ -25,9 +25,14 @@
 
                     <li class="col-3 text-right"><a href="/">Tìm thuê</a></li>
 
-
-                    <li class="col-3 text-right"><a href="/Account/SignIn">Đăng nhập</a></li>
-
+                    @if (Session["userid"] == null)
+                    {
+                        <li class="col-3 text-right"><a href="/Account/SignIn">Đăng nhập</a></li>
+                    }
+                    else
+                    {
+                        <li class="col-3 text-right"><a href="/Account/SignOut">Đăng xuất</a></li>
+                    }
                 </ul>
             </div>
             <div class="col-4 col-sm-2  align-self-center pr-3">

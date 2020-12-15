@@ -13,6 +13,11 @@ namespace EasyAccomod
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
+                name: "Home Search",
+                url: "Home/Search",
+                defaults: new { controller = "Home", action = "Search" }
+            );
+            routes.MapRoute(
                 name: "City Search",
                 url: "{city}/Search",
                 defaults: new { controller = "Post", action = "Search" }

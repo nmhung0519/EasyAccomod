@@ -7,12 +7,13 @@ namespace EasyAccomod.Models
 {
     public class SearchModel
     {
-        public string keyWord { get; set; }
+        public string KeyWord { get; set; }
 
-        public int type { get; set; }
+        public int Type { get; set; }
 
-        public int cityId { get; set; }
+        public int CityId { get; set; }
 
-        public int districtId { get; set; }
+        public int DistrictId { get; set; }
+        public int WardId { get; set; }
     }
 }
