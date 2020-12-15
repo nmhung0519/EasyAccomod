@@ -288,3 +288,44 @@ body {
         font-size: 14px !important;
     }
 }
+.big-city {
+    height: 150px;
+    font-size: 25px;
+}
+
+#hanoi-city {
+    background: url('../Picture/hanoicity.jpg') center no-repeat;
+    background-size: cover;
+}
+
+#hochiminh-city {
+    background: url("../Picture/hochiminhcity.jpg") center no-repeat;
+    background-size: cover;
+}
+
+.social-icon i {
+    display: inline-block;
+    font-size: 22px;
+    line-height: 20px;
+    margin-right: 10px;
+}
+
+.footer-title {
+    font-size: 14px;
+    text-align: left;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.footer-right-parent ul {
+    text-align: left;
+    padding: 0;
+}
+
+@media screen and (max-width: 600px) {
+    #top-collapse ul {
+        display: none;
+    }
+}

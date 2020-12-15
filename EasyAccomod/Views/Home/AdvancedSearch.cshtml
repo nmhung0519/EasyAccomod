@@ -1,0 +1,107 @@
+﻿
+
+    <div class="page-container container-fluid w-100 vh-100 py-1 ">
+        <div id="overlay"></div>
+        <div class="form-container container mx-auto  bg-light px-1  px-lg-2 py-3 rounded">
+            <div id="header" class="container">
+                <h4 class="font-weight-bold text-center">Tìm kiếm nâng cao</h4>
+                <div id="login-form-container" class="container py-3">
+                    <form id="sign-up-form" method="POST" action="/">
+
+
+                        <div class="form-group row">
+                            <div class="col-12 col-md-8">
+                                <label for="address">Số nhà, đường/thôn</label>
+                                <input class="form-control" type="text" id="house-number" name="house-number">
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <label for="ward">Phường/Xã</label>
+                                <select id="ward" name="ward" class="form-control">
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 col-md-6">
+                                <label for="district">Quận/Huyện</label>
+                                <select id="district" name="district" class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="city" style="white-space: nowrap;">Tỉnh/Thành phố</label>
+                                <select id="city" name="city" class="form-control">
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 col-lg-4">
+                                <label for="price" style="white-space: nowrap;">Giá tiền</label>
+                                <select id="price" name="price" class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="type" style="white-space: nowrap;">Loại phòng</label>
+                                <select id="type" name="type" class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="area" style="white-space: nowrap;">Diện tích</label>
+                                <select id="area" name="area" class="form-control">
+                                </select>
+                            </div>
+
+
+                        </div>
+
+
+                        <h6>Điều kiện, cơ sở vật chất:</h6>
+
+                        <div class="form-group row">
+                            <div class="col-12 col-sm-4">
+                                <input type="checkbox" id="check-air-conditional" name="check-air-conditional">
+                                <label for="check-air-conditional" style="white-space: nowrap;">Điều hoà</label>
+
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <input type="checkbox" id="check-water-heater" name="check-water-heater">
+                                <label for="check-water-heater" style="white-space: nowrap;">Nóng lạnh</label>
+
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <input type="checkbox" id="check-kitchen" name="check-kitchen">
+                                <label for="check-kitchen" style="white-space: nowrap;">Bếp</label>
+                            </div>
+                            <div class="col-6 col-sm-4">
+                                <input type="checkbox" id="check-balcony" name="check-balcony">
+                                <label for="check-balcony" style="white-space: nowrap;">Ban công</label>
+
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <input type="checkbox" id="check-closed-room" name="check-closed-room">
+                                <label for="check-closed-room" style="white-space: nowrap;">Vệ sinh khép kín</label>
+
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <input type="checkbox" id="check-not-live-with-host" name="check-not-live-with-host">
+                                <label for="check-not-live-with-host" style="white-space: nowrap;">Không chung chủ</label>
+
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="container text-center">
+                            <button class="btn btn-primary" type="submit" form="sign-up-form" id="submit-btn" value="submit" name="submit">Tìm kiếm</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+

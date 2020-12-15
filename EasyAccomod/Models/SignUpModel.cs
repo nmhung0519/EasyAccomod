@@ -55,7 +55,7 @@ namespace EasyAccomod.Models
         [Range(1, int.MaxValue, ErrorMessage = "Chọn Phường/Xã")]
         public int wardId { get; set; }
 
-        [Display(Name = "Số nhà")]
+        [Display(Name = "Số nhà, đường/thôn")]
         [Required(ErrorMessage = "Số nhà không được để trống")]
         public string address { get; set; }
 
