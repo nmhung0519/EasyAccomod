@@ -26,5 +26,17 @@ namespace EasyAccomod.Controllers
                 return View("SearchResult", new SearchResultModel(model, posts));
             }
         }
+
+        [HttpGet]
+        public ActionResult AdvancedSearch()
+        {
+            return View(new AdvancedSearchModel());
+        }
+
+        [HttpPost]
+        public ActionResult AdvancedSearch(AdvancedSearchModel model)
+        {
+            return View(model);
+        }
     }
 }

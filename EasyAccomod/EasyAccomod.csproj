@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Crypto.cs" />
+    <Compile Include="Models\AdvancedSearchModel.cs" />
     <Compile Include="Models\EditPostModel.cs" />
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\KeyNamePair.cs" />

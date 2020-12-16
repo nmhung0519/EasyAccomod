@@ -1,37 +1,33 @@
-﻿
-
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EasyAccomod.Models.AdvancedSearchModel
     <div class="page-container container-fluid w-100 vh-100 py-1 ">
         <div id="overlay"></div>
         <div class="form-container container mx-auto  bg-light px-1  px-lg-2 py-3 rounded">
-            <div id="header" class="container">
+            <div id="header" class="container" style="display: contents">
                 <h4 class="font-weight-bold text-center">Tìm kiếm nâng cao</h4>
                 <div id="login-form-container" class="container py-3">
-                    <form id="sign-up-form" method="POST" action="/">
-
-
+                    @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Post))
+                    {
                         <div class="form-group row">
                             <div class="col-12 col-md-8">
-                                <label for="address">Số nhà, đường/thôn</label>
-                                <input class="form-control" type="text" id="house-number" name="house-number">
+                                
                             </div>
-
                             <div class="col-12 col-md-4">
-                                <label for="ward">Phường/Xã</label>
-                                <select id="ward" name="ward" class="form-control">
-                                </select>
+                                @Html.LabelFor(m => m.WardId)
+                                @Html.DropDownListFor(m => m.WardId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Xã/Phường", Value = "0" } }, new { @class = "form-control ward-filter", @disabled = "disable" })
 
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-12 col-md-6">
-                                <label for="district">Quận/Huyện</label>
-                                <select id="district" name="district" class="form-control">
-                                </select>
+                                @Html.LabelFor(m => m.DistrictId)
+                                @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Quận/Huyện", Value = "0" } }  , new { @class = "form-control district-filter", @disabled = "disable" })
                             </div>
                             <div class="col-12 col-md-6">
-                                <label for="city" style="white-space: nowrap;">Tỉnh/Thành phố</label>
-                                <select id="city" name="city" class="form-control">
-                                </select>
+                                @Html.LabelFor(m => m.CityId)
+                                @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Tình/Thành phố", Value = "0" } }, new { @class = "form-control city-filter" })
                             </div>
 
                         </div>
@@ -42,17 +38,16 @@
                                 </select>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <label for="type" style="white-space: nowrap;">Loại phòng</label>
-                                <select id="type" name="type" class="form-control">
-                                </select>
+                                @Html.LabelFor(m => m.Type, new { @style = "white-space: nowrap" })
+                                @Html.DropDownListFor(m => m.Type, Model.GetListType(), new { @class = "form-control" })
                             </div>
                             <div class="col-12 col-lg-4">
-                                <label for="area" style="white-space: nowrap;">Diện tích</label>
-                                <select id="area" name="area" class="form-control">
-                                </select>
+                                <label for="area" style="white-space: nowrap;">Diện tích(m2)</label> <br />
+                                <span>Từ:</span>
+                                @Html.TextBoxFor(m => m.FromArea, new { @class = "form-control", @type = "number" })
+                                <span>Đến:</span>
+                                @Html.TextBoxFor(m => m.ToArea, new { @class = "form-control", @type = "number" })
                             </div>
-
-
                         </div>
 
 
@@ -60,48 +55,44 @@
 
                         <div class="form-group row">
                             <div class="col-12 col-sm-4">
-                                <input type="checkbox" id="check-air-conditional" name="check-air-conditional">
-                                <label for="check-air-conditional" style="white-space: nowrap;">Điều hoà</label>
+                                @Html.CheckBoxFor(m => m.AirConditioner)
+                                @Html.LabelFor(m => m.AirConditioner, new { @style = "white-space: nowrap" })
 
                             </div>
                             <div class="col-12 col-sm-4">
-                                <input type="checkbox" id="check-water-heater" name="check-water-heater">
-                                <label for="check-water-heater" style="white-space: nowrap;">Nóng lạnh</label>
+                                @Html.CheckBoxFor(m => m.WaterHeater)
+                                @Html.LabelFor(m => m.WaterHeater, new { @style = "white-space: nowrap" })
 
                             </div>
                             <div class="col-12 col-sm-4">
-                                <input type="checkbox" id="check-kitchen" name="check-kitchen">
-                                <label for="check-kitchen" style="white-space: nowrap;">Bếp</label>
+                                @Html.CheckBoxFor(m => m.PrivateKitchen)
+                                @Html.LabelFor(m => m.PrivateKitchen, new { @style = "white-space: nowrap" })
                             </div>
                             <div class="col-6 col-sm-4">
-                                <input type="checkbox" id="check-balcony" name="check-balcony">
-                                <label for="check-balcony" style="white-space: nowrap;">Ban công</label>
+                                @Html.CheckBoxFor(m => m.Balcony)
+                                @Html.LabelFor(m => m.Balcony, new { @style = "white-space: nowrap" })
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                @Html.CheckBoxFor(m => m.ClosedRoom)
+                                @Html.LabelFor(m => m.ClosedRoom, new { @style = "white-space: nowrap" })
 
                             </div>
                             <div class="col-12 col-sm-4">
-                                <input type="checkbox" id="check-closed-room" name="check-closed-room">
-                                <label for="check-closed-room" style="white-space: nowrap;">Vệ sinh khép kín</label>
-
-                            </div>
-                            <div class="col-12 col-sm-4">
-                                <input type="checkbox" id="check-not-live-with-host" name="check-not-live-with-host">
-                                <label for="check-not-live-with-host" style="white-space: nowrap;">Không chung chủ</label>
+                                @Html.CheckBoxFor(m => m.WithoutHost)
+                                @Html.LabelFor(m => m.WithoutHost, new { @style = "white-space: nowrap" })
 
                             </div>
                         </div>
-
-
-
-
                         <div class="container text-center">
-                            <button class="btn btn-primary" type="submit" form="sign-up-form" id="submit-btn" value="submit" name="submit">Tìm kiếm</button>
+                            <button class="btn btn-primary">Tìm kiếm</button>
                         </div>
-                    </form>
+                    }
 
                 </div>
             </div>
         </div>
 
     </div>
+    <script src="~/Scripts/address.control.js"></script>
 
 
