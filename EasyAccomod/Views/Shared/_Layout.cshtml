@@ -29,11 +29,27 @@
 
                     @if (Session["userid"] == null)
                     {
+
                         <li class="col-4 text-right"><a href="/Account/SignIn">Đăng nhập</a></li>
                     }
                     else
                     {
-                        <li class="col-4 text-right"><a href="/Account/SignOut">Đăng xuất</a></li>
+                       
+                        <li class="col-4" style="white-space: nowrap; display: inline-block;">
+                            <i class="fas fa-user mr-2"></i>
+
+
+                            <a href="#" role="button" id="username-display" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @Session["fullname"]
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="username-display">
+                                <a class="dropdown-item" href="#">Trang cá nhân</a>
+                                <a class="dropdown-item" href="#">Bài viết đã thích</a>
+                                <a class="dropdown-item" href="#">Đăng xuất</a>
+                            </div>
+
+                        </li>
                     }
                 </ul>
             </div>
@@ -47,15 +63,7 @@
         </div>
     </div>
     @RenderBody()
-    <div class="container-fluid w-100 my-5" id="content-container">
-        <h4 class="mx-5 mb-5">Khu vực lớn</h4>
-        <div class="container row w-100 justify-content-around mx-auto" id="big-city-container">
-            <div class="col-9 col-lg-5 bg-danger rounded big-city py-3 px-3  text-white " id="hanoi-city">
-                Hà Nội
-            </div>
-            <div class="col-9 col-lg-5 mt-5 mt-lg-0 bg-danger rounded py-3 px-3 text-white big-city " id="hochiminh-city">TPHCM</div>
-        </div>
-    </div>
+    
     <div class="container-fluid w-100" id="footer" style="background-color: #e9e9e9;">
         <div class="row px-3 px-lg-2 py-2">
             <div class="col-12 col-lg-9 order-lg-2">

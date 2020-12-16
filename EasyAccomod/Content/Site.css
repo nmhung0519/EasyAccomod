@@ -329,3 +329,9 @@ ul {
         display: none;
     }
 }
+#username-display {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 22ch;
+    display: inline-block;
+}

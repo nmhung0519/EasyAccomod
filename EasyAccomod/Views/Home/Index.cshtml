@@ -2,10 +2,10 @@
     <div id="slide-menu">
         <ul>
 
-            <li><a href="/"><i class="fa fa-chevron-circle-right"></i>Tìm kiếm nâng cao</a></li>
+            <li><a href="/Home/AdvancedSearch"><i class="fa fa-chevron-circle-right"></i>Tìm kiếm nâng cao</a></li>
 
 
-            <li><a href="/"><i class="fa fa-chevron-circle-right"></i>Đăng nhập</a></li>
+            <li><a href="~/Views/Account/SignIn"><i class="fa fa-chevron-circle-right"></i>Đăng nhập</a></li>
 
         </ul>
     </div>
@@ -13,6 +13,15 @@
         <div id="overlay"></div>
         <h1 id="title">Tìm nhà trọ thích hợp</h1>
         @Html.Partial("SearchContainer")
+    </div>
+</div>
+<div class="container-fluid w-100 my-5" id="content-container">
+    <h4 class="mx-5 mb-5">Khu vực lớn</h4>
+    <div class="container row w-100 justify-content-around mx-auto" id="big-city-container">
+        <div class="col-9 col-lg-5 bg-danger rounded big-city py-3 px-3  text-white " id="hanoi-city">
+            Hà Nội
+        </div>
+        <div class="col-9 col-lg-5 mt-5 mt-lg-0 bg-danger rounded py-3 px-3 text-white big-city " id="hochiminh-city">TPHCM</div>
     </div>
 </div>
 <script>
