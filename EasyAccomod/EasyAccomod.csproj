@@ -194,6 +194,7 @@
     </Compile>
     <Compile Include="Helpers\Crypto.cs" />
     <Compile Include="Models\AdvancedSearchModel.cs" />
+    <Compile Include="Models\CreatePostModel.cs" />
     <Compile Include="Models\EditPostModel.cs" />
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\KeyNamePair.cs" />
@@ -208,6 +209,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PostDetail.css" />
+    <Content Include="Content\PostList.css" />
     <Content Include="Content\signin.css" />
     <Content Include="Content\signup.css" />
     <Content Include="favicon.ico" />
@@ -246,12 +249,13 @@
     <Content Include="Views\Account\Signin.cshtml" />
     <Content Include="Views\Account\Signup.cshtml" />
     <Content Include="Views\Account\_LayoutAccount.cshtml" />
-    <Content Include="Views\Home\SearchResult.cshtml" />
     <Content Include="Views\Home\AdvancedSearch.cshtml" />
+    <Content Include="Views\Post\CreatePost.cshtml" />
+    <Content Include="Views\Post\ListPost.cshtml" />
+    <Content Include="Views\Post\PostDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Post\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

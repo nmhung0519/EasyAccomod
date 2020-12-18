@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model EasyAccomod.Models.SearchResultModel
+
+<link href="~/Content/PostList.css" rel="stylesheet" />
+<div class="container w-100 rounded border mx-auto my-5">
+    <h4><u>Tìm kiếm</u></h4>
+    <div class="container posts-container d-flex justify-content-around flex-wrap ">
+        <div class="post-wrapper">
+            <div class="post-image-thumb"></div>
+            <div class="post-info">
+                <div class="post-top-part">
+                    <span class="post-title"> <a href="/Post/PostDetail/1">Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii</a></span>
+                    <span class="post-area">30m2</span>
+                    <span class="post-price">2,5 triệu/tháng</span>
+                </div>
+                <span class="post-user">Nguyễn Mạnh Hùng</span>
+                <span class="post-datetime">17/12/20 12:12 </span>
+
+                <i class="far fa-star text-warning"></i>
+                <span class="post-rating">7.5</span>
+                <i class="far fa-heart text-danger"></i>
+            </div>
+        </div>
+        <div class="post-wrapper">
+            <div class="post-image-thumb"></div>
+            <div class="post-info">
+                <div class="post-top-part">
+                    <span class="post-title"> <a href="/Post/PostDetail/1">Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii</a></span>
+                    <span class="post-area">30m2</span>
+                    <span class="post-price">2,5 triệu/tháng</span>
+                </div>
+                <span class="post-user">Nguyễn Mạnh Hùng</span>
+                <span class="post-datetime">17/12/20 12:12 </span>
+
+                <i class="far fa-star text-warning"></i>
+                <span class="post-rating">7.5</span>
+                <i class="far fa-heart text-danger"></i>
+            </div>
+        </div>
+        <div class="post-wrapper">
+            <div class="post-image-thumb"></div>
+            <div class="post-info">
+                <div class="post-top-part">
+                    <span class="post-title"> <a href="/Post/PostDetail/1">Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii</a></span>
+                    <span class="post-area">30m2</span>
+                    <span class="post-price">2,5 triệu/tháng</span>
+                </div>
+                <span class="post-user">Nguyễn Mạnh Hùng</span>
+                <span class="post-datetime">17/12/20 12:12 </span>
+
+                <i class="far fa-star text-warning"></i>
+                <span class="post-rating">7.5</span>
+                <i class="far fa-heart text-danger"></i>
+            </div>
+        </div>
+        @if (Model != null && Model.Result != null)
+        {
+            foreach (var item in Model.Result)
+            {
+                <div class="post-wrapper">
+                    <div class="post-image-thumb"></div>
+                    <div class="post-info">
+                        <div class="post-top-part">
+                            <span class="post-title"> <a href="/Post/PostDetail/@item.Id">@item.Title</a></span>
+                            <span class="post-area">30m2</span>
+                            <span class="post-price">2,5 triệu/tháng</span>
+                        </div>
+                        <span class="post-user">@item.Poster.LastName @item.Poster.FirstName</span>
+                        <span class="post-datetime">@item.CreateTime.ToString() </span>
+
+                        <i class="far fa-star text-warning"></i>
+                        <span class="post-rating">7.5</span>
+                        <i class="far fa-heart text-danger"></i>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".post-info .fa-heart").click(function () {
+            $(this).toggleClass("far");
+            $(this).toggleClass("fas");
+        });
+
+        $(".post-top-part").mouseenter(function () {
+            $(this).find(".post-title").css("color", "rgb(0, 148, 163)");
+
+        })
+            .mouseleave(function () {
+                $(this).find(".post-title").css("color", "black");
+            });
+        $(".post-image-thumb").mouseenter(function () {
+            $(this).next().find(".post-title").css("color", "rgb(0, 148, 163)");
+        })
+            .mouseleave(function () {
+                $(this).next().find(".post-title").css("color", "black");
+            })
+    });
+</script>

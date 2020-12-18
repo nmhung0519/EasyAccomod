@@ -1,0 +1,89 @@
+﻿.post-wrapper {
+    width: 450px;
+    height: 120px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.post-image-thumb {
+    float: left;
+    background: url("img/hanoicity.jpg") center;
+    background-size: cover;
+    height: 120px;
+    width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-info {
+    float: left;
+    height: 100%;
+    position: relative;
+    width: 300px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+    .post-info span {
+        display: block;
+    }
+
+.post-area {
+    color: #9b9b9b;
+}
+
+.post-price {
+    color: #c90927;
+    font-weight: 700;
+}
+
+.post-user {
+    color: #9b9b9b;
+}
+
+.post-datetime {
+    font-size: 10px;
+    color: #9b9b9b;
+}
+
+@media only screen and (max-width: 530px) {
+
+    .post-image-thumb {
+        margin-top: 3%;
+        width: 30%;
+        height: auto;
+        min-height: 100px;
+        top: 50%;
+    }
+
+    .post-info {
+        width: 70%;
+    }
+}
+
+.post-wrapper .fa-star {
+    position: absolute;
+    bottom: 10px;
+    right: 55px;
+    font-size: 16px;
+}
+
+.post-rating {
+    position: absolute;
+    bottom: 8px;
+    right: 35px;
+    font-size: 14px;
+}
+
+.post-wrapper .fa-heart {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.post-top-part {
+    display: inline-block;
+    cursor: pointer;
+}

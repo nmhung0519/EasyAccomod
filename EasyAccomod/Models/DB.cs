@@ -121,8 +121,8 @@ namespace EasyAccomod.Models
         [Column("water_heater")]
         public int WaterHeater { get; set; }
 
-        [Column("private_kitchen")]
-        public int PrivateKitchen { get; set; }
+        //[Column("private_kitchen")]
+        //public int PrivateKitchen { get; set; }
 
         [Column("air_conditioner")]
         public int AirConditioner { get; set; }

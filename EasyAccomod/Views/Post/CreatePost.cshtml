@@ -1,0 +1,120 @@
+﻿@{ 
+    Layout = null;
+}
+@model EasyAccomod.Models.CreatePostModel
+    
+    <script src="~/Scripts/address.control.js"></script>
+    <div class="modal-content">
+        @using (Html.BeginForm("CreatePost", "Post", FormMethod.Post))
+        {
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tạo bài viết</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login-form-container" class="container py-3">
+
+                    <div class="form-group row">
+                        <div class="col-12 col-md-8">
+                            @Html.LabelFor(m => m.Address)
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            @Html.LabelFor(m => m.CityId)
+                            @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Tỉnh/Thành phố" } }, new { @class = "form-control city-filter" })
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12 col-md-6">
+                            @Html.LabelFor(m => m.DistrictId)
+                            @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Quận/Huyện" } }, new { @class = "form-control district-filter", @disabled = "disabled" })
+                        </div>
+                        <div class="col-12 col-md-6">
+                            @Html.LabelFor(m => m.WardId)
+                            @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Phường/Xã" } }, new { @class = "form-control ward-filter", @disabled = "disabled" })
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12 col-lg-3">
+                            @Html.LabelFor(m => m.Price)
+                            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @type = "number" })
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <label for="type" style="white-space: nowrap;">Loại phòng</label>
+                            @Html.LabelFor(m => m.Type, new { @style = "white-space: nowrap" })
+                            @Html.DropDownListFor(m => m.Type, Model.GetListType(), new { @class = "form-control" })
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            @Html.LabelFor(m => m.NumOfRooms)
+                            @Html.TextBoxFor(m => m.NumOfRooms, new { @type = "number", @class="form-control"})
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            @Html.LabelFor(m => m.Area)
+                            @Html.TextBoxFor(m => m.Area, new { @type = "number", @class="form-control"})
+                        </div>
+
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12 col-lg-3">
+                            @Html.LabelFor(m => m.ElectricityPrice)
+                            @Html.TextBoxFor(m => m.ElectricityPrice, new { @type = "number", @class="form-control" })
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            @Html.LabelFor(m => m.WaterPrice)
+                            @Html.TextBoxFor(m => m.WaterPrice, new { @type = "number", @class="form-control" })
+                        </div>
+                    </div>
+
+
+                    <h6>Điều kiện, cơ sở vật chất:</h6>
+
+                    <div class="form-group row">
+                        <div class="col-12 col-sm-4">
+                            @Html.CheckBoxFor(m => m.AirConditioner)
+                            @Html.LabelFor(m => m.AirConditioner, new { @style = "white-space: nowrap" })
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            @Html.CheckBoxFor(m => m.WaterHeater)
+                            @Html.LabelFor(m => m.WaterHeater, new { @style = "white-space: nowrap" })
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            @Html.CheckBoxFor(m => m.PrivateKitchen)
+                            @Html.LabelFor(m => m.PrivateKitchen, new { @style = "white-space: nowrap" })
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            @Html.CheckBoxFor(m => m.Balcony)
+                            @Html.LabelFor(m => m.Balcony, new { @style = "white-space: nowrap" })
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            @Html.CheckBoxFor(m => m.ClosedRoom)
+                            @Html.LabelFor(m => m.ClosedRoom, new { @style = "white-space: nowrap" })
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            @Html.CheckBoxFor(m => m.WithoutHost)
+                            @Html.LabelFor(m => m.WithoutHost, new { @style = "white-space: nowrap" })
+                        </div>
+                    </div>
+                    <h6>Hinh ảnh:</h6>
+                    <div class="col-12 col-lg-6">
+                        <input type="file" id="img-url" name="file" accept="image/*">
+                    </div>
+
+
+                    <div class="col-3 col-lg-6 mt-3">
+                        <img id="word-img" src="#" style="width: 100%; max-width: 200px; max-height: 200px;">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                <button class="btn btn-primary">Đăng bài</button>
+            </div>
+        }
+        </div>

@@ -30,7 +30,6 @@ namespace EasyAccomod.Models
         public int Type { get; set; }
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Diện tích phải là số")]
         public double FromArea { get; set; }
-        [RegularExpression(@"^[0-9''.'\s]{1,40}$", ErrorMessage = "Diện tích phải là số")]
         public double ToArea { get; set; }
         public int FromPrice { get; set; }
         public int ToPrice { get; set; }

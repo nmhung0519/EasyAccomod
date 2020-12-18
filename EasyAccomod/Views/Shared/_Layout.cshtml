@@ -9,6 +9,8 @@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 </head>
 <body class="bg-white">
@@ -34,7 +36,7 @@
                     }
                     else
                     {
-                       
+
                         <li class="col-4" style="white-space: nowrap; display: inline-block;">
                             <i class="fas fa-user mr-2"></i>
 
@@ -57,103 +59,114 @@
                 <ul id="navbar-user" class="nav row justify-content-end mr-3 mr-sm-0">
                     <li class="col-3 col-sm-2 align-self-center"><a href="/" class="text-decoration-none"><i class="fa fa-heart"></i></a></li>
                     <li class="col-3 col-sm-2 align-self-center"><a href="/"><i class="fa fa-bell"></i></a></li>
-                    <li class="col-6 col-sm-6 col-lg-4 align-self-center  "><a href="/" class="btn btn-sm text-nowrap" id="btn-dang-tin">Đăng tin</a></li>
+                    <li class="col-6 col-sm-6 col-lg-4 align-self-center  "><button class="btn btn-sm text-nowrap" data-toggle="modal" data-target="#exampleModal" id="btn-dang-tin">Đăng tin</button></li>
                 </ul>
             </div>
         </div>
     </div>
-    @RenderBody()
-    
-    <div class="container-fluid w-100" id="footer" style="background-color: #e9e9e9;">
-        <div class="row px-3 px-lg-2 py-2">
-            <div class="col-12 col-lg-9 order-lg-2">
-                <ul class="row text-center p-2" style="list-style-type: none;">
-                    <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
-                        <ul class="footer-home-type">
-                            <li>Phòng trọ</li>
-                            <li>Chung cư mini</li>
-                            <li>Nhà nguyên căn</li>
-                            <li>Chung cư nguyên căn</li>
-                        </ul>
+    <script>
+        $("body").ready(function () {
+            $("#btn-dang-tin").click(function () {
+                $("#exampleModal>.modal-dialog.modal-xl").load("/Post/CreatePost");
+            });
+            $('#exampleModal').on('hidden.bs.modal', function (e) {
+                $("#exampleModal>.modal-dialog.modal-xl").empty();
+            })
+        })
+    </script>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-xl"></div></div>
+        @RenderBody()
 
-                    </li>
-                    <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
-                        <ul class="footer-home-type">
-                            <li>Phòng trọ</li>
-                            <li>Chung cư mini</li>
-                            <li>Nhà nguyên căn</li>
-                            <li>Chung cư nguyên căn</li>
-                        </ul>
-                    </li>
-                    <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
-                        <ul class="footer-home-type">
-                            <li>Phòng trọ</li>
-                            <li>Chung cư mini</li>
-                            <li>Nhà nguyên căn</li>
-                            <li>Chung cư nguyên căn</li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="row text-center p-2" style="list-style-type: none;">
-                    <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
-                        <ul class="footer-home-type">
-                            <li>Phòng trọ</li>
-                            <li>Chung cư mini</li>
-                            <li>Nhà nguyên căn</li>
-                            <li>Chung cư nguyên căn</li>
-                        </ul>
+        <div class="container-fluid w-100" id="footer" style="background-color: #e9e9e9;">
+            <div class="row px-3 px-lg-2 py-2">
+                <div class="col-12 col-lg-9 order-lg-2">
+                    <ul class="row text-center p-2" style="list-style-type: none;">
+                        <li class="footer-right-parent col-4">
+                            <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                            <ul class="footer-home-type">
+                                <li>Phòng trọ</li>
+                                <li>Chung cư mini</li>
+                                <li>Nhà nguyên căn</li>
+                                <li>Chung cư nguyên căn</li>
+                            </ul>
 
-                    </li>
-                    <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
-                        <ul class="footer-home-type">
-                            <li>Phòng trọ</li>
-                            <li>Chung cư mini</li>
-                            <li>Nhà nguyên căn</li>
-                            <li>Chung cư nguyên căn</li>
-                        </ul>
-                    </li>
-                    <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
-                        <ul class="footer-home-type">
-                            <li>Phòng trọ</li>
-                            <li>Chung cư mini</li>
-                            <li>Nhà nguyên căn</li>
-                            <li>Chung cư nguyên căn</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-3 text-left order-lg-1">
-                <div class="row">
-                    <ul class="col-12 col-md-4 col-lg-12 pl-1 pl-lg-5" style="list-style-type: none;">
-                        <li style="font-family: 'Nerko One', cursive; font-size: 30px; color: #00DEB6;">EasyAccomod</li>
-                        <li><i class="fa fa-phone"></i> 0996699996</li>
-                        <li>
-                            <i class="fa fa-envelope"></i>
-                            <a class="text-decoration-none text-dark" href="mailto:easyaccomod@gmail.com"> easyaccomod@gmail.com</a>
                         </li>
-
-                        <li class="social-icon mt-2">
-                            <a href="#"><i class="fab fa-facebook" style="color: #39579a;"></i></a>
-                            <a href="#"><i class="fab fa-youtube" style="color: #dc2217;"></i></a>
-                            <a href="#"><i class="fab fa-instagram" style="color: #d6249f;"></i></a>
+                        <li class="footer-right-parent col-4">
+                            <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                            <ul class="footer-home-type">
+                                <li>Phòng trọ</li>
+                                <li>Chung cư mini</li>
+                                <li>Nhà nguyên căn</li>
+                                <li>Chung cư nguyên căn</li>
+                            </ul>
                         </li>
-
+                        <li class="footer-right-parent col-4">
+                            <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                            <ul class="footer-home-type">
+                                <li>Phòng trọ</li>
+                                <li>Chung cư mini</li>
+                                <li>Nhà nguyên căn</li>
+                                <li>Chung cư nguyên căn</li>
+                            </ul>
+                        </li>
                     </ul>
-                    <div class="col-12 col-md-6 col-lg-12 py-2 pl-1 pl-lg-5" style="padding-left: 5px;">
-                        <h3 style="font-size: 14px; font-weight: 700;" class="mt-2">CÔNG TY CỔ PHẦN ACCOMODCORP</h3>
-                        <p>EasyAccomod là hệ thống tìm nhà trọ đơn giản được lập ra và vận hành bởi AccomodCorp - một công ty chuyên về dịch vụ nhà ở cho thuê.</p>
-                    </div>
+                    <ul class="row text-center p-2" style="list-style-type: none;">
+                        <li class="footer-right-parent col-4">
+                            <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                            <ul class="footer-home-type">
+                                <li>Phòng trọ</li>
+                                <li>Chung cư mini</li>
+                                <li>Nhà nguyên căn</li>
+                                <li>Chung cư nguyên căn</li>
+                            </ul>
 
+                        </li>
+                        <li class="footer-right-parent col-4">
+                            <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                            <ul class="footer-home-type">
+                                <li>Phòng trọ</li>
+                                <li>Chung cư mini</li>
+                                <li>Nhà nguyên căn</li>
+                                <li>Chung cư nguyên căn</li>
+                            </ul>
+                        </li>
+                        <li class="footer-right-parent col-4">
+                            <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                            <ul class="footer-home-type">
+                                <li>Phòng trọ</li>
+                                <li>Chung cư mini</li>
+                                <li>Nhà nguyên căn</li>
+                                <li>Chung cư nguyên căn</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+                <div class="col-12 col-lg-3 text-left order-lg-1">
+                    <div class="row">
+                        <ul class="col-12 col-md-4 col-lg-12 pl-1 pl-lg-5" style="list-style-type: none;">
+                            <li style="font-family: 'Nerko One', cursive; font-size: 30px; color: #00DEB6;">EasyAccomod</li>
+                            <li><i class="fa fa-phone"></i> 0996699996</li>
+                            <li>
+                                <i class="fa fa-envelope"></i>
+                                <a class="text-decoration-none text-dark" href="mailto:easyaccomod@gmail.com"> easyaccomod@gmail.com</a>
+                            </li>
 
+                            <li class="social-icon mt-2">
+                                <a href="#"><i class="fab fa-facebook" style="color: #39579a;"></i></a>
+                                <a href="#"><i class="fab fa-youtube" style="color: #dc2217;"></i></a>
+                                <a href="#"><i class="fab fa-instagram" style="color: #d6249f;"></i></a>
+                            </li>
+
+                        </ul>
+                        <div class="col-12 col-md-6 col-lg-12 py-2 pl-1 pl-lg-5" style="padding-left: 5px;">
+                            <h3 style="font-size: 14px; font-weight: 700;" class="mt-2">CÔNG TY CỔ PHẦN ACCOMODCORP</h3>
+                            <p>EasyAccomod là hệ thống tìm nhà trọ đơn giản được lập ra và vận hành bởi AccomodCorp - một công ty chuyên về dịch vụ nhà ở cho thuê.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
 </body>
 </html>

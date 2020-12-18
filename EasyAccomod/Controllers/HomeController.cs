@@ -23,7 +23,13 @@ namespace EasyAccomod.Controllers
                                 && (model.Type == 0 || p.Type == model.Type)
                                 && ((p.CityId == 0) || ((p.WardId == model.WardId) || (p.WardId == 0 && (p.DistrictId == model.DistrictId || (p.DistrictId == 0 && p.CityId == model.CityId)))))
                              select p).ToList();
-                return View("SearchResult", new SearchResultModel(model, posts));
+                foreach (var item in posts)
+                {
+                    db.Entry(item)
+                        .Reference(x => x.Poster)
+                        .Load();
+                }
+                return View("../Post/ListPost", new SearchResultModel(model, posts));
             }
         }
 
@@ -36,7 +42,7 @@ namespace EasyAccomod.Controllers
         [HttpPost]
         public ActionResult AdvancedSearch(AdvancedSearchModel model)
         {
-            return View(model);
+            return View("../Post/ListPost");
         }
     }
 }

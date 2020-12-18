@@ -17,11 +17,16 @@ namespace EasyAccomod.Controllers
         [HttpGet]
         public ActionResult CreatePost()
         {
-            return View();
+            return View(new CreatePostModel());
         }
 
         [HttpPost]
-        public ActionResult CreatePost(EditPostModel model)
+        public ActionResult CreatePost(CreatePostModel model)
+        {
+            return View();
+        }
+
+        public ActionResult PostDetail(int id)
         {
             return View();
         }
