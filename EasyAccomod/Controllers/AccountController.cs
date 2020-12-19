@@ -51,7 +51,7 @@ namespace EasyAccomod.Controllers
             return RedirectToAction("SignIn");
         }
 
-        public ActionResult Signout()
+        public ActionResult SignOut()
         {
             Session["userid"] = null;
             Session["fullname"] = null;
