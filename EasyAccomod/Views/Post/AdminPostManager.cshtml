@@ -1,0 +1,99 @@
+﻿<link href="~/Content/AdminPostManager.css" rel="stylesheet" />
+<div class="admin-page-container container rounded border mx-auto row" style="margin-top: 50px; margin-bottom: 50px;">
+
+    <div class="col-3 web-sidebar" style="position: relative; border-right: 1px solid #eee;">
+        <div class="sticky-sidebar">
+            <div class="sidebar-header">
+                <h3>Quản lý </h3>
+            </div>
+            <nav id="sidebar">
+
+                <ul class="list-unstyled components">
+
+                    <li class="nav-item-big">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Phê duyệt</a>
+                        <ul class="collapse list-unstyled nav nav-pills flex-column" id="homeSubmenu">
+                            <li class="nav-item">
+                                <a id="approve-account" class="nav-link" data-toggle="pill" href="#">Phê duyệt tài khoản <span class="badge badge-danger">101</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="approve-post" class="nav-link" data-toggle="pill" href="#">Phê duyệt bài đăng<span class="badge badge-danger">101</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="approve-purchase" class="nav-link" data-toggle="pill" href="#">Phê duyệt thanh toán<span class="badge badge-danger">101</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="approve-comment" class="nav-link" data-toggle="pill" href="#">Phê duyệt bình luận<span class="badge badge-danger">101</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item-big">
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Thống kê</a>
+                        <ul class="collapse list-unstyled nav nav-pills flex-column" id="pageSubmenu">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#">Bài đăng được xem nhiều nhất</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#">Bài đăng được thích nhiều nhất</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#">Phân tích thời gian đăng bài</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item-big">
+                        <a href="#" id="messages">Tin nhắn</a>
+                    </li>
+                    <li class="nav-item-big">
+                        <a href="#">Báo cáo vi phạm</a>
+                    </li>
+
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="content col-9" id="content-container">
+
+    </div>
+
+</div>
+<script>
+
+
+
+    $(".nav-item-big").click(function () {
+        if ($(this).attr("aria-expanded", "true")) {
+            $(this).find("a").removeClass("active");
+        }
+        $(this).siblings().find("a").attr("aria-expanded", "false");
+        $(this).siblings().find("ul").removeClass("show");
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");
+            $(this).siblings().removeClass("active");
+        }
+    });
+
+
+    $("#messages").click(function () {
+        $("#content-container").load("post-list.html");
+    });
+
+
+    $("#approve-account").click(function () {
+        $("#content-container").load("approve-account.html");
+    });
+
+    $("#approve-post").click(function () {
+        $("#content-container").load("approve-post.html");
+    });
+
+    $("#approve-purchase").click(function () {
+        $("#content-container").load("approve-purchase.html");
+    });
+
+    $("#approve-comment").click(function () {
+        $("#content-container").load("approve-comment.html");
+    })
+</script>

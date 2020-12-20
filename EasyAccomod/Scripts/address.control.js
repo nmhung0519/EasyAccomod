@@ -16,7 +16,7 @@
         $(".ward-filter").empty();
         $(".ward-filter").append("<option value='0'>Chọn Phường/Xã</option>");
         $(".ward-filter").prop("disabled", true);
-        if ($(e.target).val() == -1) {
+        if ($(e.target).val() == 0) {
             $(".district-filter").prop("disabled", true);
             return;
         }
@@ -39,7 +39,7 @@ $(".district-filter").ready(function () {
     $(".district-filter").change(function (e) {
         $(".ward-filter").empty();
         $(".ward-filter").append("<option value='0'>Chọn Phường/Xã</option>");
-        if ($(e.target).val() == -1) {
+        if ($(e.target).val() == 0) {
             $(".ward-filter").prop("disabled", true);
             return;
         }

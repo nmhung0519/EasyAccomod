@@ -19,16 +19,17 @@ namespace EasyAccomod.Controllers
             using (var db = new DBContext())
             {
                 var posts = (from p in db.Posts
-                             where (p.Title.Contains(model.KeyWord) || p.Content.Contains(model.KeyWord))
+                             where ((model.KeyWord == null) || p.Title.Contains(model.KeyWord) || p.Content.Contains(model.KeyWord))
                                 && (model.Type == 0 || p.Type == model.Type)
-                                && ((p.CityId == 0) || ((p.WardId == model.WardId) || (p.WardId == 0 && (p.DistrictId == model.DistrictId || (p.DistrictId == 0 && p.CityId == model.CityId)))))
+                                && ((model.CityId == 0) || ((p.WardId == model.WardId) || (model.WardId == 0 && (p.DistrictId == model.DistrictId || (model.DistrictId == 0 && p.CityId == model.CityId)))))
                              select p).ToList();
-                foreach (var item in posts)
-                {
-                    db.Entry(item)
-                        .Reference(x => x.Poster)
-                        .Load();
-                }
+                if (posts != null) 
+                    foreach (var item in posts)
+                    {
+                        db.Entry(item)
+                            .Reference(x => x.Poster)
+                            .Load();
+                    }
                 return View("../Post/ListPost", new SearchResultModel(model, posts));
             }
         }

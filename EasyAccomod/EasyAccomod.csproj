@@ -205,6 +205,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminPostManager.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -253,6 +254,8 @@
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\ListPost.cshtml" />
     <Content Include="Views\Post\PostDetail.cshtml" />
+    <Content Include="Views\Post\AdminPostManager.cshtml" />
+    <Content Include="Views\Post\HostPostManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

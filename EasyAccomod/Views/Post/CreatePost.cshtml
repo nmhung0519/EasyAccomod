@@ -24,18 +24,18 @@
 
                         <div class="col-12 col-md-4">
                             @Html.LabelFor(m => m.CityId)
-                            @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Tỉnh/Thành phố" } }, new { @class = "form-control city-filter" })
+                            @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Tỉnh/Thành phố" } }, new { @class = "form-control city-filter" })
 
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-12 col-md-6">
                             @Html.LabelFor(m => m.DistrictId)
-                            @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Quận/Huyện" } }, new { @class = "form-control district-filter", @disabled = "disabled" })
+                            @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Quận/Huyện" } }, new { @class = "form-control district-filter", @disabled = "disabled" })
                         </div>
                         <div class="col-12 col-md-6">
                             @Html.LabelFor(m => m.WardId)
-                            @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Phường/Xã" } }, new { @class = "form-control ward-filter", @disabled = "disabled" })
+                            @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Phường/Xã" } }, new { @class = "form-control ward-filter", @disabled = "disabled" })
                         </div>
 
                     </div>
@@ -118,3 +118,22 @@
             </div>
         }
         </div>
+    <script>
+        $("#Type").change(function (e) {
+            if ($(e.target).val() >= 2 && $(e.target).val() <= 4) {
+                $("#PrivateKitchen").prop("checked", true);
+                $("#PrivateKitchen").prop("disabled", true);
+                $("#WithoutHost").prop("checked", true);
+                $("#WithoutHost").prop("disabled", true);
+                $("#ClosedRoom").prop("checked", true);
+                $("#ClosedRoom").prop("disabled", true);
+                return;
+            }
+            $("#PrivateKitchen").prop("checked", false);
+            $("#PrivateKitchen").prop("disabled", false);
+            $("#WithoutHost").prop("checked", false);
+            $("#WithoutHost").prop("disabled", false);
+            $("#ClosedRoom").prop("checked", false);
+            $("#ClosedRoom").prop("disabled", false);
+        })
+    </script>

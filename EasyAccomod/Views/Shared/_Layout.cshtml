@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 </head>
 <body class="bg-white">
-    <div id="header" class="container-fluid fixed-top px-1" style="padding: 0; background: white">
+    <div id="header" class="container-fluid fixed-top px-1" style="padding: 0; background: white; border-bottom: 1px solid lightgrey">
         <div class="row h-100" style="margin: 0">
             <div id="side-nav" class="fa fa-bars col-1 ml-2 align-self-center" onclick="ToggleSideNav()"></div>
 
@@ -48,6 +48,18 @@
                             <div class="dropdown-menu" aria-labelledby="username-display">
                                 <a class="dropdown-item" href="#">Trang cá nhân</a>
                                 <a class="dropdown-item" href="#">Bài viết đã thích</a>
+                                @{
+                                    int usertype;
+                                    if (int.TryParse(Session["userid"].ToString(), out usertype) && (usertype == 1 || usertype == 2))
+                                    {
+                                        <a class="dropdown-item" href="/Post/HostPostManager">Bài viết đã đăng</a>
+                                    }
+
+                                    if (usertype == 1)
+                                    {
+                                        <a class="dropdown-item" href="/Post/AdminPostManager">Quản lý/Phê duyệt bài đăng</a>
+                                    }
+                                }
                                 <a class="dropdown-item" href="/Account/SignOut">Đăng xuất</a>
                             </div>
 

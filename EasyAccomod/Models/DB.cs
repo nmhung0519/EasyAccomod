@@ -35,7 +35,7 @@ namespace EasyAccomod.Models
 
         [ForeignKey("CityId")]
         public CityModel City { get; set; }
-        public virtual ICollection<PostModel> Posts { get; set; }
+        public virtual ICollection<PostModel> Posts { get; set; } 
         public virtual ICollection<WardModel> Wards { get; set; }
     }
 
@@ -67,7 +67,6 @@ namespace EasyAccomod.Models
 
         [Column("cityname")]
         public string CityName { get; set; }
-
         public virtual ICollection<PostModel> Posts { get; set; }
         public virtual ICollection<DistrictModel> Districts { get; set; }
     }
@@ -84,7 +83,6 @@ namespace EasyAccomod.Models
 
         [Column("content")]
         public string Content { get; set; }
-
         [Column("cityid")]
         public int CityId { get; set; }
 
@@ -121,8 +119,8 @@ namespace EasyAccomod.Models
         [Column("water_heater")]
         public int WaterHeater { get; set; }
 
-        //[Column("private_kitchen")]
-        //public int PrivateKitchen { get; set; }
+        [Column("private_kitchen")]
+        public int PrivateKitchen { get; set; }
 
         [Column("air_conditioner")]
         public int AirConditioner { get; set; }
@@ -130,11 +128,15 @@ namespace EasyAccomod.Models
         [Column("balcony")]
         public int Balcony { get; set; }
 
+        [Column("without_host")]
+        public int WithoutHost { get; set; }
+
         [Column("electricity_price")]
         public string ElectricityPrice { get; set; }
 
         [Column("water_price")]
         public string WaterPrice { get; set; }
+
 
         [Column("create_time")]
         public DateTime CreateTime { get; set; }
@@ -152,7 +154,7 @@ namespace EasyAccomod.Models
         public double Price { get; set; }
 
         [Column("price_unit")]
-        public char PriceUnit { get; set; }
+        public int PriceUnit { get; set; }
 
         [Column("rent_time")]
         public string RentTime { get; set; }
@@ -162,6 +164,12 @@ namespace EasyAccomod.Models
 
         [Column("deposit")]
         public string Deposit { get; set; }
+
+        [Column("area")]
+        public int Area { get; set; }
+
+        [Column("views")]
+        public int Views { get; set; }
 
         public virtual ICollection<TicketModel> Tickets { get; set; }
     }

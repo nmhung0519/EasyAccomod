@@ -2,6 +2,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@model EasyAccomod.Models.PostModel
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
@@ -40,7 +42,7 @@
         </div>
 
         <div class="row reaction px-3 mt-2">
-            <div class="col-4 col-lg-8" style="white-space:nowrap">Lượt xem: 2001</div>
+            <div class="col-4 col-lg-8" style="white-space:nowrap">Lượt xem: @Model.Views</div>
             <div class="col-4 col-lg-2 text-right">
                 <i class="far fa-star text-warning"></i>
                 <span class="post-rating">7.5</span>
@@ -51,8 +53,8 @@
             </div>
         </div>
         <div class="row post-details-info mt-2 px-3">
-            <h5 class="post-details-title">Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii</h5>
-            <p class="post-details-address">Số 5, ngõ 169 ngách 8/9 đường Cầu Giấy - Phường Quan Hoa - Quận Cầu Giấy - Hà Nội</p>
+            <h5 class="post-details-title">@Model.Title</h5>
+            <p class="post-details-address">@Model.Address - @Model.Ward.WardName - @Model.Ward.District.DistrictName - @Model.Ward.District.City.CityName</p>
 
 
         </div>
@@ -71,7 +73,7 @@
                 </tr>
                 <tr>
                     <td>Diện tích</td>
-                    <td>: 30 m2</td>
+                    <td>: @Model.Area m2</td>
                 </tr>
                 <tr>
                     <td>Giá điện</td>
@@ -81,73 +83,80 @@
                     <td>Giá nước</td>
                     <td>: 100,000/người</td>
                 </tr>
-                <tr>
-                    <td>Điều hoà</td>
-                    <td>: Có</td>
-                </tr>
-                <tr>
-                    <td>Nóng lạnh</td>
-                    <td>: Có</td>
-                </tr>
-                <tr>
-                    <td>Bếp</td>
-                    <td>: Có</td>
-                </tr>
-                <tr>
-                    <td>Ban công</td>
-                    <td>: Không</td>
-                </tr>
-                <tr>
-                    <td>Vệ sinh khép kín</td>
-                    <td>: Không</td>
-                </tr>
-                <tr>
-                    <td>Chung chủ</td>
-                    <td>: Có</td>
-                </tr>
+                @if (Model.AirConditioner >= 0)
+                {
+                    <tr>
+                        @{ string airConditioner = (Model.AirConditioner == 1) ? "Có" : "Không"; }
+                        <td>Điều hoà</td>
+                        <td>: @airConditioner</td>
+                    </tr>
+                }
+                @if (Model.WaterHeater >= 0)
+                {
+                    <tr>
+                        @{ string waterHeater = (Model.WaterHeater == 1) ? "Có" : "Không"; }
+                        <td>Nóng lạnh</td>
+                        <td>: @waterHeater</td>
+                    </tr>
+                }
+                @if (Model.PrivateKitchen >= 0)
+                {
+                    <tr>
+                        @{ string privateKitchen = (Model.PrivateKitchen == 1) ? "Có" : "Không"; }
+                        <td>Bếp</td>
+                        <td>: Có</td>
+                    </tr>
+                }
+                @if (Model.Balcony >= 0)
+                {
+                    <tr>
+                        @{ string balcony = (Model.Balcony == 1) ? "Có" : "Không"; }
+                        <td>Ban công</td>
+                        <td>: @balcony</td>
+                    </tr>
+                }
+                @if (Model.ClosedRoom >= 0)
+                {
+                    <tr>
+                        @{ string closedRoom = (Model.ClosedRoom == 1) ? "Có" : "Không"; } 
+                        <td>Vệ sinh khép kín</td>
+                        <td>: @closedRoom</td>
+                    </tr>
+                }
+                @if (Model.WithoutHost >= 0)
+                {
+                    <tr>
+                        @{ string withoutHost = (Model.WithoutHost == 1) ? "Có" : "Không";}
+                        <td>Chung chủ</td>
+                        <td>: @withoutHost</td>
+                    </tr>
+                }
             </tbody>
         </table>
 
 
 
         <h4>Mô tả</h4>
-        <div class="post-description">
-            <!--MÔ TẢ-->
-            Bán Nhà thiết kế đẹp hoàn hảo Hẻm 3m 417/26/2 Quang Trung, Phường 10, Quận Gò Vấp, TP.HCM.
-            - DT: 4 x 14m, Gồm: 1 trệt + 2 lầu + 2 sân thượng.
-            - 4 Phòng Ngủ rộng đẹp mới hoàn toàn, 4 Wc riêng với thiết bị vệ sinh Toto rất đẹp.
-            - Cầu thang gỗ, Tủ bếp gỗ, cửa phòng gỗ, tất cả là gỗ căm se bền mãi với thời gian, sàn các phòng gỗ Đức toàn bộ.
-            - Phòng Bếp + Phòng Khách rất rộng. Có sân để xe tầng trệt.
-            - Có 1m giếng trời sau.
-            - 2 sân thượng lớn.
-            + Nhà thiết kế sang trọng, hiện đại.
-            + Hẻm ba gác 3m cách hẻm xe hơi 20m, Hẻm đẹp nhất Đường Quang Trung đối diện UBND Quận Gò Vấp, khu dịch vụ sầm uất nhất của Q.Gò Vấp.
-            + Rất tiện lợi cho gia đình ở, hoặc mở Vp, KD online…
-            + ĐẶC BIỆT: CÓ THỂ THIẾT KẾ NHÀ THÀNH 7 PHÒNG VÀ CĂN HỘ DỊCH VỤ CAO CẤP CHO THUÊ TẠO DÒNG TIỀN HÀNG THÁNG LÊN TỚI 28 TRIỆU/THÁNG.
-            Giá bán GIẢM SỐC: 4.9 Tỷ - GIÁ CŨ: 5.35 TỶ - GIẢM NGAY 450 TRIỆU DO CẦN BÁN GẤP (Hoa hồng 50 Triệu - 100 Triệu gửi ACE Môi Giới)
-            LH: 0937554570 A.Hoàng
-        </div>
-
-
-
-
-
+        <div class="post-description">@Model.Content</div>
 
         <hr>
-        <div class="post-details-datetime text-right font-italic">17/12/20 12:12</div>
+        <div class="post-details-datetime text-right font-italic">@Model.CreateTime</div>
         <h4>Người đăng</h4>
         <div class="row">
-            <div class="col-12"><i class="fa fa-user" style="font-size: 20px;"></i> <span class="host-name">Nguyễn Mạnh Hùng</span></div>
+            <div class="col-12"><i class="fa fa-user" style="font-size: 20px;"></i> <span class="host-name">@Model.ContactName</span></div>
 
         </div>
         <div class="row mt-1">
             <div class="col-12">
-                <span><i class="fa fa-phone"></i> 0996699996</span>
+                <span>
+                    <i class="fa fa-phone"></i> 
+                    <a class="text-decoration-none text-dark" href="tel:@Model.ContactPhone">@Model.ContactPhone</a>
+                </span>
             </div>
             <div class="col-12">
                 <span>
                     <i class="fa fa-envelope"></i>
-                    <a class="text-decoration-none text-dark" href="mailto:easyaccomod@gmail.com"> easyaccomod@gmail.com</a>
+                    <a class="text-decoration-none text-dark" href="mailto:@Model.Poster.Email">@Model.Poster.Email</a>
                 </span>
             </div>
         </div>
@@ -190,14 +199,17 @@
 
 
     <div class="host-info col-4" style="position: relative;">
-        <div class="container mt-3 rounded border py-3" style="position: sticky; top: 20px;">
+        <div class="container mt-3 rounded border py-3" style="position: sticky; top: 55px;">
             <div class="row">
                 <div class="col-3 text-center"><i class="fa fa-user" style="font-size: 20px;"></i></div>
-                <div class="col-9"><span class="host-name">Nguyễn Mạnh Hùng</span></div>
+                <div class="col-9"><span class="host-name">@Model.Poster.LastName @Model.Poster.FirstName</span></div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-                    <span><i class="fa fa-phone"></i> 0996699996</span>
+                    <span>
+                        <i class="fa fa-phone"></i> 
+                        <a class="text-decoration-none text-dark" href="tel:@Model.Poster.Phone">0996699996</a>
+                    </span>
                 </div>
                 <div class="col-12">
                     <span>
