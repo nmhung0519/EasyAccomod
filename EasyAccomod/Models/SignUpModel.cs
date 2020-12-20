@@ -28,6 +28,8 @@ namespace EasyAccomod.Models
         [Required(ErrorMessage = "Họ và tên không được để trống")]
         public string fullname { get; set; }
 
+        public int UserType { get; set; }
+
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email không được để trống")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Email không đúng định dạng")]

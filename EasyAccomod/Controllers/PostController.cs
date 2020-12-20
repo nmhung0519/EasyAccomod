@@ -29,6 +29,18 @@ namespace EasyAccomod.Controllers
             return View(new CreatePostModel());
         }
 
+        [HttpPost]
+        public ContentResult CreatePost(CreatePostModel model)
+        {
+            if (!ModelState.IsValid) return Content("Form không hợp lệ", "text/html");
+            try
+            {
+
+            }
+            catch (Exception ex) { return Content(ex.Message, "text/html"); }
+            return Content("Tạo bài đăng thành công", "text/html");
+        }
+
         public ActionResult AdminPostManager()
         {
             return View();
@@ -37,14 +49,6 @@ namespace EasyAccomod.Controllers
         public ActionResult HostPostManager()
         {
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult CreatePost(CreatePostModel model)
-        {
-            if (!ModelState.IsValid) return View(model);
-            //
-            return RedirectToAction("HostPostManager");
         }
 
         public ActionResult PostDetail(int id)

@@ -24,7 +24,7 @@ namespace EasyAccomod.Controllers
             {
                 string password = model.password.ToMD5();
                 var account = (from a in db.Accounts
-                               where a.username == model.username && a.password == password
+                               where a.Username == model.username && a.Password == password
                                select a).FirstOrDefault();
                 if (account == null)
                 {
@@ -45,10 +45,38 @@ namespace EasyAccomod.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(SignUpModel model)
+        public ContentResult SignUp(SignUpModel model)
         {
-            if (!ModelState.IsValid) return (View(model));
-            return RedirectToAction("SignIn");
+            if (!ModelState.IsValid) return Content("Dữ liệu không đúng định dạng", "text/html");
+            try
+            {
+                AccountModel account = new AccountModel();
+                account.Accounts = new List<AccountModel>();
+                account.Posts = new List<PostModel>();
+                account.Notifications = new List<NotificationModel>();
+                account.Username = model.usernname;
+                account.Password = model.password.ToMD5();
+                account.LastName = " ";
+                account.FirstName = model.fullname;
+                account.Phone = model.phone;
+                account.Email = model.email;
+                account.IdCard = model.idCard;
+                account.Address = model.address;
+                account.WardId = model.wardId;
+                account.Type = model.UserType;
+                account.ApproverId = 1;
+                using (var db = new DBContext())
+                {
+                    var acc = (from a in db.Accounts
+                               where a.Username == account.Username
+                               select a).FirstOrDefault();
+                    if (acc != null) return Content("Tài khoản đã tồn tại", "text/html");
+                    db.Accounts.Add(account);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex) { return Content(ex.Message, "text/html"); }
+            return Content("window.location.href='/Account/SignIn'", "text/javascript");
         }
 
         public ActionResult SignOut()

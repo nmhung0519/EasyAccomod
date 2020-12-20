@@ -220,10 +220,10 @@ namespace EasyAccomod.Models
         public string Email { get; set; }
 
         [Column("username")]
-        public string username { get; set; }
+        public string Username { get; set; }
 
         [Column("password")]
-        public string password { get; set; }
+        public string Password { get; set; }
 
         [Column("idcard")]
         public string IdCard { get; set; }
@@ -235,12 +235,51 @@ namespace EasyAccomod.Models
         public int ApproverId { get; set; }
 
         [ForeignKey("ApproverId")]
-        public AccountModel Approver { get; set; }
+        public virtual AccountModel Approver { get; set; }
 
         [Column("approval_time")]
         public DateTime ApprovalTime { get; set; }
 
+        [Column("wardid")]
+        public int WardId { get; set; }
+
+        [ForeignKey("WardId")]
+        public WardModel Ward { get; set; }
+
+        [Column("address")]
+        public string Address { get; set; }
+
         public virtual ICollection<PostModel> Posts { get; set; }
         public virtual ICollection<AccountModel> Accounts { get; set; }
+        public virtual ICollection<NotificationModel> Notifications { get; set; }
+    }
+
+    [Table("notification")]
+    public class NotificationModel
+    {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("targetid")]
+        public int TargetId { get; set; }
+
+        [Column("type")]
+        public int Type { get; set; }
+
+        [Column("title")]
+        public string Title { get; set; }
+
+        [Column("createdtime")]
+        public DateTime CreatedTime { get; set; }
+
+        [Column("receiverid")]
+        public int ReceiverId { get; set; }
+
+        [ForeignKey("ReceiverId")]
+        public AccountModel Receiver { get; set; }
+
+        [Column("seen")]
+        public bool Seen { get; set; }
     }
 }

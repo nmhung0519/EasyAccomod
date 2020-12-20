@@ -25,6 +25,16 @@ namespace EasyAccomod.Models
         [Range(1, int.MaxValue, ErrorMessage = "Chọn Phường/Xã")]
         public int WardId { get; set; }
 
+        //[Display(Name = "Tiêu đề")]
+        //[MinLength(10, ErrorMessage = "Tiêu đề tối thiểu 10 ký tự")]
+        //[MaxLength(255, ErrorMessage = "Độ dài tiêu đề tối đa 255 ký tự")]
+        public string Title { get; set; }
+
+        //[Display(Name = "Mô tả")]
+        //[MinLength(50, ErrorMessage = "Mô tả tối thiểu 50 ký tự")]
+        //[MaxLength(4000, ErrorMessage = "Độ dài mô tả tối đa 4000 ký tự")]
+        public string Content { get; set; }
+
         [Display(Name = "Giá tiền")]
         public double Price { get; set; }
         [Display(Name = "Loại BĐS")]
