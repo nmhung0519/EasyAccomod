@@ -26,7 +26,7 @@ namespace EasyAccomod.Models
 
         [Display(Name = "Loại BĐS")]
         [Required(ErrorMessage = "Loại BĐS không được để trống")]
-        [Range(1, 4, ErrorMessage = "Loại BĐS không đúng định dạng")]
+        [Range(0, 4, ErrorMessage = "Loại BĐS không đúng định dạng")]
         public int Type { get; set; }
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Diện tích phải là số")]
         public double FromArea { get; set; }
@@ -56,6 +56,7 @@ namespace EasyAccomod.Models
         {
             return new List<SelectListItem>
             {
+                new SelectListItem { Text = "Tất cả", Value = "0"},
                 new SelectListItem { Text = "Phòng trọ", Value = "1"},
                 new SelectListItem { Text = "Chung cư mini", Value = "2"},
                 new SelectListItem { Text = "Nhà nguyên căn", Value = "3"},

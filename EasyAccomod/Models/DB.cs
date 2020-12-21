@@ -172,6 +172,14 @@ namespace EasyAccomod.Models
         public int Views { get; set; }
 
         public virtual ICollection<TicketModel> Tickets { get; set; }
+
+        public string DisplayPrice()
+        {
+            if (Price < 0) return "Liên hệ";
+            if (PriceUnit == 1) return Price + "/tháng";
+            if (PriceUnit == 2) return Price + "/năm";
+            return "Liên hệ";
+        }
     }
 
     [Table("ticket")]

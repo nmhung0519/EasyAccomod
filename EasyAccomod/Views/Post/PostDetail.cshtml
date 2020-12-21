@@ -58,14 +58,14 @@
 
 
         </div>
-        <h4 class="post-big-price">3,2 triệu</h4>
+        <h4 class="post-big-price">@Model.DisplayPrice()</h4>
         <h4>Thông tin chính</h4>
 
         <table class="table table-sm table-borderless">
             <tbody>
                 <tr>
                     <td>Giá</td>
-                    <td>: 3,200,000 VNĐ</td>
+                    <td>: @Model.DisplayPrice()</td>
                 </tr>
                 <tr>
                     <td>Số phòng</td>
@@ -118,7 +118,7 @@
                 @if (Model.ClosedRoom >= 0)
                 {
                     <tr>
-                        @{ string closedRoom = (Model.ClosedRoom == 1) ? "Có" : "Không"; } 
+                        @{ string closedRoom = (Model.ClosedRoom == 1) ? "Có" : "Không"; }
                         <td>Vệ sinh khép kín</td>
                         <td>: @closedRoom</td>
                     </tr>
@@ -149,7 +149,7 @@
         <div class="row mt-1">
             <div class="col-12">
                 <span>
-                    <i class="fa fa-phone"></i> 
+                    <i class="fa fa-phone"></i>
                     <a class="text-decoration-none text-dark" href="tel:@Model.Poster.Phone">@Model.Poster.Phone</a>
                 </span>
             </div>

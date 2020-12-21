@@ -35,10 +35,68 @@ namespace EasyAccomod.Controllers
             if (!ModelState.IsValid) return Content("Form không hợp lệ", "text/html");
             try
             {
+                PostModel newPost = new PostModel();
+                newPost.Address = model.Address;
+                newPost.CityId = model.CityId;
+                newPost.DistrictId = model.DistrictId;
+                newPost.WardId = model.WardId;
+                newPost.Price = model.Price;
+                newPost.PriceUnit = 1;
+                newPost.Type = model.Type;
+                newPost.Area = model.Area;
+                newPost.ElectricityPrice = "s" + model.ElectricityPrice;
+                newPost.WaterPrice = "s" + model.WaterPrice;
+                newPost.AirConditioner = (model.AirConditioner) ? 1 : 0;
+                newPost.WaterHeater = (model.WaterHeater) ? 1 : 0;
+                newPost.PrivateKitchen = (model.PrivateKitchen) ? 1 : 0;
+                newPost.Balcony = (model.Balcony) ? 1 : 0;
+                newPost.ClosedRoom = (model.ClosedRoom) ? 1 : 0;
+                newPost.WithoutHost = (model.WithoutHost) ? 1 : 0;
+                newPost.PosterId = int.Parse(Session["userid"].ToString());
+                newPost.ContactName = Session["fullname"].ToString();
+                using (var db = new DBContext())
+                {
+                    newPost.ContactPhone = (from a in db.Accounts
+                                            where a.Id == newPost.PosterId
+                                            select a.Phone).FirstOrDefault();
+                }
+                switch (newPost.Type)
+                {
+                    case 1:
+                        newPost.Title = "Phòng trọ";
+                        break;
+                    case 2:
+                        newPost.Title = "Chung cư mini";
+                        break;
+                    case 3:
+                        newPost.Title = "Nhà nguyên căn";
+                        break;
+                    case 4:
+                        newPost.Title = "Chung cư nguyên căn";
+                        break;
+                }
+
+                newPost.Title = newPost.Title + " - " + newPost.Address;
+                newPost.Content = newPost.Title;
+                newPost.RentTime = "6 tháng";
+                newPost.Deposit = "1 tháng";
+                newPost.DatePerTime = "1 tháng";
+                newPost.CreateTime = DateTime.Now;
+
+                TicketModel ticket = new TicketModel();
+                ticket.ApproverId = int.Parse(Session["userid"].ToString());
+                ticket.StartTime = DateTime.Now;
+                ticket.EndTime = DateTime.Now.AddDays(7);
+                newPost.Tickets = new List<TicketModel> { ticket };
+                using (var db = new DBContext())
+                {
+                    db.Posts.Add(newPost);
+                    db.SaveChanges();
+                }
 
             }
             catch (Exception ex) { return Content(ex.Message, "text/html"); }
-            return Content("Tạo bài đăng thành công", "text/html");
+            return Content("window.location.href = '/Post/HostPostManager'", "text/javascript");
         }
 
         public ActionResult AdminPostManager()

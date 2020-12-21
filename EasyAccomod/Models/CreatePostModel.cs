@@ -46,7 +46,7 @@ namespace EasyAccomod.Models
 
         [Display(Name = "Diện tích")]
         [Required(ErrorMessage = "Giá phòng không được để trống")]
-        public double Area { get; set; }
+        public int Area { get; set; }
 
         [Display(Name = "Giá điện (/số)")]
         [Required(ErrorMessage = "Giá điện không được để trống")]
