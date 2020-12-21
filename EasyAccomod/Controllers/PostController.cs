@@ -22,9 +22,10 @@ namespace EasyAccomod.Controllers
             using (var db = new DBContext())
             {
                 var account = (from a in db.Accounts
-                               where a.Id == userid && (a.Type == 1 || a.Type == 2)
+                               where a.Id == userid
+                                && (a.Type == 1 || (a.Type == 2 && a.ApprovalTime.Year != 0))
                                select a).FirstOrDefault();
-                if (account == null) return PartialView("../Account/SignIn", new SignInModel());
+                if (account == null) return PartialView("CreatePostAccessDeny");
             }
             return View(new CreatePostModel());
         }
@@ -56,9 +57,12 @@ namespace EasyAccomod.Controllers
                 newPost.ContactName = Session["fullname"].ToString();
                 using (var db = new DBContext())
                 {
-                    newPost.ContactPhone = (from a in db.Accounts
-                                            where a.Id == newPost.PosterId
-                                            select a.Phone).FirstOrDefault();
+                    var user = (from a in db.Accounts
+                                where a.Id == newPost.PosterId
+                                select a).FirstOrDefault();
+                    if (user == null) return Content("window.location.href = '/Account/SignIn'", "text/javascript");
+                    newPost.ContactPhone = user.Phone;
+                    if (user.Type == 1) newPost.Approved = true;
                 }
                 switch (newPost.Type)
                 {
@@ -86,7 +90,11 @@ namespace EasyAccomod.Controllers
                 TicketModel ticket = new TicketModel();
                 ticket.ApproverId = int.Parse(Session["userid"].ToString());
                 ticket.StartTime = DateTime.Now;
-                ticket.EndTime = DateTime.Now.AddDays(7);
+                if (newPost.Approved)
+                {
+                    ticket.EndTime = DateTime.Now.AddDays(7);
+                    ticket.Approved = newPost.Approved;
+                }
                 newPost.Tickets = new List<TicketModel> { ticket };
                 using (var db = new DBContext())
                 {

@@ -223,6 +223,7 @@
     <Content Include="Scripts\address.control.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="database\database.nb3" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -236,10 +237,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Post\approve-account.html" />
-    <Content Include="Views\Post\approve-comment.html" />
-    <Content Include="Views\Post\approve-post.html" />
-    <Content Include="Views\Post\approve-purchase.html" />
+    <None Include="Views\Post\approve-account.cshtml" />
+    <None Include="Views\Post\approve-comment.cshtml" />
+    <None Include="Views\Post\approve-post.cshtml" />
+    <None Include="Views\Post\approve-purchase.cshtml" />
+    <Content Include="database\trigger.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -262,6 +264,7 @@
     <Content Include="Views\Post\PostDetail.cshtml" />
     <Content Include="Views\Post\AdminPostManager.cshtml" />
     <Content Include="Views\Post\HostPostManager.cshtml" />
+    <Content Include="Views\Post\CreatePostAccessDeny.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

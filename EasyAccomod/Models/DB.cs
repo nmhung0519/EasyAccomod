@@ -171,6 +171,9 @@ namespace EasyAccomod.Models
         [Column("views")]
         public int Views { get; set; }
 
+        [Column("approved")]
+        public bool Approved { get; set; }
+
         public virtual ICollection<TicketModel> Tickets { get; set; }
 
         public string DisplayPrice()
@@ -206,6 +209,9 @@ namespace EasyAccomod.Models
 
         [Column("end_time")]
         public DateTime EndTime { get; set; }
+
+        [Column("approved")]
+        public bool Approved { get; set; }
     }
 
     [Table("account")]

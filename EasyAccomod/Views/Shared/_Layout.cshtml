@@ -50,7 +50,7 @@
                                 <a class="dropdown-item" href="#">Bài viết đã thích</a>
                                 @{
                                     int usertype;
-                                    if (int.TryParse(Session["userid"].ToString(), out usertype) && (usertype == 1 || usertype == 2))
+                                    if (int.TryParse(Session["usertype"].ToString(), out usertype) && (usertype == 1 || usertype == 2))
                                     {
                                         <a class="dropdown-item" href="/Post/HostPostManager">Bài viết đã đăng</a>
                                     }

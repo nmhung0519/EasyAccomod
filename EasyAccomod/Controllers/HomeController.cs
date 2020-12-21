@@ -55,9 +55,7 @@ namespace EasyAccomod.Controllers
                     if (districtId != 0) wardId = (from w in db.Wards
                                   where (w.WardName == "" + ward) && (w.DistrictId == districtId)
                                   select w.Id).FirstOrDefault();
-                    var posts = (from p in db.Posts
-                                 where (cityId == 0 || p.CityId == cityId) && (districtId == 0 || p.DistrictId == districtId) && (wardId == 0 || p.WardId == wardId)
-                                 select p).ToList();
+                    var posts = db.Posts.SqlQuery("CALL usp_post_ticket_getpostbylocation(" + cityId + "," + districtId + "," + wardId + ")").ToList<PostModel>();
                     if (posts != null)
                         foreach (var item in posts)
                         {

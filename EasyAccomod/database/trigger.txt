@@ -1,0 +1,25 @@
+-- Tạo thông báo khi có bài đăng mới
+CREATE TRIGGER after_post_insert
+AFTER INSERT ON post
+FOR EACH ROW
+BEGIN
+	IF (NEW.approved = 0) THEN
+		INSERT INTO notification (targetid, type, title, createdtime, receiverid)
+			SELECT NEW.id, 2, (SELECT CONCAT(a.lastname, ' ', a.firstname, ' Vừa tạo bài đăng mới. Xem và phê duyệt ngay') FROM account a WHERE a.Id = NEW.posterid), NEW.create_time, adm.id
+			FROM account adm
+			WHERE adm.type = 1;
+		END IF;
+END;
+
+-- Tạo thông báo đến các admin khi có tài khoản cho thuê trọ mới
+CREATE TRIGGER after_insert_account
+AFTER INSERT ON account
+FOR EACH ROW
+BEGIN
+	IF (NEW.type = 2) THEN
+		INSERT INTO notification (targetid, type, title, createdtime, receiverid)
+			SELECT NEW.id, 1, CONCAT(NEW.lastname, ' ', NEW.firstname, ' vừa tạo tài khoản người cho thuê mới. Xem và phê duyệt ngay.'), NOW(), a.id
+			FROM account a
+			WHERE a.type = 1;
+	END IF;
+END;
