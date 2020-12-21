@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyAccomod.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,21 @@ namespace EasyAccomod
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+                name: "City All",
+                url: "{city}/tat-ca-bds",
+                defaults: new { controller = "Home", action = "GetByLocation"}
+            );
+            routes.MapRoute(
+                name: "District All",
+                url: "{city}/{district}/tat-ca-bds",
+                defaults: new { controller = "Home", action = "GetByLocation" }
+            );
+            routes.MapRoute(
+                name: "Ward All",
+                url: "{city}/{district}/{ward}/tat-ca-bds",
+                defaults: new { controller = "Home", action = "GetByLocation" }
+            );
             routes.MapRoute(
                 name: "Home Search",
                 url: "Home/Search",
