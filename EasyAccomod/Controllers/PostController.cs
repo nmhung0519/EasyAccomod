@@ -107,16 +107,6 @@ namespace EasyAccomod.Controllers
             return Content("window.location.href = '/Post/HostPostManager'", "text/javascript");
         }
 
-        public ActionResult AdminPostManager()
-        {
-            return View();
-        }
-
-        public ActionResult HostPostManager()
-        {
-            return View();
-        }
-
         public ActionResult PostDetail(int id)
         {
             try

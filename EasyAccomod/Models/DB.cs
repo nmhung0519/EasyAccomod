@@ -221,11 +221,8 @@ namespace EasyAccomod.Models
         [Column("id")]
         public int Id { get; set; }
 
-        [Column("firstname")]
-        public string FirstName { get; set; }
-
-        [Column("lastname")]
-        public string LastName { get; set; }
+        [Column("fullname")]
+        public string FullName { get; set; }
 
         [Column("phone")]
         public string Phone { get; set; }
@@ -262,6 +259,9 @@ namespace EasyAccomod.Models
 
         [Column("address")]
         public string Address { get; set; }
+
+        [Column("approved")]
+        public bool Approved { get; set; }
 
         public virtual ICollection<PostModel> Posts { get; set; }
         public virtual ICollection<AccountModel> Accounts { get; set; }

@@ -47,17 +47,16 @@
 
                             <div class="dropdown-menu" aria-labelledby="username-display">
                                 <a class="dropdown-item" href="#">Trang cá nhân</a>
-                                <a class="dropdown-item" href="#">Bài viết đã thích</a>
                                 @{
                                     int usertype;
                                     if (int.TryParse(Session["usertype"].ToString(), out usertype) && (usertype == 1 || usertype == 2))
                                     {
-                                        <a class="dropdown-item" href="/Post/HostPostManager">Bài viết đã đăng</a>
+                                        <a class="dropdown-item" href="/HostManager">Bài viết đã đăng</a>
                                     }
 
                                     if (usertype == 1)
                                     {
-                                        <a class="dropdown-item" href="/Post/AdminPostManager">Quản lý/Phê duyệt bài đăng</a>
+                                        <a class="dropdown-item" href="/AdminManager">Quản lý/Phê duyệt bài đăng</a>
                                     }
                                 }
                                 <a class="dropdown-item" href="/Account/SignOut">Đăng xuất</a>

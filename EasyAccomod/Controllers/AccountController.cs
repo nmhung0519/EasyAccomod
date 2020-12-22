@@ -33,7 +33,7 @@ namespace EasyAccomod.Controllers
                 }
                 Session["usertype"] = account.Type;
                 Session["userid"] = account.Id;
-                Session["fullname"] = account.LastName + " " + account.FirstName;
+                Session["fullname"] = account.FullName;
             }
             return RedirectToAction("Index", "Home");
         }
@@ -56,8 +56,7 @@ namespace EasyAccomod.Controllers
                 account.Notifications = new List<NotificationModel>();
                 account.Username = model.usernname;
                 account.Password = model.password.ToMD5();
-                account.LastName = "";
-                account.FirstName = model.fullname;
+                account.FullName = model.fullname;
                 account.Phone = model.phone;
                 account.Email = model.email;
                 account.IdCard = model.idCard;

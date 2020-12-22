@@ -188,7 +188,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AdminManagerController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\HostManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminPostManager.css" />
+    <Content Include="Content\ApproveComment.css" />
+    <Content Include="Content\ApprovePost.css" />
+    <Content Include="Content\ApprovePurchase.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -237,10 +242,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <None Include="Views\Post\approve-account.cshtml" />
-    <None Include="Views\Post\approve-comment.cshtml" />
-    <None Include="Views\Post\approve-post.cshtml" />
-    <None Include="Views\Post\approve-purchase.cshtml" />
+    <None Include="Views\AdminManager\ApproveAccount.cshtml" />
+    <None Include="Views\AdminManager\ApproveComment.cshtml" />
+    <None Include="Views\AdminManager\ApprovePost.cshtml" />
+    <None Include="Views\AdminManager\ApprovePurchase.cshtml" />
     <Content Include="database\trigger.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -262,9 +267,11 @@
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\ListPost.cshtml" />
     <Content Include="Views\Post\PostDetail.cshtml" />
-    <Content Include="Views\Post\AdminPostManager.cshtml" />
     <Content Include="Views\Post\HostPostManager.cshtml" />
     <Content Include="Views\Post\CreatePostAccessDeny.cshtml" />
+    <Content Include="Views\AdminManager\Index.cshtml" />
+    <Content Include="Views\HostManager\Index.cshtml" />
+    <Content Include="Views\HostManager\Post.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

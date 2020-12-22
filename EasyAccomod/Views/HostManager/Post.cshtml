@@ -1,0 +1,152 @@
+﻿@{
+    Layout = null;
+}
+
+@model IEnumerable<EasyAccomod.Models.PostModel>
+
+<link href="~/Content/ApprovePost.css" rel="stylesheet" />
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" data-toggle="tab" href="#posttab1" role="tab" aria-controls="nav-home" aria-selected="true">Đang hiển thị</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#posttab2" role="tab" aria-controls="nav-profile" aria-selected="false">Đang chờ duyệt</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#posttab3" role="tab" aria-controls="nav-profile" aria-selected="false">Đã ẩn</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#posttab4" role="tab" aria-controls="nav-profile" aria-selected="false">Bị từ chối</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="posttab1" role="tabpanel">
+        <h5 class="my-4">Bài đăng đang hiển thị</h5>
+
+        <!--One card-->
+        <div class="container">
+            <div class=" rounded border mb-4 p-2">
+                <div class="post-wrapper row px-3">
+                    <div class="post-image-thumb"></div>
+                    <div class="post-info col-12 col-lg-9">
+                        <div class="post-top-part">
+                            <span class="post-title">
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
+                            </span>
+                            <span class="post-area">30m2</span>
+                            <span class="post-price">2,5 triệu/tháng</span>
+                        </div>
+                        <span class="post-user">Nguyễn Mạnh Hùng</span>
+                        <span class="post-datetime">17/12/20 12:12 </span>
+
+
+                    </div>
+                </div>
+
+                <div class="confirm-bar text-right">
+                    <div class="btn btn-primary">Ẳn bài viết</div>
+                    <div class="btn btn-secondary ml-3">Sửa bài viết</div>
+                </div>
+            </div>
+        </div>
+
+        <!--End card-->
+
+    </div>
+    <div class="tab-pane fade" id="posttab2" role="tabpanel">
+        <h5 class="my-4">Bài đăng đang chờ duyệt</h5>
+
+        <!--One card-->
+        <div class="container">
+            <div class=" rounded border mb-4 p-2">
+                <div class="post-wrapper row px-3">
+                    <div class="post-image-thumb"></div>
+                    <div class="post-info col-12 col-lg-9">
+                        <div class="post-top-part">
+                            <span class="post-title">
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
+                            </span>
+                            <span class="post-area">30m2</span>
+                            <span class="post-price">2,5 triệu/tháng</span>
+                        </div>
+                        <span class="post-user">Nguyễn Mạnh Hùng</span>
+                        <span class="post-datetime">17/12/20 12:12 </span>
+
+
+                    </div>
+                </div>
+
+                <div class="confirm-bar text-right">
+                    <div class="btn btn-primary">Sửa bài viết</div>
+                </div>
+            </div>
+        </div>
+
+        <!--End card-->
+
+
+    </div>
+    <div class="tab-pane fade" id="posttab3" role="tabpanel">
+        <h5 class="my-4">Bài đăng đã ẩn</h5>
+
+        <!--One card-->
+        <div class="container">
+            <div class=" rounded border mb-4 p-2">
+                <div class="post-wrapper row px-3">
+                    <div class="post-image-thumb"></div>
+                    <div class="post-info col-12 col-lg-9">
+                        <div class="post-top-part">
+                            <span class="post-title">
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
+                            </span>
+                            <span class="post-area">30m2</span>
+                            <span class="post-price">2,5 triệu/tháng</span>
+                        </div>
+                        <span class="post-user">Nguyễn Mạnh Hùng</span>
+                        <span class="post-datetime">17/12/20 12:12 </span>
+
+
+                    </div>
+                </div>
+
+                <div class="confirm-bar text-right">
+                    <div class="btn btn-primary">Hiện thị bài viết</div>
+                </div>
+            </div>
+        </div>
+
+        <!--End card-->
+
+    </div>
+    <div class="tab-pane fade" id="posttab4" role="tabpanel">
+        <h5 class="my-4">Bài đăng bị từ chối</h5>
+
+        <!--One card-->
+        <div class="container">
+            <div class=" rounded border mb-4 p-2">
+                <div class="post-wrapper row px-3">
+                    <div class="post-image-thumb"></div>
+                    <div class="post-info col-12 col-lg-9">
+                        <div class="post-top-part">
+                            <span class="post-title">
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
+                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
+                            </span>
+                            <span class="post-area">30m2</span>
+                            <span class="post-price">2,5 triệu/tháng</span>
+                        </div>
+                        <span class="post-user">Nguyễn Mạnh Hùng</span>
+                        <span class="post-datetime">17/12/20 12:12 </span>
+
+
+                    </div>
+                </div>
+
+                <div class="confirm-bar text-right">
+                    <div class="btn btn-primary">Sửa và đăng bài viết</div>
+                </div>
+            </div>
+        </div>
+
+        <!--End card-->
+
+    </div>
+
+</div>

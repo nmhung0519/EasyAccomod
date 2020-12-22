@@ -12,7 +12,7 @@
 
                     <li class="nav-item-big">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Phê duyệt</a>
-                        <ul class="collapse list-unstyled nav nav-pills flex-column" id="homeSubmenu">
+                        <ul class="collapse list-unstyled nav nav-pills" id="homeSubmenu">
                             <li class="nav-item">
                                 <a id="approve-account" class="nav-link" data-toggle="pill" href="#">Phê duyệt tài khoản <span class="badge badge-danger">101</span></a>
                             </li>
@@ -30,7 +30,7 @@
 
                     <li class="nav-item-big">
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Thống kê</a>
-                        <ul class="collapse list-unstyled nav nav-pills flex-column" id="pageSubmenu">
+                        <ul class="collapse list-unstyled nav nav-pills" id="pageSubmenu">
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="pill" href="#">Bài đăng được xem nhiều nhất</a>
                             </li>
@@ -68,7 +68,7 @@
             $(this).find("a").removeClass("active");
         }
         $(this).siblings().find("a").attr("aria-expanded", "false");
-        $(this).siblings().find("ul").removeClass("show");
+        //$(this).siblings().find("ul").removeClass("show");
         if (!$(this).hasClass("active")) {
             $(this).addClass("active");
             $(this).siblings().removeClass("active");
@@ -77,23 +77,23 @@
 
 
     $("#messages").click(function () {
-        $("#content-container").load("post-list.html");
+        $("#content-container").load("/Manager/ApproveAccount");
     });
 
 
     $("#approve-account").click(function () {
-        $("#content-container").load("approve-account.html");
+        $("#content-container").load("/Manager/ApproveAccount");
     });
 
     $("#approve-post").click(function () {
-        $("#content-container").load("approve-post.html");
+        $("#content-container").load("/Manager/ApprovePost");
     });
 
     $("#approve-purchase").click(function () {
-        $("#content-container").load("approve-purchase.html");
+        $("#content-container").load("/Manager/ApprovePurchase");
     });
 
     $("#approve-comment").click(function () {
-        $("#content-container").load("approve-comment.html");
+        $("#content-container").load("/Manager/ApproveComment");
     })
 </script>
