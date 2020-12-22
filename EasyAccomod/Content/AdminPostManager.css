@@ -5,9 +5,19 @@
     position: relative;
 }
 
+::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
 #sidebar {
     overflow-y: auto;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 100px);
 }
 
 .sticky-sidebar {
@@ -25,6 +35,7 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+/* cái mũi tên thả xuống*/
 .dropdown-toggle::after {
     display: block;
     position: absolute;
@@ -49,31 +60,81 @@ ul li {
     padding: 10px;
 }
 
-#sidebar ul li a {
+.components li a {
     padding: 10px;
-    font-size: 1.1em;
     display: block;
 }
 
-    #sidebar ul li a:hover {
-        color: #fff;
-        background: #007bff;
-    }
-
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li a:hover {
     color: #fff;
     background: #007bff;
 }
 
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
+.nav-item-big > a {
+    font-weight: 700;
 }
 
-ul li span {
-    float: right;
+ul ul a {
+    padding-left: 15px !important;
+}
+
+li.nav-item a {
+    position: relative;
+}
+
+.badge-admin {
+    top: 15px;
+    right: 5px;
+    position: absolute;
 }
 
 .nav-link {
     border-radius: 0 !important;
+}
+
+.pill-span {
+    display: block;
+    max-width: 80%;
+}
+
+@media only screen and (max-width:1030px) {
+    .nav-item a {
+        font-size: 14px;
+        display: inline-block;
+    }
+}
+
+@media only screen and (max-width:620px) {
+    body {
+        font-size: 12px;
+    }
+
+    .web-sidebar {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .btn {
+        font-size: inherit !important;
+    }
+
+    .sidebar-header h3 {
+        font-size: 20px;
+    }
+
+    .nav-item a {
+        font-size: inherit;
+    }
+
+    .dropdown-toggle::after {
+        right: 10px;
+    }
+}
+
+@media only screen and (max-width:480px) {
+
+    .sidebar-header h3 {
+        font-size: 16px;
+        text-align: center;
+    }
 }

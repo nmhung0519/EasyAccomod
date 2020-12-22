@@ -6,52 +6,91 @@
             <div class="sidebar-header">
                 <h3>Quản lý </h3>
             </div>
+            
             <nav id="sidebar">
 
                 <ul class="list-unstyled components">
 
                     <li class="nav-item-big">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Phê duyệt</a>
-                        <ul class="collapse list-unstyled nav nav-pills" id="homeSubmenu">
+                        <a href="#post-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Bài đăng</a>
+                        <ul class="collapse show list-unstyled nav nav-pills" id="post-menu">
                             <li class="nav-item">
-                                <a id="approve-account" class="nav-link" data-toggle="pill" href="#">Phê duyệt tài khoản <span class="badge badge-danger">101</span></a>
+                                <a id="approve-post" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Bài đăng chờ duyệt</span>
+                                    <span class="badge badge-danger badge-admin">100</span>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a id="approve-post" class="nav-link" data-toggle="pill" href="#">Phê duyệt bài đăng<span class="badge badge-danger">101</span></a>
+                                <a id="approved-post" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Bài đăng đã duyệt</span>
+                                    <span class="badge badge-danger badge-admin">100</span>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a id="approve-purchase" class="nav-link" data-toggle="pill" href="#">Phê duyệt thanh toán<span class="badge badge-danger">101</span></a>
+                                <a id="denied-post" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Bài đăng đã huỷ</span>
+                                    <span class="badge badge-danger badge-admin">101</span>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a id="approve-comment" class="nav-link" data-toggle="pill" href="#">Phê duyệt bình luận<span class="badge badge-danger">101</span></a>
+                                <a id="approve-comment" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Phê duyệt bình luận</span>
+                                    <span class="badge badge-danger badge-admin">101</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li class="nav-item-big">
+                        <a href="#account-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Tài khoản</a>
+                        <ul class="collapse show list-unstyled nav nav-pills" id="account-menu">
+                            <li class="nav-item">
+                                <a id="approve-account" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Tài khoản chờ duyệt</span>
+                                    <span class="badge badge-danger badge-admin">101</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="approved-account" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Tài khoản đã duyệt</span>
+                                    <span class="badge badge-danger badge-admin">101</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="denied-account" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Tài khoản đã xoá</span>
+                                    <span class="badge badge-danger badge-admin">101</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="nav-item-big">
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Thống kê</a>
-                        <ul class="collapse list-unstyled nav nav-pills" id="pageSubmenu">
+                        <a href="#statistic-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Thống kê</a>
+                        <ul class="collapse show list-unstyled nav nav-pills" id="statistic-menu">
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#">Bài đăng được xem nhiều nhất</a>
+                                <a id="most-viewed-post" class="nav-link" data-toggle="pill" href="#">Bài đăng được xem nhiều nhất</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#">Bài đăng được thích nhiều nhất</a>
+                                <a id="most-liked-post" class="nav-link" data-toggle="pill" href="#">Bài đăng được thích nhiều nhất</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#">Phân tích thời gian đăng bài</a>
+                                <a id="time-most-post" class="nav-link" data-toggle="pill" href="#">Phân tích thời gian đăng bài</a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item-big">
-                        <a href="#" id="messages">Tin nhắn</a>
-                    </li>
-                    <li class="nav-item-big">
-                        <a href="#">Báo cáo vi phạm</a>
+
+                    <li class="nav-item-big" style="position: relative;">
+                        <a id="report-post" href="#">
+                            <span class="pill-span">Báo cáo vi phạm </span>
+                            <span class="badge badge-danger badge-admin">50</span>
+                        </a>
                     </li>
 
 
                 </ul>
             </nav>
+            
         </div>
     </div>
     <div class="content col-9" id="content-container">
@@ -64,16 +103,15 @@
 
 
     $(".nav-item-big").click(function () {
-        if ($(this).attr("aria-expanded", "true")) {
+        if ($(this).find("ul").hasClass("show")) {
             $(this).find("a").removeClass("active");
         }
-        $(this).siblings().find("a").attr("aria-expanded", "false");
-        //$(this).siblings().find("ul").removeClass("show");
-        if (!$(this).hasClass("active")) {
-            $(this).addClass("active");
-            $(this).siblings().removeClass("active");
-        }
+        $(this).siblings().find("a").removeClass("active");
     });
+    $(".nav-link").click(function () {
+        $(this).parents(".nav-item-big").siblings().find("a").removeClass("active");
+    });
+
 
 
     $("#messages").click(function () {
