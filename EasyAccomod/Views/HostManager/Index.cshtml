@@ -2,6 +2,7 @@
     ViewBag.Title = "Quản lý bài đăng";
 }
 <link href="~/Content/AdminPostManager.css" rel="stylesheet" />
+<link href="~/Content/HostManager.css" rel="stylesheet" />
 <div class="admin-page-container container rounded border mx-auto row" style="margin-top: 50px; margin-bottom: 50px;">
 
     <div class="col-3 web-sidebar" style="position: relative; border-right: 1px solid #eee;">
@@ -13,19 +14,19 @@
 
                 <ul class="list-unstyled components">
 
-                    <li class="nav-item-big">
-                        <a id="host-manager-post" href="javscript:void(0)">Bài đăng</a>
+                    <li class="nav-item-big active">
+                        <a id="host-manager-post" href="javascript:void(0)">Bài đăng</a>
                     </li>
 
                     <li class="nav-item-big">
-                        <a href="#pageSubmenu">Thanh toán</a>
+                        <a href="javascript:void(0)">Thanh toán</a>
                     </li>
                 </ul>
             </nav>
         </div>
     </div>
     <div class="content col-9" id="content-container">
-
+        @{Html.RenderAction("Post", "HostManager");}
     </div>
 
 </div>

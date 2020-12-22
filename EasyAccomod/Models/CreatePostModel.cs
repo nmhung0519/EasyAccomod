@@ -48,15 +48,15 @@ namespace EasyAccomod.Models
         [Required(ErrorMessage = "Giá phòng không được để trống")]
         public int Area { get; set; }
 
-        [Display(Name = "Giá điện (/số)")]
+        [Display(Name = "Giá điện (kW/h)")]
         [Required(ErrorMessage = "Giá điện không được để trống")]
-        [Range(0, double.MaxValue, ErrorMessage = "Giá điện phải lớn hơn 0")]
-        public double ElectricityPrice { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Giá điện phải lớn hơn 0")]
+        public int ElectricityPrice { get; set; }
 
         [Display(Name = "Giá nước (/m3)")]
         [Required(ErrorMessage = "Giá nước không được để trống")]
-        [Range(0, double.MaxValue, ErrorMessage = "Giá nước phải lớn hơn 0")]
-        public double WaterPrice { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Giá nước phải lớn hơn 0")]
+        public int WaterPrice { get; set; }
 
         [Display(Name = "Điều hoà")]
         public bool AirConditioner { get; set; }

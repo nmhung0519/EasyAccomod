@@ -12,8 +12,8 @@
                 <ul class="list-unstyled components">
 
                     <li class="nav-item-big">
-                        <a href="#post-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Bài đăng</a>
-                        <ul class="collapse show list-unstyled nav nav-pills" id="post-menu">
+                        <a href="#post-menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bài đăng</a>
+                        <ul class="collapse list-unstyled nav nav-pills" id="post-menu">
                             <li class="nav-item">
                                 <a id="approve-post" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Bài đăng chờ duyệt</span>
@@ -42,8 +42,8 @@
                         </ul>
                     </li>
                     <li class="nav-item-big">
-                        <a href="#account-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Tài khoản</a>
-                        <ul class="collapse show list-unstyled nav nav-pills" id="account-menu">
+                        <a href="#account-menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tài khoản</a>
+                        <ul class="collapse list-unstyled nav nav-pills" id="account-menu">
                             <li class="nav-item">
                                 <a id="approve-account" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Tài khoản chờ duyệt</span>
@@ -66,8 +66,8 @@
                     </li>
 
                     <li class="nav-item-big">
-                        <a href="#statistic-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Thống kê</a>
-                        <ul class="collapse show list-unstyled nav nav-pills" id="statistic-menu">
+                        <a href="#statistic-menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Thống kê</a>
+                        <ul class="collapse list-unstyled nav nav-pills" id="statistic-menu">
                             <li class="nav-item">
                                 <a id="most-viewed-post" class="nav-link" data-toggle="pill" href="#">Bài đăng được xem nhiều nhất</a>
                             </li>
@@ -99,15 +99,6 @@
 
 </div>
 <script>
-
-
-
-    $(".nav-item-big").click(function () {
-        if ($(this).find("ul").hasClass("show")) {
-            $(this).find("a").removeClass("active");
-        }
-        $(this).siblings().find("a").removeClass("active");
-    });
     $(".nav-link").click(function () {
         $(this).parents(".nav-item-big").siblings().find("a").removeClass("active");
     });
@@ -115,23 +106,23 @@
 
 
     $("#messages").click(function () {
-        $("#content-container").load("/Manager/ApproveAccount");
+        $("#content-container").load("/AdminManager/ApproveAccount");
     });
 
 
     $("#approve-account").click(function () {
-        $("#content-container").load("/Manager/ApproveAccount");
+        $("#content-container").load("/AdminManager/ApproveAccount");
     });
 
     $("#approve-post").click(function () {
-        $("#content-container").load("/Manager/ApprovePost");
+        $("#content-container").load("/AdminManager/ApprovePost");
     });
 
     $("#approve-purchase").click(function () {
-        $("#content-container").load("/Manager/ApprovePurchase");
+        $("#content-container").load("/AdminManager/ApprovePurchase");
     });
 
     $("#approve-comment").click(function () {
-        $("#content-container").load("/Manager/ApproveComment");
+        $("#content-container").load("/AdminManager/ApproveComment");
     })
 </script>

@@ -66,7 +66,7 @@ namespace EasyAccomod.Controllers
                     return View("../Post/ListPost", new SearchResultModel(new SearchModel { CityId = cityId, DistrictId  = districtId, WardId = wardId }, posts));
                 }
             }
-            catch (Exception ex) { return Json(ex.Message); }
+            catch (Exception ex) { return Json(ex.Message, JsonRequestBehavior.AllowGet); }
         }
 
         [HttpGet]

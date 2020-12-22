@@ -77,11 +77,11 @@
                 </tr>
                 <tr>
                     <td>Giá điện</td>
-                    <td>: 4000/số</td>
+                    <td>: @Model.GetElectricityPrice()</td>
                 </tr>
                 <tr>
                     <td>Giá nước</td>
-                    <td>: 100,000/người</td>
+                    <td>: @Model.GetWaterPrice()</td>
                 </tr>
                 @if (Model.AirConditioner >= 0)
                 {

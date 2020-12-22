@@ -18,6 +18,7 @@ namespace EasyAccomod.Models
         public DbSet<PostModel> Posts { get; set; }
         public DbSet<TicketModel> Tickets { get; set; }
         public DbSet<AccountModel> Accounts { get; set; }
+        public DbSet<ViewPostModel> ViewPosts { get; set; }
     }
 
     [Table("district")]
@@ -132,10 +133,10 @@ namespace EasyAccomod.Models
         public int WithoutHost { get; set; }
 
         [Column("electricity_price")]
-        public string ElectricityPrice { get; set; }
+        public int ElectricityPrice { get; set; }
 
         [Column("water_price")]
-        public string WaterPrice { get; set; }
+        public int WaterPrice { get; set; }
 
 
         [Column("create_time")]
@@ -156,15 +157,6 @@ namespace EasyAccomod.Models
         [Column("price_unit")]
         public int PriceUnit { get; set; }
 
-        [Column("rent_time")]
-        public string RentTime { get; set; }
-
-        [Column("date_per_time")]
-        public string DatePerTime { get; set; }
-
-        [Column("deposit")]
-        public string Deposit { get; set; }
-
         [Column("area")]
         public int Area { get; set; }
 
@@ -172,7 +164,19 @@ namespace EasyAccomod.Models
         public int Views { get; set; }
 
         [Column("approved")]
-        public bool Approved { get; set; }
+        public int Approved { get; set; }
+
+        [Column("isshow")]
+        public bool IsShow { get; set; }
+
+        [Column("start_time")]
+        public DateTime StartTime { get; set; }
+
+        [Column("end_time")]
+        public DateTime EndTime { get; set; }
+
+        [Column("sold")]
+        public bool Sold { get; set; }
 
         public virtual ICollection<TicketModel> Tickets { get; set; }
 
@@ -182,6 +186,18 @@ namespace EasyAccomod.Models
             if (PriceUnit == 1) return Price + "/tháng";
             if (PriceUnit == 2) return Price + "/năm";
             return "Liên hệ";
+        }
+
+        public string GetElectricityPrice()
+        {
+            if (ElectricityPrice < 0) return "Giá dân";
+            return ElectricityPrice + "/kWh";
+        }
+
+        public string GetWaterPrice()
+        {
+            if (WaterPrice < 0) return "Giá dân";
+            return WaterPrice + "/số";
         }
     }
 
@@ -198,20 +214,32 @@ namespace EasyAccomod.Models
         [ForeignKey("PostId")]
         public PostModel Post { get; set; }
 
+        [Column("create_time")]
+        public DateTime CreateTime { get; set; }
+
+        [Column("time")]
+        public int Time { get; set; }
+
+        [Column("unit_time")]
+        public int UnitTime { get; set; }
+
+        [Column("approved")]
+        public int Approved { get; set; }
+
         [Column("approver_id")]
         public int ApproverId { get; set; }
 
-        [ForeignKey("ApproverId")]
-        public AccountModel Approver { get; set; }
+        [Column("approval_time")]
+        public DateTime ApprovalTime { get; set; }
 
-        [Column("start_time")]
-        public DateTime StartTime { get; set; }
-
-        [Column("end_time")]
-        public DateTime EndTime { get; set; }
-
-        [Column("approved")]
-        public bool Approved { get; set; }
+        public string GetTime()
+        {
+            if (UnitTime == 1) return Time + " " + "Tuần";
+            if (UnitTime == 2) return Time + " " + "Tháng";
+            if (UnitTime == 3) return Time + " " + "Quý";
+            if (UnitTime == 4) return Time + " " + "Năm";
+            return "";
+        }
     }
 
     [Table("account")]
@@ -295,5 +323,22 @@ namespace EasyAccomod.Models
 
         [Column("seen")]
         public bool Seen { get; set; }
+    }
+
+    [Table("viewpost")]
+    public class ViewPostModel
+    {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("post_id")]
+        public int PostId { get; set; }
+
+        [Column("user_id")]
+        public int UserId { get; set; }
+
+        [Column("time")]
+        public DateTime Time { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace EasyAccomod.Controllers
             {
                 var account = (from a in db.Accounts
                                where a.Id == userid
-                                && (a.Type == 1 || (a.Type == 2 && a.ApprovalTime.Year != 0))
+                                && (a.Type == 1 || (a.Type == 2 && a.Approved && a.ApprovalTime.Year != 0))
                                select a).FirstOrDefault();
                 if (account == null) return PartialView("CreatePostAccessDeny");
             }
@@ -45,8 +45,8 @@ namespace EasyAccomod.Controllers
                 newPost.PriceUnit = 1;
                 newPost.Type = model.Type;
                 newPost.Area = model.Area;
-                newPost.ElectricityPrice = "s" + model.ElectricityPrice;
-                newPost.WaterPrice = "s" + model.WaterPrice;
+                newPost.ElectricityPrice = model.ElectricityPrice;
+                newPost.WaterPrice = model.WaterPrice;
                 newPost.AirConditioner = (model.AirConditioner) ? 1 : 0;
                 newPost.WaterHeater = (model.WaterHeater) ? 1 : 0;
                 newPost.PrivateKitchen = (model.PrivateKitchen) ? 1 : 0;
@@ -62,7 +62,11 @@ namespace EasyAccomod.Controllers
                                 select a).FirstOrDefault();
                     if (user == null) return Content("window.location.href = '/Account/SignIn'", "text/javascript");
                     newPost.ContactPhone = user.Phone;
-                    if (user.Type == 1) newPost.Approved = true;
+                    if (user.Type == 1)
+                    {
+                        newPost.Approved = 1;
+                        newPost.IsShow = true;
+                    }
                 }
                 switch (newPost.Type)
                 {
@@ -82,18 +86,15 @@ namespace EasyAccomod.Controllers
 
                 newPost.Title = newPost.Title + " - " + newPost.Address;
                 newPost.Content = newPost.Title;
-                newPost.RentTime = "6 tháng";
-                newPost.Deposit = "1 tháng";
-                newPost.DatePerTime = "1 tháng";
                 newPost.CreateTime = DateTime.Now;
-
                 TicketModel ticket = new TicketModel();
-                ticket.ApproverId = int.Parse(Session["userid"].ToString());
-                ticket.StartTime = DateTime.Now;
-                if (newPost.Approved)
+                ticket.ApproverId = 0;
+                ticket.CreateTime = DateTime.Now;
+                ticket.Time = 1;
+                ticket.UnitTime = 1;
+                if (newPost.Approved == 1)
                 {
-                    ticket.EndTime = DateTime.Now.AddDays(7);
-                    ticket.Approved = newPost.Approved;
+                    ticket.Approved = 1;
                 }
                 newPost.Tickets = new List<TicketModel> { ticket };
                 using (var db = new DBContext())
@@ -104,7 +105,7 @@ namespace EasyAccomod.Controllers
 
             }
             catch (Exception ex) { return Content(ex.Message, "text/html"); }
-            return Content("window.location.href = '/Post/HostPostManager'", "text/javascript");
+            return Content("<script>window.location.href = '/HostManager'</script>", "text/javascript");
         }
 
         public ActionResult PostDetail(int id)
@@ -129,6 +130,12 @@ namespace EasyAccomod.Controllers
                         .Reference(x => x.City)
                         .Load();
                     post.Views = post.Views + 1;
+                    ViewPostModel viewPost = new ViewPostModel();
+                    viewPost.UserId = 0;
+                    if (Session["userid"] != null) viewPost.UserId = int.Parse(Session["userid"].ToString());
+                    viewPost.PostId = post.Id;
+                    viewPost.Time = DateTime.Now;
+                    db.ViewPosts.Add(viewPost);
                     db.SaveChanges();
                     return View(post);
                 }

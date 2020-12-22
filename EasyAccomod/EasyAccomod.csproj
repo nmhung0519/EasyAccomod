@@ -199,6 +199,7 @@
     <Compile Include="Models\CreatePostModel.cs" />
     <Compile Include="Models\EditPostModel.cs" />
     <Compile Include="Models\DB.cs" />
+    <Compile Include="Models\HostPostsModel.cs" />
     <Compile Include="Models\KeyNamePair.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
@@ -215,6 +216,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\HostManager.css" />
     <Content Include="Content\PostDetail.css" />
     <Content Include="Content\PostList.css" />
     <Content Include="Content\signin.css" />
