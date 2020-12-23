@@ -11,11 +11,15 @@ namespace EasyAccomod.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["userid"] == null || Session["usertype"] == null) return RedirectToAction("SignIn", "Account");
+            int userid, usertype;
+            if (int.TryParse(Session["usertype"].ToString(), out usertype) && int.TryParse(Session["userid"].ToString(), out userid) && usertype != 1) return Json("Access Deny");
             return View();
         }
 
         public ActionResult Post()
         {
+            if (Session["userid"] == null) return RedirectToAction("SignIn", "Account");
             int userid;
             if (!(int.TryParse(Session["userid"].ToString(), out userid))) RedirectToAction("SignIn", "Account");
             using (var db = new DBContext())

@@ -24,8 +24,8 @@
                                 <p>@item.Username - @item.Phone - @item.Phone</p>
 
                                 <div class="confirm-bar text-right">
-                                    <div class="btn btn-primary">Phê duyệt</div>
-                                    <div class="btn btn-secondary ml-3">Từ chối</div>
+                                    <div class="btn btn-primary approve-account-button" data-id="@item.Id" data-active="true">Phê duyệt</div>
+                                    <div class="btn btn-secondary ml-3 refuse-account-button" data-id="@item.Id" data-active="true">Từ chối</div>
                                 </div>
                             </div>
                         </div>
@@ -51,3 +51,41 @@
             </div>
             
         </div>
+        <script>
+            $("#approve-account-container").delegate(".approve-account-button", "click", function (e) {
+                if ($(e.target).attr("data-active") != "true") return;
+                $(e.target).attr("data-active", "false");
+                $.ajax({
+                    url: "/AdminManager/ApproveAccount",
+                    type: "POST",
+                    data: { id: $(e.target).attr("data-id") },
+                    success: function (data) {
+                        if (data == "Success") {
+                            alert("Succcess");
+                            return;
+                        }
+
+                        console.log(data);
+                        $(e.target).attr("data-active", "true");
+                    }
+                });
+            });
+            $("#approve-account-container").delegate(".refuse-account-button", "click", function (e) {
+                if ($(e.target).attr("data-active") != "true") return;
+                $(e.target).attr("data-active", "false");
+                $.ajax({
+                    url: "/AdminManager/RefuseAccount",
+                    type: "POST",
+                    data: { id: $(e.target).attr("data-id") },
+                    success: function (data) {
+                        if (data == "Success") {
+                            alert("Succcess");
+                            return;
+                        }
+
+                        console.log(data);
+                        $(e.target).attr("data-active", "true");
+                    }
+                });
+            });
+        </script>

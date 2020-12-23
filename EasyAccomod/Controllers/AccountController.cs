@@ -11,7 +11,7 @@ namespace EasyAccomod.Controllers
     public class AccountController : Controller
     {
         [HttpGet]
-        public ActionResult Signin()
+        public ActionResult SignIn()
         {
             return View(new SignInModel());
         }

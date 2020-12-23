@@ -149,11 +149,8 @@
                                     <span class="post-price">@item.DisplayPrice()</span>
                                 </div>
                                 <span class="post-datetime">@item.CreateTime</span>
-
-
                             </div>
                         </div>
-
                         <div class="confirm-bar text-right">
                             <div class="btn btn-primary">Sửa và gửi duyệt</div>
                             <div class="btn btn-primary">Xoá bài viết</div>
@@ -165,3 +162,47 @@
         }
     </div>
 </div>
+<script>
+    function newPostCard(id) {
+        var item = document.createElement("div");
+        item.className = "container";
+        var ctc = document.createElement("div");
+        ctc.className = "rounded border mb-4 p-2";
+        item.appendChild(ctc);
+        var ctw = document.createElement("div");
+        ctw.className = "post-wrapper row px-3";
+        ctc.appendChild(ctw);
+        var imc = document.createElement("div");
+        imc.className = "post-image-thumb";
+        ctw.appendChild(imc);
+        var ifc = document.createElement("div");
+        ifc.className = "post-info col-12 col-lg-9";
+        ctw.appendChild(ifc);
+        var ptp = document.createElement("div");
+        ptp.className = "post-top-part";
+        ifc.appendChild(ptp);
+        var ttl = document.createElement("span");
+        ttl.className = "post-title";
+        ttl.innerHTML = "Tiêu đề";
+        ptp.appendChild(ttl);
+        var adr = document.createElement("span");
+        adr.className = "post-address";
+        adr.innerHTML = "Địa chỉ";
+        ptp.appendChild(adr);
+        var arn = document.createElement("span")
+        arn.className = "post-area";
+        arn.innerHTML = "Diện tích";
+        ptp.appendChild(arn);
+        var prc = document.createElement("span");
+        prc.className = "post-price";
+        prc.innerHTML = "Giá";
+        ptp.appendChild(prc);
+        var pdt = document.createElement("span");
+        pdt.classname = "post-datetime";
+        ptp.appendChild(pdt);
+        var cpn = document.createElement("div");
+        cpn.classname = "confirm-bar text-right";
+        ctc.appendChild(cpn);
+        return item;
+    }
+</script>

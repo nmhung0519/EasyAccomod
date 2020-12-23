@@ -28,6 +28,45 @@ namespace EasyAccomod.Controllers
         }
 
         [HttpPost]
+        public JsonResult ApproveAccount(int id)
+        {
+            int userid, usertype;
+            if (Session["userid"] == null || int.TryParse(Session["userid"].ToString(), out userid)) return Json("SignInFirst");
+            if (Session["usertype"] == null || !int.TryParse(Session["usertype"].ToString(), out usertype) || usertype != 1) return Json("AdminOnly");
+            using (var db = new DBContext())
+            {
+                var account = (from a in db.Accounts
+                               where a.Id == id
+                               select a).FirstOrDefault();
+                if (account.Approved || (account.Approved && account.ApprovalTime.Year > 1)) return Json("AccountProccessed");
+                account.Approved = true;
+                account.ApprovalTime = DateTime.Now;
+                account.ApproverId = userid;
+                db.SaveChanges();
+                return Json("Successs");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult RefuseAccount(int id)
+        {
+            int userid, usertype;
+            if (Session["userid"] == null || !int.TryParse(Session["userid"].ToString(), out userid)) return Json("SignInFirst");
+            if (Session["usertype"] == null || !int.TryParse(Session["usertype"].ToString(), out usertype) || usertype != 1) return Json("AdminOnly");
+            using (var db = new DBContext())
+            {
+                var account = (from a in db.Accounts
+                               where a.Id == id
+                               select a).FirstOrDefault();
+                if (account.Approved || (account.Approved && account.ApprovalTime.Year > 1)) return Json("AccountProccessed");
+                account.ApprovalTime = DateTime.Now;
+                account.ApproverId = userid;
+                db.SaveChanges();
+                return Json("Success");
+            }
+        }
+
+        [HttpPost]
         public JsonResult ApprovePost(int id)
         {
             if (Session["userid"] == null || Session["usertype"] == null) return Json("SignInFirst");
@@ -113,7 +152,7 @@ namespace EasyAccomod.Controllers
             using (var db = new DBContext())
             {
                 var tickets = (from t in db.Tickets
-                               where t.Approved == 0
+                               where t.Approved == 0 && t.ApprovalTime.Year <= 1
                                select t).ToList();
                 foreach (var item in tickets)
                 {
