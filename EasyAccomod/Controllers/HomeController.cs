@@ -29,6 +29,9 @@ namespace EasyAccomod.Controllers
                         db.Entry(item)
                             .Reference(x => x.Poster)
                             .Load();
+                        db.Entry(item)
+                                .Collection(x => x.Images)
+                                .Load();
                     }
                 return View("../Post/ListPost", new SearchResultModel(model, posts));
             }
@@ -61,6 +64,9 @@ namespace EasyAccomod.Controllers
                         {
                             db.Entry(item)
                                 .Reference(x => x.Poster)
+                                .Load();
+                            db.Entry(item)
+                                .Collection(x => x.Images)
                                 .Load();
                         }
                     return View("../Post/ListPost", new SearchResultModel(new SearchModel { CityId = cityId, DistrictId  = districtId, WardId = wardId }, posts));

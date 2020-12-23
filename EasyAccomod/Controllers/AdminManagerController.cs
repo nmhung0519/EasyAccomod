@@ -160,6 +160,9 @@ namespace EasyAccomod.Controllers
                         .Reference(x => x.Post)
                         .Load();
                     db.Entry(item.Post)
+                        .Collection(x => x.Images)
+                        .Load();
+                    db.Entry(item.Post)
                         .Reference(x => x.Ward)
                         .Load();
                     db.Entry(item.Post)

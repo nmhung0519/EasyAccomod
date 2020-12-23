@@ -100,7 +100,6 @@ E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\System.Web.WebPages.
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Newtonsoft.Json.xml
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Antlr3.Runtime.pdb
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.csprojAssemblyReference.cache
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.csproj.CoreCompileInputs.cache
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.csproj.CopyComplete
 E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.dll
@@ -228,3 +227,4 @@ C:\Users\zully\Source\Repos\nmhung0519\EasyAccomod\EasyAccomod\obj\Debug\EasyAcc
 C:\Users\zully\Source\Repos\nmhung0519\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.csproj.CopyComplete
 C:\Users\zully\Source\Repos\nmhung0519\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.dll
 C:\Users\zully\Source\Repos\nmhung0519\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.pdb
+E:\Documents\Github Respository\EasyAccomod\EasyAccomod\obj\Debug\EasyAccomod.csprojAssemblyReference.cache

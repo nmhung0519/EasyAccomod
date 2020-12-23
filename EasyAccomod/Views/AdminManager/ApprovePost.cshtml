@@ -20,12 +20,19 @@
                     <div class="container">
                         <div class=" rounded border mb-4 p-2" >
                             <div class="post-wrapper row px-3">
-                                <div class="post-image-thumb"></div>
+                                @if (item == null || item.Post == null || item.Post.Images == null || item.Post.Images.Count == 0)
+                                {
+                                    <div class="post-image-thumb"></div>
+                                }
+                                else
+                                {
+                                    <div class="post-image-thumb" style="background: url('/UploadImage/@item.Post.Images.First().Path'); background: 100% 100%"></div>
+                                }
                                 <div class="post-info col-12 col-lg-9">
                                     <div class="post-top-part">
                                         <span class="post-title">@item.Post.Title</span>
                                         <span class="post-address">@item.Post.Address - @item.Post.Ward.WardName - @item.Post.District.DistrictName - @item.Post.City.CityName</span>
-                                        @{ 
+                                        @{
                                             string area = item.Post.Area + "m2";
                                         }
                                         <span class="post-area">@area</span>
@@ -33,8 +40,8 @@
                                     </div>
                                     <span class="post-user">@item.Post.Poster.FullName</span>
                                     <span class="post-datetime">@item.CreateTime</span>
-                                
-                                
+
+
                                 </div>
                             </div>
                         

@@ -13,7 +13,14 @@
             foreach (var item in Model.Result)
             {
                 <div class="post-wrapper">
-                    <div class="post-image-thumb"></div>
+                    @if (item == null || item.Images == null || item.Images.Count == 0)
+                    {
+                        <div class="post-image-thumb"></div>
+                    }
+                    else
+                    {
+                        <div class="post-image-thumb" style="background: url('/UploadImage/@item.Images.First().Path'); background: 100% 100%"></div>
+                    }
                     <div class="post-info">
                         <div class="post-top-part">
                             <span class="post-title"> <a href="/Post/PostDetail/@item.Id">@item.Title</a></span>

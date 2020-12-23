@@ -1,0 +1,208 @@
+﻿@{
+    Layout = null;
+}
+
+@model EasyAccomod.Models.HostPostsModel
+
+<link href="~/Content/ApprovePost.css" rel="stylesheet" />
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" data-toggle="tab" href="#posttab1" role="tab" aria-controls="nav-home" aria-selected="true">Đang hiển thị</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#posttab2" role="tab" aria-controls="nav-profile" aria-selected="false">Đang chờ duyệt</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#posttab3" role="tab" aria-controls="nav-profile" aria-selected="false">Đã được thuê</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#posttab4" role="tab" aria-controls="nav-profile" aria-selected="false">Bị từ chối</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="posttab1" role="tabpanel">
+        <h5 class="my-4">Bài đăng đang hiển thị</h5>
+        @if (Model != null)
+        {
+            foreach (var item in Model.ShowingPost)
+            {
+                <div class="container">
+                    <div class=" rounded border mb-4 p-2">
+                        <div class="post-wrapper row px-3">
+                            <div class="post-image-thumb"></div>
+                            <div class="post-info col-12 col-lg-9">
+                                <div class="post-top-part">
+                                    <span class="post-title">
+                                        @item.Title
+                                    </span>
+                                    <span class="post-address">
+                                        @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
+                                    </span>
+                                    @{ string area = item.Area + "m2"; }
+                                    <span class="post-area">@area</span>
+                                    <span class="post-price">@item.DisplayPrice()</span>
+                                </div>
+                                <span class="post-datetime">@item.CreateTime</span>
+
+
+                            </div>
+                        </div>
+
+                        <div class="confirm-bar text-right">
+                            <div class="btn btn-primary host-mng-sold" data-postid="1">Đã cho thuê</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="tab-pane fade" id="posttab2" role="tabpanel">
+        <h5 class="my-4">Bài đăng đang chờ duyệt</h5>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model.ApprovingPost)
+            {
+                <div class="container">
+                    <div class=" rounded border mb-4 p-2">
+                        <div class="post-wrapper row px-3">
+                            <div class="post-image-thumb"></div>
+                            <div class="post-info col-12 col-lg-9">
+                                <div class="post-top-part">
+                                    <span class="post-title">
+                                        @item.Title
+                                    </span>
+                                    <span class="post-address">
+                                        @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
+                                    </span>
+                                    @{ string area = item.Area + "m2";}
+                                    <span class="post-area">@area</span>
+                                    <span class="post-price">@item.DisplayPrice()</span>
+                                </div>
+                                <span class="post-datetime">@item.CreateTime</span>
+                            </div>
+                        </div>
+
+                        <div class="confirm-bar text-right">
+                            <div class="btn btn-primary">Sửa bài viết</div>
+                            @if (item.Approved == 0)
+                            {
+                                <div class="btn btn-primary">Xoá bài viết</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="tab-pane fade" id="posttab3" role="tabpanel">
+        <h5 class="my-4">Bài đăng đã được thuê</h5>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model.HidingPost)
+            {
+                <div class="container">
+                    <div class=" rounded border mb-4 p-2">
+                        <div class="post-wrapper row px-3">
+                            <div class="post-image-thumb"></div>
+                            <div class="post-info col-12 col-lg-9">
+                                <div class="post-top-part">
+                                    <span class="post-title">
+                                        @item.Title
+                                    </span>
+                                    <span class="post-address">
+                                        @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
+                                    </span>
+                                    @{ string area = item.Area + "m2";}
+                                    <span class="post-area">@area</span>
+                                    <span class="post-price">@item.DisplayPrice()</span>
+                                </div>
+                                <span class="post-datetime">@item.CreateTime</span>
+                            </div>
+                        </div>
+
+                        <div class="confirm-bar text-right">
+                            <div class="btn btn-primary">Hiện thị bài viết</div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+    <div class="tab-pane fade" id="posttab4" role="tabpanel">
+        <h5 class="my-4">Bài đăng bị từ chối</h5>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model.RefusedPost)
+            {
+                <div class="container">
+                    <div class=" rounded border mb-4 p-2">
+                        <div class="post-wrapper row px-3">
+                            <div class="post-image-thumb"></div>
+                            <div class="post-info col-12 col-lg-9">
+                                <div class="post-top-part">
+                                    <span class="post-title">
+                                        @item.Title
+                                    </span>
+                                    <span class="post-address">
+                                        @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
+                                    </span>
+                                    @{ string area = item.Area + "m2";}
+                                    <span class="post-area">@area</span>
+                                    <span class="post-price">@item.DisplayPrice()</span>
+                                </div>
+                                <span class="post-datetime">@item.CreateTime</span>
+                            </div>
+                        </div>
+                        <div class="confirm-bar text-right">
+                            <div class="btn btn-primary">Sửa và gửi duyệt</div>
+                            <div class="btn btn-primary">Xoá bài viết</div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+</div>
+<script>
+    function newPostCard(id) {
+        var item = document.createElement("div");
+        item.className = "container";
+        var ctc = document.createElement("div");
+        ctc.className = "rounded border mb-4 p-2";
+        item.appendChild(ctc);
+        var ctw = document.createElement("div");
+        ctw.className = "post-wrapper row px-3";
+        ctc.appendChild(ctw);
+        var imc = document.createElement("div");
+        imc.className = "post-image-thumb";
+        ctw.appendChild(imc);
+        var ifc = document.createElement("div");
+        ifc.className = "post-info col-12 col-lg-9";
+        ctw.appendChild(ifc);
+        var ptp = document.createElement("div");
+        ptp.className = "post-top-part";
+        ifc.appendChild(ptp);
+        var ttl = document.createElement("span");
+        ttl.className = "post-title";
+        ttl.innerHTML = "Tiêu đề";
+        ptp.appendChild(ttl);
+        var adr = document.createElement("span");
+        adr.className = "post-address";
+        adr.innerHTML = "Địa chỉ";
+        ptp.appendChild(adr);
+        var arn = document.createElement("span")
+        arn.className = "post-area";
+        arn.innerHTML = "Diện tích";
+        ptp.appendChild(arn);
+        var prc = document.createElement("span");
+        prc.className = "post-price";
+        prc.innerHTML = "Giá";
+        ptp.appendChild(prc);
+        var pdt = document.createElement("span");
+        pdt.classname = "post-datetime";
+        ptp.appendChild(pdt);
+        var cpn = document.createElement("div");
+        cpn.classname = "confirm-bar text-right";
+        ctc.appendChild(cpn);
+        return item;
+    }
+</script>

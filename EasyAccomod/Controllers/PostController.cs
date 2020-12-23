@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace EasyAccomod.Controllers
 {
@@ -55,6 +56,7 @@ namespace EasyAccomod.Controllers
                 newPost.WithoutHost = (model.WithoutHost) ? 1 : 0;
                 newPost.PosterId = int.Parse(Session["userid"].ToString());
                 newPost.ContactName = Session["fullname"].ToString();
+                newPost.CreateTime = DateTime.Now;
                 using (var db = new DBContext())
                 {
                     var user = (from a in db.Accounts
@@ -64,6 +66,8 @@ namespace EasyAccomod.Controllers
                     newPost.ContactPhone = user.Phone;
                     if (user.Type == 1)
                     {
+                        newPost.StartTime = newPost.CreateTime;
+                        newPost.EndTime = newPost.CreateTime.AddDays(7);
                         newPost.Approved = 1;
                         newPost.IsShow = true;
                     }
@@ -86,7 +90,6 @@ namespace EasyAccomod.Controllers
 
                 newPost.Title = newPost.Title + " - " + newPost.Address;
                 newPost.Content = newPost.Title;
-                newPost.CreateTime = DateTime.Now;
                 TicketModel ticket = new TicketModel();
                 ticket.ApproverId = 0;
                 ticket.CreateTime = DateTime.Now;
@@ -97,6 +100,21 @@ namespace EasyAccomod.Controllers
                     ticket.Approved = 1;
                 }
                 newPost.Tickets = new List<TicketModel> { ticket };
+                newPost.Images = new List<PostImageModel>();
+                for (int i = 0; i < model.UploadImages.Count(); i++)
+                {
+                    var file = model.UploadImages[i];
+                    if (file == null) continue;
+                    string fileName = newPost.CreateTime.Year
+                        + ((newPost.CreateTime.Month < 10) ? "0" : "") + newPost.CreateTime.Month
+                        + ((newPost.CreateTime.Day < 10) ? "0" : "") + newPost.CreateTime.Day
+                        + ((newPost.CreateTime.Hour < 10) ? "0" : "") + newPost.CreateTime.Hour
+                        + ((newPost.CreateTime.Minute < 10) ? "0" : "") + newPost.CreateTime.Minute
+                        + ((newPost.CreateTime.Second < 10) ? "0" : "") + newPost.CreateTime.Second
+                        + i + newPost.PosterId + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("~/UploadImage/" + fileName));
+                    newPost.Images.Add(new PostImageModel { Path = fileName });
+                }
                 using (var db = new DBContext())
                 {
                     db.Posts.Add(newPost);
@@ -128,6 +146,9 @@ namespace EasyAccomod.Controllers
                         .Load();
                     db.Entry(post.Ward.District)
                         .Reference(x => x.City)
+                        .Load();
+                    db.Entry(post)
+                        .Collection(x => x.Images)
                         .Load();
                     post.Views = post.Views + 1;
                     ViewPostModel viewPost = new ViewPostModel();

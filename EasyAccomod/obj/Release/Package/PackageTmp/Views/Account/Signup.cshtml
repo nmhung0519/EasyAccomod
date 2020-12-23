@@ -1,0 +1,116 @@
+﻿@{
+    Layout = "~/Views/Account/_LayoutAccount.cshtml";
+}
+@model EasyAccomod.Models.SignUpModel
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/address.control.js"></script>
+<div class="page-container container-fluid w-100 vh-100 " style="overflow: hidden;">
+    <div class="form-container-sign-up container mx-auto  bg-light mt-1 px-0 px-lg-5 rounded py-3" style="max-height: 90%; overflow: auto">
+        <div style="overflow: hidden">
+            <div id="account-header" class="container">
+                @using (Ajax.BeginForm("SignUp", "Account", new AjaxOptions { UpdateTargetId = "form-signup-err-msg" }))
+                {
+                    <div id="above-sign-up-form" class="row">
+                        <div class="col-12 col-lg-6">
+                            <h4 class="font-weight-bold text-center">Đăng ký thành viên</h4>
+                        </div>
+                        <div class="col-12 col-lg-6 pl-5 pl-lg-0">
+                            <div class="form-check-user-type">
+                                <span>Bạn là? </span>
+                                <div class="d-inline-block">
+                                    <div class="d-inline-block mr-2">
+                                        <input type="radio" id="type-owner" value="2" name="UserType" checked>
+                                        <label for="type-owner">Chủ nhà trọ</label>
+                                    </div>
+                                    <div class="d-inline-block">
+                                        <input type="radio" id="type-normal-user" value="3" name="UserType">
+                                        <label for="type-normal-user">Người thuê trọ</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="login-form-container" class="container py-3">
+                        <div class="form-group row">
+                            <div class="col-12 col-lg-6">
+                                @Html.LabelFor(m => m.fullname, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.fullname, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.fullname, null, new { @class = "err-msg" })
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                @Html.LabelFor(m => m.phone, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.phone, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.phone, null, new { @class = "err-msg" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 col-lg-6">
+                                @Html.LabelFor(m => m.email, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.email, null, new { @class = "err-msg" })
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                @Html.LabelFor(m => m.idCard, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.idCard, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.idCard, null, new { @class = "err-msg" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6 col-lg-3">
+                                <label for="city" style="white-space: nowrap;">Tỉnh/Thành phố</label>
+                                @Html.DropDownListFor(x => x.cityId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Tỉnh/Thành phố" } }, new { @class = "form-control city-filter" })
+                                @Html.ValidationMessageFor(m => m.cityId, null, new { @class = "err-msg" })
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <label for="district">Quận/Huyện</label>
+                                @Html.DropDownListFor(x => x.districtId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Quận/Huyện" } }, new { @class = "form-control district-filter", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(m => m.districtId, null, new { @class = "err-msg" })
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <label for="ward">Phường/Xã</label>
+                                @Html.DropDownListFor(x => x.wardId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Phường/Xã" } }, new { @class = "form-control ward-filter", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(m => m.wardId, null, new { @class = "err-msg" })
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                @Html.LabelFor(m => m.address, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.address, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.address, null, new { @class = "err-msg" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.usernname, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.usernname, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.usernname, null, new { @class = "err-msg" })
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 col-lg-6">
+                                @Html.LabelFor(m => m.password, new { @class = "control-label" })
+                                @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.password, null, new { @class = "err-msg" })
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                @Html.LabelFor(m => m.repassword, new { @class = "control-label" })
+                                @Html.PasswordFor(m => m.repassword, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.repassword, null, new { @class = "err-msg" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox"><span class="pl-1">Hiện mật khẩu</span>
+                        </div>
+                        <div>
+                            <span id="form-signup-err-msg" class="err-msg"></span>
+                        </div>
+                        <div class="container text-center">
+                            <button class="btn btn-primary" type="submit">Đăng ký</button>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

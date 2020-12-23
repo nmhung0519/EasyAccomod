@@ -177,7 +177,7 @@ namespace EasyAccomod.Models
 
         [Column("sold")]
         public bool Sold { get; set; }
-
+        public virtual ICollection<PostImageModel> Images { get; set; }
         public virtual ICollection<TicketModel> Tickets { get; set; }
 
         public string DisplayPrice()
@@ -340,5 +340,22 @@ namespace EasyAccomod.Models
 
         [Column("time")]
         public DateTime Time { get; set; }
+    }
+
+    [Table("postimage")]
+    public class PostImageModel
+    {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("post_id")]
+        public int PostId { get; set; }
+
+        [ForeignKey("PostId")]
+        public virtual PostModel Post { get; set; }
+
+        [Column("path")]
+        public string Path { get; set; }
     }
 }

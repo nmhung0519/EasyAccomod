@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -76,6 +77,10 @@ namespace EasyAccomod.Models
         [Display(Name = "Không chung chủ")]
         public bool WithoutHost { get; set; }
 
+        [Display(Name = "Hình ảnh")]
+        [LimitCount(3, 10, ErrorMessage = "Số lượng file ảnh tối thiểu là 3 và tối đa là 10")]
+        public List<HttpPostedFileWrapper> UploadImages { get; set; }
+
         public IEnumerable<SelectListItem> GetListType()
         {
             return new List<SelectListItem>
@@ -85,6 +90,30 @@ namespace EasyAccomod.Models
                 new SelectListItem { Value = "3", Text = "Nhà nguyên căn"},
                 new SelectListItem { Value = "4", Text = "Chung cư nguyên căn"}
             };
+        }
+    }
+
+    public class LimitCountAttribute : ValidationAttribute
+    {
+        private readonly int _min;
+        private readonly int _max;
+
+        public LimitCountAttribute(int min, int max)
+        {
+            _min = min;
+            _max = max;
+        }
+
+        public override bool IsValid(object value)
+        {
+            var list = value as IList;
+            if (list == null)
+                return false;
+
+            if (list.Count < _min || list.Count > _max)
+                return false;
+
+            return true;
         }
     }
 }

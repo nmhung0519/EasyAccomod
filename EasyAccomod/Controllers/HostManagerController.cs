@@ -38,6 +38,9 @@ namespace EasyAccomod.Controllers
                     db.Entry(item)
                         .Reference(x => x.Ward)
                         .Load();
+                    db.Entry(item)
+                        .Collection(x => x.Images)
+                        .Load();
                 }
                 HostPostsModel model = new HostPostsModel();
                 model.ShowingPost = (from p in posts

@@ -75,7 +75,7 @@ namespace EasyAccomod.Controllers
                 }
             }
             catch (Exception ex) { return Content(ex.Message, "text/html"); }
-            return Content("window.location.href='/Account/SignIn'", "text/javascript");
+            return Content("<script>window.location.href='/Account/SignIn'</script>", "text/javascript");
         }
 
         public ActionResult SignOut()

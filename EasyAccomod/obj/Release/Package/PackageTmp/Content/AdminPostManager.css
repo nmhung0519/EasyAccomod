@@ -1,0 +1,140 @@
+﻿.admin-page-container {
+    width: 95%;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
+#sidebar {
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+}
+
+.sticky-sidebar {
+    position: sticky;
+    top: 50px;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+/* cái mũi tên thả xuống*/
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+ul li {
+    width: 100%;
+}
+
+#sidebar ul p {
+    padding: 10px;
+}
+
+.components li a {
+    padding: 10px;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #fff;
+    background: #007bff;
+}
+
+.nav-item-big > a {
+    font-weight: 700;
+}
+
+ul ul a {
+    padding-left: 15px !important;
+}
+
+li.nav-item a {
+    position: relative;
+}
+
+.badge-admin {
+    top: 15px;
+    right: 5px;
+    position: absolute;
+}
+
+.nav-link {
+    border-radius: 0 !important;
+}
+
+.pill-span {
+    display: block;
+    max-width: 80%;
+}
+
+@media only screen and (max-width:1030px) {
+    .nav-item a {
+        font-size: 14px;
+        display: inline-block;
+    }
+}
+
+@media only screen and (max-width:620px) {
+    body {
+        font-size: 12px;
+    }
+
+    .web-sidebar {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .btn {
+        font-size: inherit !important;
+    }
+
+    .sidebar-header h3 {
+        font-size: 20px;
+    }
+
+    .nav-item a {
+        font-size: inherit;
+    }
+
+    .dropdown-toggle::after {
+        right: 10px;
+    }
+}
+
+@media only screen and (max-width:480px) {
+
+    .sidebar-header h3 {
+        font-size: 16px;
+        text-align: center;
+    }
+}
