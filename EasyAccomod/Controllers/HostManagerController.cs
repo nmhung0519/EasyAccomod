@@ -13,10 +13,9 @@ namespace EasyAccomod.Controllers
         {
             if (Session["userid"] == null || Session["usertype"] == null) return RedirectToAction("SignIn", "Account");
             int userid, usertype;
-            if (int.TryParse(Session["usertype"].ToString(), out usertype) && int.TryParse(Session["userid"].ToString(), out userid) && usertype != 1) return Json("Access Deny");
+            if (int.TryParse(Session["usertype"].ToString(), out usertype) && int.TryParse(Session["userid"].ToString(), out userid) && usertype != 1 && usertype != 2) return Json("Access Deny", JsonRequestBehavior.AllowGet);
             return View();
         }
-
         public ActionResult Post()
         {
             if (Session["userid"] == null) return RedirectToAction("SignIn", "Account");

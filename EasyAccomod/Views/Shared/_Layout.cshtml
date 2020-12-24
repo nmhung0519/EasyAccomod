@@ -63,14 +63,20 @@
                             </div>
 
                         </li>
-                    }
+                                    }
                 </ul>
             </div>
             <div class="col-4 col-sm-3 offset-0 offset-sm-1 offset-lg-0  align-self-center pr-3">
                 <ul id="navbar-user" class="nav row justify-content-end mr-3 mr-sm-0">
                     <li class="col-3 col-sm-2 align-self-center"><a href="/" class="text-decoration-none"><i class="fa fa-heart"></i></a></li>
                     <li class="col-3 col-sm-2 align-self-center"><a href="/"><i class="fa fa-bell"></i></a></li>
-                    <li class="col-6 col-sm-6 col-lg-4 align-self-center  "><button class="btn btn-sm text-nowrap" data-toggle="modal" data-target="#exampleModal" id="btn-dang-tin">Đăng tin</button></li>
+                    @{
+                        int usertype1;
+                        if (Session["usertype"] == null || (int.TryParse(Session["usertype"].ToString(), out usertype1) && (usertype1 == 1 || usertype1 == 2)))
+                        {
+                            <li class="col-6 col-sm-6 col-lg-4 align-self-center  "><button class="btn btn-sm text-nowrap" data-toggle="modal" data-target="#exampleModal" id="btn-dang-tin">Đăng tin</button></li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -79,10 +85,10 @@
         $("body").ready(function () {
             $("#btn-dang-tin").click(function () {
                 $("#exampleModal>.modal-dialog.modal-xl").load("/Post/CreatePost");
-            });
+                            });
             $('#exampleModal').on('hidden.bs.modal', function (e) {
                 $("#exampleModal>.modal-dialog.modal-xl").empty();
-            })
+                            })
         })
     </script>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-xl"></div></div>

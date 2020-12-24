@@ -34,7 +34,11 @@ namespace EasyAccomod.Controllers
         [HttpPost]
         public ContentResult CreatePost(CreatePostModel model)
         {
-            if (!ModelState.IsValid) return Content("Form không hợp lệ", "text/html");
+            if (!ModelState.IsValid)
+            {
+                ModelError err = ModelState.Values.Where(x => x.Errors.Count() != 0).First().Errors[0];
+                return Content(err.ErrorMessage, "text/html");
+            }
             try
             {
                 PostModel newPost = new PostModel();
@@ -150,6 +154,16 @@ namespace EasyAccomod.Controllers
                     db.Entry(post)
                         .Collection(x => x.Images)
                         .Load();
+                    post.Comments = (from c in db.Comments
+                                     where c.PostId == post.Id && c.Approved
+                                     orderby c.CreateTime
+                                     select c).ToList();
+                    foreach (var item in post.Comments)
+                    {
+                        db.Entry(item)
+                            .Reference(x => x.User)
+                            .Load();
+                    }
                     post.Views = post.Views + 1;
                     ViewPostModel viewPost = new ViewPostModel();
                     viewPost.UserId = 0;
@@ -161,7 +175,30 @@ namespace EasyAccomod.Controllers
                     return View(post);
                 }
             }
-            catch (Exception) { return Json("Đã xảy ra lỗi trong quá trình lấy dữ liệu bài viết"); }
+            catch { return Json("Đã xảy ra lỗi trong quá trình lấy dữ liệu bài viết", JsonRequestBehavior.AllowGet); }
+        }
+        [HttpPost]
+        public JsonResult CreateComment(int postid, string content)
+        {
+            try
+            {
+                int userid, usertype;
+                if (Session["userid"] == null || Session["usertype"] == null || !int.TryParse(Session["userid"].ToString(), out userid) || !int.TryParse(Session["usertype"].ToString(), out usertype)) return Json("SignInFirst");
+                if (usertype != 3) return Json("RenterOnly");
+                CommentModel comment = new CommentModel();
+                comment.PostId = postid;
+                comment.UserId = userid;
+                comment.CreateTime = DateTime.Now;
+                comment.Content = content;
+                comment.ApproverId = userid;
+                using (var db = new DBContext())
+                {
+                    db.Comments.Add(comment);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex) { return Json(ex.Message); }
+        return Json("Success");
         }
     }
 }

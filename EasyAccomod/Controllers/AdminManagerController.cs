@@ -141,9 +141,89 @@ namespace EasyAccomod.Controllers
             return Json("Success");
         }
 
+        [HttpGet]
         public ActionResult ApproveComment()
         {
-            return PartialView();
+            using (var db = new DBContext())
+            {
+                var comments = (from c in db.Comments
+                                where (!c.Approved) && (c.ApprovalTime.Year <= 1)
+                                select c).ToList();
+                foreach (var item in comments)
+                {
+                    db.Entry(item)
+                        .Reference(x => x.Post)
+                        .Load();
+                    db.Entry(item)
+                        .Reference(x => x.User)
+                        .Load();
+                    db.Entry(item.Post)
+                        .Reference(x => x.Poster)
+                        .Load();
+                    db.Entry(item.Post)
+                        .Reference(x => x.City)
+                        .Load();
+                    db.Entry(item.Post)
+                        .Reference(x => x.District)
+                        .Load();
+                    db.Entry(item.Post)
+                        .Reference(x => x.Ward)
+                        .Load();
+                    db.Entry(item.Post)
+                        .Collection(x => x.Images)
+                        .Load();
+                }
+                return PartialView(comments);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult ApproveComment(int id)
+        {
+            int userid, usertype;
+            if (Session["userid"] == null || Session["usertype"] == null || !int.TryParse(Session["userid"].ToString(), out userid) || !int.TryParse(Session["usertype"].ToString(), out usertype)) return Json("SignInFirst");
+            if (usertype != 1) return Json("AdminOnly");
+            try
+            {
+                using (var db = new DBContext())
+                {
+                    var comment = (from c in db.Comments
+                                   where c.Id == id
+                                   select c).FirstOrDefault();
+                    if (comment == null) { return Json("CommentNotFound"); }
+                    if (comment.ApprovalTime.Year > 1) return Json("CommentProcessed");
+                    comment.ApprovalTime = DateTime.Now;
+                    comment.ApproverId = userid;
+                    comment.Approved = true;
+                    db.SaveChanges();
+                }
+                return Json("Sucesss");
+            }
+            catch (Exception ex) { return Json(ex.Message); }
+        }
+
+        [HttpPost]
+        public JsonResult RefuseComment(int id)
+        {
+            int userid, usertype;
+            if (Session["userid"] == null || Session["usertype"] == null || !int.TryParse(Session["userid"].ToString(), out userid) || !int.TryParse(Session["usertype"].ToString(), out usertype)) return Json("SignInFirst");
+            if (usertype != 1) return Json("AdminOnly");
+            try
+            {
+                using (var db = new DBContext())
+                {
+                    var comment = (from c in db.Comments
+                                   where c.Id == id
+                                   select c).FirstOrDefault();
+                    if (comment == null) { return Json("CommentNotFound"); }
+                    if (comment.ApprovalTime.Year > 1) return Json("CommentProcessed");
+                    comment.ApprovalTime = DateTime.Now;
+                    comment.ApproverId = userid;
+                    db.SaveChanges();
+                }
+                return Json("Sucesss");
+            }
+            catch (Exception ex) { return Json(ex.Message); }
         }
 
         [HttpGet]

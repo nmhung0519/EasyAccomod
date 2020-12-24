@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -19,6 +20,7 @@ namespace EasyAccomod.Models
         public DbSet<TicketModel> Tickets { get; set; }
         public DbSet<AccountModel> Accounts { get; set; }
         public DbSet<ViewPostModel> ViewPosts { get; set; }
+        public DbSet<CommentModel> Comments { get; set; }
     }
 
     [Table("district")]
@@ -179,6 +181,7 @@ namespace EasyAccomod.Models
         public bool Sold { get; set; }
         public virtual ICollection<PostImageModel> Images { get; set; }
         public virtual ICollection<TicketModel> Tickets { get; set; }
+        public virtual ICollection<CommentModel> Comments { get; set; }
 
         public string DisplayPrice()
         {
@@ -294,6 +297,11 @@ namespace EasyAccomod.Models
         public virtual ICollection<PostModel> Posts { get; set; }
         public virtual ICollection<AccountModel> Accounts { get; set; }
         public virtual ICollection<NotificationModel> Notifications { get; set; }
+        [InverseProperty("Approver")]
+        public virtual ICollection<CommentModel> ApprovedComments { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<CommentModel> CreatedComments { get; set; }
+
     }
 
     [Table("notification")]
@@ -357,5 +365,43 @@ namespace EasyAccomod.Models
 
         [Column("path")]
         public string Path { get; set; }
+    }
+
+    [Table("comment")]
+    public class CommentModel
+    {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("post_id")]
+        public int PostId { get; set; }
+
+        [ForeignKey("PostId")]
+        public virtual PostModel Post { get; set; }
+
+        [Column("user_id")]
+        public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual AccountModel User { get; set; }
+
+        [Column("create_time")]
+        public DateTime CreateTime { get; set; }
+
+        [Column("content")]
+        public string Content { get; set; }
+
+        [Column("approved")]
+        public bool Approved { get; set; }
+
+        [Column("approverid")]
+        public int ApproverId { get; set; }
+
+        [ForeignKey("ApproverId")]
+        public virtual AccountModel Approver { get; set; }
+
+        [Column("approval_time")]
+        public DateTime ApprovalTime { get; set; }
     }
 }

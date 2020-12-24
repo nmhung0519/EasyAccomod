@@ -32,12 +32,12 @@ namespace EasyAccomod.Models
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email không được để trống")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email không đúng định dạng")]
+        [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string email { get; set; }
 
         [Display(Name = "Số điện thoại")]
         [Required(ErrorMessage = "Sô điện thoại không được để trống")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Số điện thoại không đúng định dạng")]
+        [Phone(ErrorMessage = "Số điện thoại không đúng định dạng")]
         public string phone { get; set; }
 
         [Display(Name = "Cắn cước công dân")]

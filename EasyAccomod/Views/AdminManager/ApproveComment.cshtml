@@ -1,3 +1,5 @@
+@model IEnumerable<EasyAccomod.Models.CommentModel>
+
 <link href="~/Content/ApproveComment.css" rel="stylesheet" />
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -9,43 +11,58 @@
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="approve-comment-container" role="tabpanel">
         <h5 class="my-4">Phê duyệt bình luận</h5>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <!--One card-->
+                <div class="container">
+                    <div class=" rounded border mb-4 p-2">
+                        <div class="post-wrapper row px-3">
+                            @if (item == null || item.Post == null || item.Post.Images == null || item.Post.Images.Count == 0)
+                            {
+                                <div class="post-image-thumb"></div>
+                            }
+                            else
+                            {
+                                <div class="post-image-thumb" style="background: url('/UploadImage/@item.Post.Images.First().Path'); background-size: 100% 100%"></div>
+                            }
+                            <div class="post-info col-12 col-lg-9">
+                                <div class="post-top-part">
+                                    <span class="post-title">
+                                        @item.Post.Title
+                                    </span>
+                                    <span class="post-address">
+                                        @item.Post.Address - @item.Post.Ward.WardName - @item.Post.District.DistrictName - @item.Post.City.CityName
+                                    </span>
+                                    @{ string area = item.Post.Area + "m2";}
+                                    <span class="post-area">@area</span>
+                                    <span class="post-price">@item.Post.DisplayPrice()</span>
+                                </div>
+                                <span class="post-user">@item.Post.Poster.FullName</span>
+                                <span class="post-datetime">@item.Post.CreateTime</span>
 
-        <!--One card-->
-        <div class="container">
-            <div class=" rounded border mb-4 p-2">
-                <div class="post-wrapper row px-3">
-                    <div class="post-image-thumb"></div>
-                    <div class="post-info col-12 col-lg-9">
-                        <div class="post-top-part">
-                            <span class="post-title">
-                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
-                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
-                            </span>
-                            <span class="post-area">30m2</span>
-                            <span class="post-price">2,5 triệu/tháng</span>
+
+                            </div>
                         </div>
-                        <span class="post-user">Nguyễn Mạnh Hùng</span>
-                        <span class="post-datetime">17/12/20 12:12 </span>
+                        <hr>
+                        <div class="row px-3">
+                            <p><b>@item.User.FullName</b></p>
+                        </div>
+                        <div class="row px-3">
+                            <p>@item.Content</p>
+                        </div>
 
-
+                        <div class="confirm-bar text-right">
+                            <div class="btn btn-primary comment-approve" data-id="@item.Id">Phê duyệt</div>
+                            <div class="btn btn-secondary ml-3 comment-refuse" data-id="@item.Id">Từ chối</div>
+                        </div>
                     </div>
                 </div>
-                <hr>
-                <div class="row px-3">
-                    <p><b>Nguyễn Quốc Huy</b></p>
-                </div>
-                <div class="row px-3">
-                    <p>6 tỉ có bán nhà ko?</p>
-                </div>
 
-                <div class="confirm-bar text-right">
-                    <div class="btn btn-primary">Phê duyệt</div>
-                    <div class="btn btn-secondary ml-3">Từ chối</div>
-                </div>
-            </div>
-        </div>
-
-        <!--End card-->
+                <!--End card-->
+            }
+        }
 
     </div>
     <div class="tab-pane fade" id="restore-comment-container" role="tabpanel">
@@ -92,3 +109,44 @@
     </div>
 
 </div>
+
+<script>
+    $("#approve-comment-container").delegate(".comment-approve", "click", function (e) {
+        if ($(e.target).prop("disabled")) return;
+        $(e.target).prop("disabled", true);
+        $(".comment-refuse[data-id=" + $(e.target).attr("data-id") + "]").prop("disabled", true);
+        $.ajax({
+            url: "/AdminManager/ApproveComment",
+            type: "POST",
+            data: { id: $(e.target).attr("data-id") },
+            success: function (data) {
+                if (data == "Success") {
+                    $(e.target).parents(".container").remove();
+                    return;
+                }
+                alert(data);
+                $(e.target).prop("disabled", false);
+                $(".comment-refuse[data-id=" + $(e.target).attr("data-id") + "]").prop("disabled", false);
+            }
+        });
+    });
+    $("#approve-comment-container").delegate(".comment-refuse", "click", function (e) {
+        if ($(e.target).prop("disabled")) return;
+        $(e.target).prop("disabled", true);
+        $(".comment-approve[data-id=" + $(e.target).attr("data-id") + "]").prop("disabled", true);
+        $.ajax({
+            url: "/AdminManager/RefuseComment",
+            type: "POST",
+            data: { id: $(e.target).attr("data-id") },
+            success: function (data) {
+                if (data == "Success") {
+                    $(e.target).parents(".container").remove();
+                    return;
+                }
+                alert(data);
+                $(e.target).prop("disabled", false);
+                $(".comment-refuse[data-id=" + $(e.target).attr("data-id") + "]").prop("disabled", false);
+            }
+        });
+    });
+</script>
