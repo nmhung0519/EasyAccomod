@@ -1,91 +1,85 @@
-@{ 
+@{
     Layout = null;
 }
 
-@model IEnumerable<EasyAccomod.Models.AccountModel> 
-        <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link active" id="approve-account-tab" data-toggle="tab" href="#approve-account-container" role="tab" aria-controls="nav-home" aria-selected="true">Phê duyệt</a>
-              <a class="nav-item nav-link" id="restore-account-tab" data-toggle="tab" href="#restore-account-container" role="tab" aria-controls="nav-profile" aria-selected="false">Hoàn tác</a>
-              
+@model IEnumerable<EasyAccomod.Models.AccountModel>
+
+
+
+<h5 class="my-4">Phê duyệt tài khoản</h5>
+
+@if (Model != null)
+{
+    foreach (var item in Model.Where(x => x.ApprovalTime.Year == 1))
+    {
+        <div class="container">
+            <div class=" rounded border mb-4 p-2">
+                <span style="display: inline-block;"><b>@item.FullName</b></span>
+                <p>@item.Username - @item.Phone - @item.Phone</p>
+
+                <div class="confirm-bar text-right">
+                    <div class="btn btn-primary approve-account-button" data-id="@item.Id" data-active="true">Phê duyệt</div>
+                    <div class="btn btn-secondary ml-3 refuse-account-button" data-id="@item.Id" data-active="true">Từ chối</div>
+                </div>
             </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="approve-account-container" role="tabpanel" aria-labelledby="nav-home-tab">
-                <h5 class="my-4">Phê duyệt tài khoản</h5>
-
-                @if(Model != null) 
-                {
-                    foreach (var item in Model.Where(x => x.ApprovalTime.Year == 1))
-                    {
-                        <div class="container">
-                            <div class=" rounded border mb-4 p-2">
-                                <span style="display: inline-block;"><b>@item.FullName</b></span>
-                                <p>@item.Username - @item.Phone - @item.Phone</p>
-
-                                <div class="confirm-bar text-right">
-                                    <div class="btn btn-primary approve-account-button" data-id="@item.Id" data-active="true">Phê duyệt</div>
-                                    <div class="btn btn-secondary ml-3 refuse-account-button" data-id="@item.Id" data-active="true">Từ chối</div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-            <div class="tab-pane fade" id="restore-account-container" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <h5 class="my-4">Hoàn tác tài khoản</h5>
-                @foreach (var item in Model.Where(x => x.ApprovalTime.Year != 1))
-                {
-                    <div class="container">
-                        <div class=" rounded border mb-4 p-2">
-                            <span style="display: inline-block;"><b>@item.FullName</b></span>
-                            <p>@item.Username - @item.Phone - @item.Email</p>
-
-                            <div class="confirm-bar text-right">
-                                <div class="btn btn-primary">Hoàn tác</div>
-
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-            
         </div>
-        <script>
-            $("#approve-account-container").delegate(".approve-account-button", "click", function (e) {
-                if ($(e.target).attr("data-active") != "true") return;
-                $(e.target).attr("data-active", "false");
-                $.ajax({
-                    url: "/AdminManager/ApproveAccount",
-                    type: "POST",
-                    data: { id: $(e.target).attr("data-id") },
-                    success: function (data) {
-                        if (data == "Success") {
-                            alert("Succcess");
-                            return;
-                        }
+    }
+}
 
-                        console.log(data);
-                        $(e.target).attr("data-active", "true");
-                    }
-                });
-            });
-            $("#approve-account-container").delegate(".refuse-account-button", "click", function (e) {
-                if ($(e.target).attr("data-active") != "true") return;
-                $(e.target).attr("data-active", "false");
-                $.ajax({
-                    url: "/AdminManager/RefuseAccount",
-                    type: "POST",
-                    data: { id: $(e.target).attr("data-id") },
-                    success: function (data) {
-                        if (data == "Success") {
-                            alert("Succcess");
-                            return;
-                        }
 
-                        console.log(data);
-                        $(e.target).attr("data-active", "true");
-                    }
-                });
-            });
-        </script>
+<h5 class="my-4">Hoàn tác tài khoản</h5>
+@foreach (var item in Model.Where(x => x.ApprovalTime.Year != 1))
+{
+    <div class="container">
+        <div class=" rounded border mb-4 p-2">
+            <span style="display: inline-block;"><b>@item.FullName</b></span>
+            <p>@item.Username - @item.Phone - @item.Email</p>
+
+            <div class="confirm-bar text-right">
+                <div class="btn btn-primary">Hoàn tác</div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $("#approve-account-container").delegate(".approve-account-button", "click", function (e) {
+        if ($(e.target).attr("data-active") != "true") return;
+        $(e.target).attr("data-active", "false");
+        $.ajax({
+            url: "/AdminManager/ApproveAccount",
+            type: "POST",
+            data: { id: $(e.target).attr("data-id") },
+            success: function (data) {
+                if (data == "Success") {
+                    alert("Succcess");
+                    return;
+                }
+
+                console.log(data);
+                $(e.target).attr("data-active", "true");
+            }
+        });
+    });
+    $("#approve-account-container").delegate(".refuse-account-button", "click", function (e) {
+        if ($(e.target).attr("data-active") != "true") return;
+        $(e.target).attr("data-active", "false");
+        $.ajax({
+            url: "/AdminManager/RefuseAccount",
+            type: "POST",
+            data: { id: $(e.target).attr("data-id") },
+            success: function (data) {
+                if (data == "Success") {
+                    alert("Succcess");
+                    return;
+                }
+
+                console.log(data);
+                $(e.target).attr("data-active", "true");
+            }
+        });
+    });
+</script>

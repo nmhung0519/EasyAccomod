@@ -43,7 +43,7 @@ body {
     cursor: pointer;
 }
 
-#acc-menu > li > a {
+#top-collapse a {
     text-decoration: none;
     color: black;
     text-overflow: initial;
@@ -139,12 +139,19 @@ body {
         -o-transition: all .5s;
         transition: all .5s;
     }
+
+    #logo-container {
+        padding-left: 0;
+    }
+
     #title {
         font-size: 18px;
     }
+
     #picture {
         height: 300px;
     }
+
     #acc-menu {
         visibility: hidden;
     }
@@ -194,7 +201,7 @@ body {
     background-color: rgba(40,40,46,.6);
     width: 75%;
     z-index: 5;
-    min-height: 50%!important;
+    min-height: 50% !important;
     border-radius: 4px;
 }
 
@@ -288,6 +295,7 @@ body {
         font-size: 14px !important;
     }
 }
+
 .big-city {
     height: 150px;
     font-size: 25px;
@@ -324,11 +332,16 @@ ul {
     padding: 0;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 576px) {
     #top-collapse ul {
         display: none;
     }
+
+    .show-when-collapse {
+        display: block !important;
+    }
 }
+
 #username-display {
     white-space: nowrap;
     overflow: hidden;
@@ -338,4 +351,45 @@ ul {
 
 .err-msg {
     color: red;
+}
+
+#notification-show {
+    top: 40px;
+    height: calc(100vh - 50px);
+    width: 300px;
+    z-index: 1040;
+    right: 30px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    overflow-y: auto;
+}
+
+.notification-item {
+    display: block;
+    text-decoration: none !important;
+    color: #000 !important;
+}
+
+
+    .notification-item:hover {
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+#notification-show::-webkit-scrollbar {
+    width: 8px !important;
+    height: 5px !important;
+}
+
+#notification-show::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
+#notify-popup {
+    height: 100px;
+    width: 300px;
+    left: 50px;
+    z-index: 2000;
+    bottom: 50px;
 }

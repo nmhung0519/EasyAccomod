@@ -6,14 +6,14 @@
             <div class="sidebar-header">
                 <h3>Quản lý </h3>
             </div>
-            
+
             <nav id="sidebar">
 
                 <ul class="list-unstyled components">
 
                     <li class="nav-item-big">
-                        <a href="#post-menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bài đăng</a>
-                        <ul class="collapse list-unstyled nav nav-pills" id="post-menu">
+                        <a href="#post-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Bài đăng</a>
+                        <ul class="collapse show list-unstyled nav nav-pills" id="post-menu">
                             <li class="nav-item">
                                 <a id="approve-post" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Bài đăng chờ duyệt</span>
@@ -33,17 +33,23 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a id="approve-purchase" class="nav-link" data-toggle="pill" href="#">
+                                    <span class="pill-span">Phê duyệt gia hạn</span>
+                                    <span class="badge badge-danger badge-admin">101</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a id="approve-comment" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Phê duyệt bình luận</span>
                                     <span class="badge badge-danger badge-admin">101</span>
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </li>
                     <li class="nav-item-big">
-                        <a href="#account-menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tài khoản</a>
-                        <ul class="collapse list-unstyled nav nav-pills" id="account-menu">
+                        <a href="#account-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Tài khoản</a>
+                        <ul class="collapse show list-unstyled nav nav-pills" id="account-menu">
                             <li class="nav-item">
                                 <a id="approve-account" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Tài khoản chờ duyệt</span>
@@ -66,8 +72,8 @@
                     </li>
 
                     <li class="nav-item-big">
-                        <a href="#statistic-menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Thống kê</a>
-                        <ul class="collapse list-unstyled nav nav-pills" id="statistic-menu">
+                        <a href="#statistic-menu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Thống kê</a>
+                        <ul class="collapse show list-unstyled nav nav-pills" id="statistic-menu">
                             <li class="nav-item">
                                 <a id="most-viewed-post" class="nav-link" data-toggle="pill" href="#">Bài đăng được xem nhiều nhất</a>
                             </li>
@@ -90,7 +96,7 @@
 
                 </ul>
             </nav>
-            
+
         </div>
     </div>
     <div class="content col-9" id="content-container">
@@ -99,9 +105,76 @@
 
 </div>
 <script>
+    $(".nav-item-big").click(function () {
+        if ($(this).find("ul").hasClass("show")) {
+            $(this).find("a").removeClass("active");
+        }
+        $(this).siblings().find("a").removeClass("active");
+    });
     $(".nav-link").click(function () {
         $(this).parents(".nav-item-big").siblings().find("a").removeClass("active");
     });
+
+    ////////////////////////////// Bài đăng
+
+    //chưa duyệt
+
+    $("#approve-post").click(function () {
+        $("#content-container").load("/AdminManager/ApprovePost");
+    });
+
+
+    //đã duyệt
+    $("#approved-post").click(function () {
+        $("#content-container").load("/AdminManager/ApprovedPost");
+    });
+
+    //đã từ chối
+    $("#denied-post").click(function () {
+        $("#content-container").load("/AdminManager/DeniedPost");
+    });
+    //phê duyệt gia hạn
+    $("#approve-purchase").click(function () {
+        $("#content-container").load("/AdminManager/ApprovePurchase");
+    });
+
+    //duyệt bình luận
+    $("#approve-comment").click(function () {
+        $("#content-container").load("/AdminManager/ApprovePost");
+    });
+    ///////////////////////////////// Tài khoản
+
+    //chưa duyệt
+    $("#approve-account").click(function () {
+        $("#content-container").load("/AdminManager/ApproveAccount");
+    });
+
+    //đã duyệt
+    $("#approved-account").click(function () {
+        $("#content-container").load("/AdminManager/ApproveAccount");
+    });
+    //đã từ chối
+    $("#denied-account").click(function () {
+        $("#content-container").load("/AdminManager/ApproveAccount");
+    });
+
+
+    ///////////////////////////Thống kê
+
+
+    // bài viết nhiều view nhất
+    $("#most-viewed-post").click(function () {
+        $("#content-container").load("/AdminManager/ApproveAccount");
+    });
+    //bài viết nhiều like nhất
+    $("#most-liked-post").click(function () {
+        $("#content-container").load("/AdminManager/ApproveAccount");
+    });
+    //phân tích thời gian đăng
+    $("#time-most-post").click(function () {
+        $("#content-container").load("/AdminManager/ApproveAccount");
+    });
+
 
 
 
@@ -110,17 +183,11 @@
     });
 
 
-    $("#approve-account").click(function () {
-        $("#content-container").load("/AdminManager/ApproveAccount");
-    });
 
-    $("#approve-post").click(function () {
-        $("#content-container").load("/AdminManager/ApprovePost");
-    });
 
-    $("#approve-purchase").click(function () {
-        $("#content-container").load("/AdminManager/ApprovePurchase");
-    });
+
+
+
 
     $("#approve-comment").click(function () {
         $("#content-container").load("/AdminManager/ApproveComment");

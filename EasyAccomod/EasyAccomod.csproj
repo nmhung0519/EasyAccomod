@@ -247,6 +247,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <None Include="Views\AdminManager\ApproveAccount.cshtml" />
     <None Include="Views\AdminManager\ApproveComment.cshtml" />
+    <None Include="Views\AdminManager\ApprovedPost.cshtml" />
     <None Include="Views\AdminManager\ApprovePost.cshtml" />
     <None Include="Views\AdminManager\ApprovePurchase.cshtml" />
     <Content Include="database\trigger.txt" />
@@ -275,6 +276,7 @@
     <Content Include="Views\AdminManager\Index.cshtml" />
     <Content Include="Views\HostManager\Index.cshtml" />
     <Content Include="Views\HostManager\Post.cshtml" />
+    <Content Include="Views\AdminManager\DeniedPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

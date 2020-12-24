@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+
+@model IEnumerable<EasyAccomod.Models.TicketModel>
+
+<link href="~/Content/ApprovePost.css" rel="stylesheet" />
+
+
+
+
+
+
+<h5 class="my-4">Hoàn tác bài đăng</h5>
+
+<!--One card-->
+<div class="container">
+    <div class=" rounded border mb-4 p-2">
+        <div class="post-wrapper row px-3">
+            <div class="post-image-thumb"></div>
+            <div class="post-info col-12 col-lg-9">
+                <div class="post-top-part">
+                    <span class="post-title">
+                        Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
+                        Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
+                    </span>
+                    <span class="post-area">30m2</span>
+                    <span class="post-price">2,5 triệu/tháng</span>
+                </div>
+                <span class="post-user">Nguyễn Mạnh Hùng</span>
+                <span class="post-datetime">17/12/20 12:12 </span>
+
+
+            </div>
+        </div>
+
+        <div class="confirm-bar text-right">
+            <div class="btn btn-primary">Hoàn tác</div>
+
+        </div>
+    </div>
+</div>
+
+<!--End card-->
+
+
+
+
+
+<script>
+    $(".approve-post-button").click(function (e) {
+        if ($(e.target).attr("data-active") != "true") return;
+        $(e.target).attr("data-active", "false");
+        $.ajax({
+            url: "/AdminManager/ApprovePost",
+            type: 'POST',
+            data: { id: $(e.target).attr("data-id") },
+            success: function (data) {
+                if (data == "Success") {
+                    alert("Success");
+                    return;
+                }
+                $(e.target).attr("data-active", "true");
+                console.log(data);
+            }
+        })
+    })
+    $(".refuse-post-button").click(function (e) {
+        if ($(e.target).attr("data-active") != "true") return;
+        $(e.target).attr("data-active", "false");
+        $.ajax({
+            url: "/AdminManager/RefusePost",
+            type: 'POST',
+            data: { id: $(e.target).attr("data-id") },
+            success: function (data) {
+                if (data == "Success") {
+                    alert("Success");
+                    return;
+                }
+                $(e.target).attr("data-active", "true");
+                console.log(data);
+            }
+        })
+    })
+</script>

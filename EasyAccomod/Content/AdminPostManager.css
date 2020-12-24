@@ -5,12 +5,12 @@
     position: relative;
 }
 
-::-webkit-scrollbar {
+#sidebar::-webkit-scrollbar {
     width: 5px !important;
     height: 5px !important;
 }
 
-::-webkit-scrollbar-thumb {
+#sidebar::-webkit-scrollbar-thumb {
     background: grey;
     border-radius: 10px;
 }
