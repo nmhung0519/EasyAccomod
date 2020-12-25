@@ -21,6 +21,7 @@ namespace EasyAccomod.Models
         public DbSet<AccountModel> Accounts { get; set; }
         public DbSet<ViewPostModel> ViewPosts { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
+        public DbSet<NotificationModel> Notifications { get; set; }
     }
 
     [Table("district")]
@@ -232,6 +233,9 @@ namespace EasyAccomod.Models
         [Column("approver_id")]
         public int ApproverId { get; set; }
 
+        [ForeignKey("ApproverId")]
+        public AccountModel Approver { get; set; }
+
         [Column("approval_time")]
         public DateTime ApprovalTime { get; set; }
 
@@ -297,6 +301,7 @@ namespace EasyAccomod.Models
         public virtual ICollection<PostModel> Posts { get; set; }
         public virtual ICollection<AccountModel> Accounts { get; set; }
         public virtual ICollection<NotificationModel> Notifications { get; set; }
+        public virtual ICollection<TicketModel> Tickets { get; set; }
         [InverseProperty("Approver")]
         public virtual ICollection<CommentModel> ApprovedComments { get; set; }
         [InverseProperty("User")]
@@ -317,8 +322,11 @@ namespace EasyAccomod.Models
         [Column("type")]
         public int Type { get; set; }
 
-        [Column("title")]
-        public string Title { get; set; }
+        [Column("user")]
+        public string User { get; set; }
+
+        [Column("action")]
+        public string Action { get; set; }
 
         [Column("createdtime")]
         public DateTime CreatedTime { get; set; }
@@ -331,6 +339,22 @@ namespace EasyAccomod.Models
 
         [Column("seen")]
         public bool Seen { get; set; }
+
+        public string GetLink()
+        {
+            switch (this.Type)
+            {
+                case 1:
+                    return "/AdminManager";
+                case 2:
+                    return "/AdminManager";
+                case 3:
+                    return "/AdminManager";
+                case 4:
+                    return "/AdminManager";
+            }
+            return "/";
+        }
     }
 
     [Table("viewpost")]

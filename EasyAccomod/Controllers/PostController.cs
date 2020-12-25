@@ -99,9 +99,11 @@ namespace EasyAccomod.Controllers
                 ticket.CreateTime = DateTime.Now;
                 ticket.Time = 1;
                 ticket.UnitTime = 1;
+                ticket.ApproverId = newPost.PosterId;
                 if (newPost.Approved == 1)
                 {
                     ticket.Approved = 1;
+                    ticket.ApprovalTime = ticket.CreateTime;
                 }
                 newPost.Tickets = new List<TicketModel> { ticket };
                 newPost.Images = new List<PostImageModel>();

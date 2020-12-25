@@ -1,0 +1,14 @@
+﻿@model IEnumerable<EasyAccomod.Models.NotificationModel>
+
+@foreach (var item in Model)
+{
+    <a href="@item.GetLink()" class="notification-item rounded  my-2 py-3 px-1">
+        <b>
+            @item.User
+        </b>
+        <span>
+            @item.Action
+        </span>
+    </a>
+}
+<a href="" class="text-primary w-100 p-3 text-center d-block text-decoration-none">Xem thêm</a>

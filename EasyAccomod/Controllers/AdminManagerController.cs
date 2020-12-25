@@ -263,5 +263,50 @@ namespace EasyAccomod.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult ApprovedPost()
+        {
+            try
+            {
+                int userid, usertype;
+                if (Session["userid"] == null || Session["usertype"] == null || !int.TryParse(Session["userid"].ToString(), out userid) || !int.TryParse(Session["usertype"].ToString(), out usertype)) return PartialView("../Account/SignIn", new SignInModel());
+                if (usertype != 1) return Content("<a href='/Account/SignOut'>Đăng nhập lại</a> với tài khoản admin để sử dụng chức năng này", "text/html");
+                using (var db = new DBContext())
+                {
+                    var posts = (from p in db.Posts
+                                 where p.Approved == 1
+                                 orderby p.CreateTime descending
+                                 select p).ToList();
+                    foreach (var item in posts)
+                    {
+                        db.Entry(item)
+                            .Reference(x => x.Poster)
+                            .Load();
+                        db.Entry(item)
+                            .Reference(x => x.City)
+                            .Load();
+                        db.Entry(item)
+                            .Reference(x => x.District)
+                            .Load();
+                        db.Entry(item)
+                            .Reference(x => x.Ward)
+                            .Load();
+                        db.Entry(item)
+                            .Collection(x => x.Images)
+                            .Load();
+                        db.Entry(item)
+                            .Collection(x => x.Tickets)
+                            .Load();
+                    }
+                    return PartialView(posts);
+                }
+            }
+            catch (Exception ex) { return Content(ex.Message, "text/html"); }
+        }
+
+        public ActionResult RefusedPost()
+        {
+            return PartialView();
+        }
     }
 }

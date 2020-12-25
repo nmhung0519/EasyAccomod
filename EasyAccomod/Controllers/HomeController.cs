@@ -86,5 +86,20 @@ namespace EasyAccomod.Controllers
         {
             return View("../Post/ListPost");
         }
+
+        [HttpGet]
+        public ActionResult NotificationBody()
+        {
+            int userid;
+            if (Session["userid"] == null || !int.TryParse(Session["userid"].ToString(), out userid)) return null;
+            using (var db = new DBContext())
+            {
+                var notifications = (from n in db.Notifications
+                                     where n.ReceiverId == userid
+                                     orderby n.CreatedTime descending
+                                     select n).ToList();
+                return PartialView(notifications);
+            }
+        }
     }
 }

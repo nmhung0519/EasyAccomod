@@ -21,141 +21,9 @@
     <!--End notify popup-->
     <div id="notification-show" class="container bg-light position-fixed d-none ">
         <h4 class="mt-2">Thông báo</h4>
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
+        <div id="notification-body">
 
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item--><!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <!--One item-->
-        <a class="notification-item rounded  my-2 py-3 px-1">
-            <b>
-                <!--username-->
-                Nguyễn Mạnh Hùng
-            </b>&nbsp;đã
-            <span>
-                <!--action-->
-                <!--bình luận về-->
-                thích
-            </span>
-
-            bài viết của bạn.
-        </a>
-        <!--End item-->
-        <a href="" class="text-primary w-100 p-3 text-center d-block text-decoration-none">Xem thêm</a>
+        </div>
     </div>
     <div id="header" class="container-fluid fixed-top px-1" style="padding: 0;user-select:none; background: white; border-bottom: 1px solid lightgrey">
         <div class="row h-100" style="margin: 0">
@@ -224,13 +92,16 @@
             <div class="col-4 col-sm-3 offset-0 offset-sm-2 offset-lg-0  align-self-center pr-3" style="padding-left: 0;">
                 <ul id="navbar-user" class="nav row justify-content-end mr-3 mr-sm-0">
                     <li class="col-3 col-sm-2 text-center align-self-center"><a href="/" class="text-decoration-none"><i class="far fa-heart"></i></a></li>
-                    <li class="col-4 col-sm-4 text-center align-self-center" style="padding:0!important; user-select: none; cursor: pointer;">
-                        <a id="notification-bell" style="width:100%; height:100%">
-                            <i class="far fa-bell"></i>
-                            <span style="position: relative; top: -10px;
-                            right: 5px;" class="badge badge-danger">10</span>
-                        </a>
-                    </li>
+                    @if (Session["userid"] != null)
+                    {
+                        <li class="col-4 col-sm-4 text-center align-self-center" style="padding:0!important; user-select: none; cursor: pointer;">
+                            <a id="notification-bell" style="width:100%; height:100%">
+                                <i class="far fa-bell"></i>
+                                <span style="position: relative; top: -10px;
+                                right: 5px;" class="badge badge-danger">10</span>
+                            </a>
+                        </li>
+                    }
                     @{
                         int usertype1;
                         if (Session["usertype"] == null || (int.TryParse(Session["usertype"].ToString(), out usertype1) && (usertype1 == 1 || usertype1 == 2)))
@@ -278,6 +149,9 @@
                 }
 
             });
+            $("#notification-bell").click(function () {
+                $("#notification-body").load("/Home/NotificationBody");
+            })
         })
     </script>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-xl"></div></div>
