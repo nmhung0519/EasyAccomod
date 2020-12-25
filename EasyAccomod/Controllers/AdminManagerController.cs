@@ -308,5 +308,9 @@ namespace EasyAccomod.Controllers
         {
             return PartialView();
         }
+        public ActionResult ChartBasedOnTimePosting()
+        {
+            return PartialView();
+        }
     }
 }
