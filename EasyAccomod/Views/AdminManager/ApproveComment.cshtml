@@ -1,15 +1,7 @@
 @model IEnumerable<EasyAccomod.Models.CommentModel>
 
 <link href="~/Content/ApproveComment.css" rel="stylesheet" />
-<nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="approve-comment-tab" data-toggle="tab" href="#approve-comment-container" role="tab" aria-controls="nav-home" aria-selected="true">Phê duyệt</a>
-        <a class="nav-item nav-link" id="restore-comment-tab" data-toggle="tab" href="#restore-comment-container" role="tab" aria-controls="nav-profile" aria-selected="false">Hoàn tác</a>
 
-    </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="approve-comment-container" role="tabpanel">
         <h5 class="my-4">Phê duyệt bình luận</h5>
         @if (Model != null)
         {
@@ -50,6 +42,9 @@
                             <p><b>@item.User.FullName</b></p>
                         </div>
                         <div class="row px-3">
+                            <p>14:59 26/12/20</p>
+                        </div>
+                        <div class="row px-3">
                             <p>@item.Content</p>
                         </div>
 
@@ -64,51 +59,7 @@
             }
         }
 
-    </div>
-    <div class="tab-pane fade" id="restore-comment-container" role="tabpanel">
-        <h5 class="my-4">Hoàn tác bình luận</h5>
-
-        <!--One card-->
-        <div class="container">
-            <div class=" rounded border mb-4 p-2">
-                <div class="post-wrapper row px-3">
-                    <div class="post-image-thumb"></div>
-                    <div class="post-info col-12 col-lg-9">
-                        <div class="post-top-part">
-                            <span class="post-title">
-                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
-                                Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
-                            </span>
-                            <span class="post-area">30m2</span>
-                            <span class="post-price">2,5 triệu/tháng</span>
-                        </div>
-                        <span class="post-user">Nguyễn Mạnh Hùng</span>
-                        <span class="post-datetime">17/12/20 12:12 </span>
-
-
-                    </div>
-                </div>
-                <hr>
-                <div class="row px-3">
-                    <p><b>Nguyễn Quốc Huy</b></p>
-                </div>
-                <div class="row px-3">
-                    <p>6 tỉ có bán nhà ko?</p>
-                </div>
-
-                <div class="confirm-bar text-right">
-                    <div class="btn btn-primary">Hoàn tác</div>
-
-                </div>
-            </div>
-        </div>
-
-        <!--End card-->
-
-
-    </div>
-
-</div>
+   
 
 <script>
     $("#approve-comment-container").delegate(".comment-approve", "click", function (e) {

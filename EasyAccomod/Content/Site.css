@@ -91,7 +91,7 @@ body {
     height: 100%;
     z-index: -999;
     top: 50px;
-    position: absolute;
+    position: fixed;
 }
 
     #slide-menu > ul {
@@ -245,15 +245,15 @@ body {
 .btn-search {
     display: grid;
     float: right;
-    height: calc(100% - 8px);
+    height: calc(100% - 2px);
     background-color: #00deb6;
     color: #262637;
     border-radius: 4px;
     text-align: center;
     width: 100px;
     position: absolute;
-    right: 4px;
-    top: 4px;
+    right: 1px;
+    top: 1px;
     align-items: center;
     cursor: pointer;
 }
@@ -278,11 +278,7 @@ body {
     padding-right: 5px;
 }
 
-@media only screen and (max-width: 1210px) {
-    #filter-row select.form-control {
-        font-size: 14px !important;
-    }
-}
+
 
 @media only screen and (max-width: 992px) {
     #filter-row select.form-control {
@@ -290,7 +286,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 470px) {
     #filter-row select.form-control {
         font-size: 14px !important;
     }

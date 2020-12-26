@@ -5,7 +5,12 @@
 @model IEnumerable<EasyAccomod.Models.AccountModel>
 
 
-
+<style>
+    
+    .user-info p {
+        margin-bottom:0;
+    }
+</style>
 <h5 class="my-4">Phê duyệt tài khoản</h5>
 
 @if (Model != null)
@@ -14,8 +19,14 @@
     {
         <div class="container">
             <div class=" rounded border mb-4 p-2">
-                <span style="display: inline-block;"><b>@item.FullName</b></span>
-                <p>@item.Username - @item.Phone - @item.Phone</p>
+                <span style="display: inline-block;"><b>@item.Username</b></span>
+                <div class="user-info ml-5">
+                    <p>Họ và tên: @item.FullName</p>
+                    <p>Số điện thoại: @item.Phone</p>
+                    <p>Email: @item.Email</p>
+                    <p>CCCD: @item.IdCard</p>
+            
+                </div>
 
                 <div class="confirm-bar text-right">
                     <div class="btn btn-primary approve-account-button" data-id="@item.Id" data-active="true">Phê duyệt</div>
@@ -27,21 +38,6 @@
 }
 
 
-<h5 class="my-4">Hoàn tác tài khoản</h5>
-@foreach (var item in Model.Where(x => x.ApprovalTime.Year != 1))
-{
-    <div class="container">
-        <div class=" rounded border mb-4 p-2">
-            <span style="display: inline-block;"><b>@item.FullName</b></span>
-            <p>@item.Username - @item.Phone - @item.Email</p>
-
-            <div class="confirm-bar text-right">
-                <div class="btn btn-primary">Hoàn tác</div>
-
-            </div>
-        </div>
-    </div>
-}
 
 
 

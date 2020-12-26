@@ -65,13 +65,13 @@ namespace EasyAccomod.Models
         [Range(-1, 1)]
         public int balcony { get; set; }
 
-        [Display(Name = "Giá điện")]
+        [Display(Name = "Giá điện(VND)")]
         public double electricityPrice { get; set; }
 
         [Display(Name = "Đơn vị tính")]
         public char electricUnit { get; set; }
 
-        [Display(Name = "Giá nước")]
+        [Display(Name = "Giá nước(VND)")]
         public double waterPrice { get; set; }
 
         [Display(Name = "Đơn vị tính")]
@@ -90,7 +90,7 @@ namespace EasyAccomod.Models
         [Range(7, int.MaxValue, ErrorMessage = "Số ngày hiển thị tối thiểu là 7")]
         public int numberOfDateShow { get; set; }
 
-        [Display(Name = "Giá thuê")]
+        [Display(Name = "Giá thuê(VND)")]
         public double price { get; set; }
 
         [Display(Name = "Đơn vị tính")]

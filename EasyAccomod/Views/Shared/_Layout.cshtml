@@ -34,6 +34,17 @@
                     <img src="~/Picture/ealogo.png" style="width: 150px; height: auto; min-height: 40px;">
                 </a>
             </div>
+            <div id="slide-menu">
+                <ul class="pl-3">
+
+                    <li><a href="/Home/AdvancedSearch">Tìm kiếm nâng cao</a></li>
+
+                    @if (Session["userid"] == null)
+                    {
+                        <li><a href="/Account/SignIn">Đăng nhập</a></li>
+                    }
+                </ul>
+            </div>
 
             <div class="col-1 col-sm-5 offset-lg-2 offset-sm-0 align-self-center" id="top-collapse">
                 <ul id="acc-menu" class="nav row justify-content-end">
@@ -69,29 +80,41 @@
                                     }
                                 }
                                 <a class="dropdown-item" href="/Account/SignOut">Đăng xuất</a>
-                                <a id="notify-trigger" class="dropdown-item">Tạo thông báo</a>
+                                
                             </div>
 
                         </li>
                     }
                 </ul>
-                <!--Khi thu nhỏ-->
-                <div class="show-when-collapse" style="display: none;position: absolute; top:-10px; right: 10px;">
-                    <a href="#" role="button" id="mini-username-display" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-user mr-2 "></i>
+                @if (Session["userid"] != null)
+                {
+                    <!--Khi thu nhỏ-->
+                    <div class="show-when-collapse" style="display: none;position: absolute; top:-10px; right: 10px;">
+                        <a href="#" role="button" id="mini-username-display" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-user mr-2 "></i>
 
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="mini-username-display">
-                        <a class="dropdown-item" href="#">Trang cá nhân</a>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="mini-username-display">
+                            <a class="dropdown-item" href="#">Trang cá nhân</a>
 
-                        <a class="dropdown-item" href="/Account/SignOut">Đăng xuất</a>
+                            <a class="dropdown-item" href="/Account/SignOut">Đăng xuất</a>
+                        </div>
                     </div>
-                </div>
-                <!---->
+                    <!---->
+                }
             </div>
             <div class="col-4 col-sm-3 offset-0 offset-sm-2 offset-lg-0  align-self-center pr-3" style="padding-left: 0;">
                 <ul id="navbar-user" class="nav row justify-content-end mr-3 mr-sm-0">
-                    <li class="col-3 col-sm-2 text-center align-self-center"><a href="/" class="text-decoration-none"><i class="far fa-heart"></i></a></li>
+                   
+                       @if (Session["usertype"] != null)
+                       {
+                            <li class="col-3 col-sm-2 text-center align-self-center">
+                                <a href="/" class="text-decoration-none">
+                                    <i class="far fa-heart"></i>
+                                </a>
+                            </li>
+                       }
+                    
                     @if (Session["userid"] != null)
                     {
                         <li class="col-4 col-sm-4 text-center align-self-center" style="padding:0!important; user-select: none; cursor: pointer;">
@@ -106,9 +129,9 @@
                         int usertype1;
                         if (Session["usertype"] == null || (int.TryParse(Session["usertype"].ToString(), out usertype1) && (usertype1 == 1 || usertype1 == 2)))
                         {
-                                        <li class="col-5 col-sm-6 col-lg-4 align-self-center  ">
-                                            <button class="btn btn-sm text-nowrap" data-toggle="modal" data-target="#exampleModal" id="btn-dang-tin">Đăng tin</button>
-                                        </li>
+                            <li class="col-5 col-sm-6 col-lg-4 align-self-center  ">
+                                <button class="btn btn-sm text-nowrap" data-toggle="modal" data-target="#exampleModal" id="btn-dang-tin">Đăng tin</button>
+                            </li>
                         }
                     }
                 </ul>
@@ -116,6 +139,13 @@
         </div>
     </div>
     <script>
+        function ToggleSideNav() {
+            if ($("#slide-menu").hasClass("slide-menu-active")) {
+                $("#slide-menu").removeClass("slide-menu-active");
+                return;
+            }
+            $("#slide-menu").addClass("slide-menu-active");
+        }
         $("body").ready(function () {
             $("#btn-dang-tin").click(function () {
                 $("#exampleModal>.modal-dialog.modal-xl").load("/Post/CreatePost");
@@ -151,7 +181,13 @@
             });
             $("#notification-bell").click(function () {
                 $("#notification-body").load("/Home/NotificationBody");
-            })
+            });
+            
+            $(window).resize(function () {
+                if (window.innerWidth > 576) {
+                    $("#slide-menu").removeClass("slide-menu-active");
+                }
+            });
         })
     </script>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-xl"></div></div>
@@ -172,7 +208,7 @@
 
                     </li>
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                        <h3 class="footer-title">Thuê nhà TPHCM</h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>
@@ -181,7 +217,7 @@
                         </ul>
                     </li>
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                        <h3 class="footer-title">Thuê nhà Đà Nẵng</h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>
@@ -192,7 +228,7 @@
                 </ul>
                 <ul class="row text-center p-2" style="list-style-type: none;">
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                        <h3 class="footer-title">Thuê nhà Cần Thơ</h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>
@@ -202,7 +238,7 @@
 
                     </li>
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                        <h3 class="footer-title">Thuê nhà Hải Phòng</h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>
@@ -211,7 +247,7 @@
                         </ul>
                     </li>
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                        <h3 class="footer-title">Thuê nhà Bắc Ninh</h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>

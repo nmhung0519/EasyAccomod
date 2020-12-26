@@ -1,4 +1,5 @@
 ﻿<link href="~/Content/AdminPostManager.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <div class="admin-page-container container rounded border mx-auto row" style="margin-top: 50px; margin-bottom: 50px;">
 
     <div class="col-3 web-sidebar" style="position: relative; border-right: 1px solid #eee;">
@@ -131,7 +132,7 @@
 
     //đã từ chối
     $("#denied-post").click(function () {
-        $("#content-container").load("/AdminManager/DeniedPost");
+        $("#content-container").load("/AdminManager/RefusedPost");
     });
     //phê duyệt gia hạn
     $("#approve-purchase").click(function () {
@@ -140,8 +141,9 @@
 
     //duyệt bình luận
     $("#approve-comment").click(function () {
-        $("#content-container").load("/AdminManager/ApprovePost");
+        $("#content-container").load("/AdminManager/ApproveComment");
     });
+
     ///////////////////////////////// Tài khoản
 
     //chưa duyệt
@@ -155,7 +157,7 @@
     });
     //đã từ chối
     $("#denied-account").click(function () {
-        $("#content-container").load("/AdminManager/ApproveAccount");
+        $("#content-container").load("/AdminManager/RefusedAccount");
     });
 
 
@@ -189,7 +191,7 @@
 
 
 
-    $("#approve-comment").click(function () {
-        $("#content-container").load("/AdminManager/ApproveComment");
-    })
+    
+
+    
 </script>

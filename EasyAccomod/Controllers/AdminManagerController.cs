@@ -312,5 +312,9 @@ namespace EasyAccomod.Controllers
         {
             return PartialView();
         }
+        public ActionResult RefusedAccount()
+        {
+            return PartialView();
+        }
     }
 }

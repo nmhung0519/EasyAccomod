@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+@model IEnumerable<EasyAccomod.Models.AccountModel>
+
+
+<style>
+
+    .user-info p {
+        margin-bottom: 0;
+    }
+</style>
+<h5 class="my-4">Hoàn tác tài khoản</h5>
+
+@if (Model != null)
+{
+    foreach (var item in Model.Where(x => x.ApprovalTime.Year != 1))
+    {
+        <div class="container">
+            <div class=" rounded border mb-4 p-2">
+                <span style="display: inline-block;"><b>@item.FullName</b></span>
+                <div class="user-info ml-5">
+                    <p>Họ và tên: @item.FullName</p>
+                    <p>Số điện thoại: @item.Phone</p>
+                    <p>Email: @item.Email</p>
+                    <p>CCCD: @item.IdCard</p>
+
+                </div>
+
+                <div class="confirm-bar text-right">
+                    <div class="btn btn-primary">Hoàn tác</div>
+
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+
+
+
+
+
+<script>
+
+</script>

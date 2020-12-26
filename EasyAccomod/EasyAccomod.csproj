@@ -278,6 +278,7 @@
     <Content Include="Views\AdminManager\RefusedPost.cshtml" />
     <Content Include="Views\Home\NotificationBody.cshtml" />
     <Content Include="Views\AdminManager\ChartBasedOnTimePosting.cshtml" />
+    <Content Include="Views\AdminManager\RefusedAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

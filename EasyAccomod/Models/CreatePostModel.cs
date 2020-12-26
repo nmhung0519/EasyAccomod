@@ -36,7 +36,7 @@ namespace EasyAccomod.Models
         //[MaxLength(4000, ErrorMessage = "Độ dài mô tả tối đa 4000 ký tự")]
         public string Content { get; set; }
 
-        [Display(Name = "Giá tiền")]
+        [Display(Name = "Giá tiền(VND)")]
         public double Price { get; set; }
         [Display(Name = "Loại BĐS")]
         [Range(1,4, ErrorMessage = "Loại BĐS không đúng định dạng")]
@@ -45,16 +45,16 @@ namespace EasyAccomod.Models
         [Display(Name = "Số phòng")]
         public int NumOfRooms { get; set; }
 
-        [Display(Name = "Diện tích")]
+        [Display(Name = "Diện tích(m2)")]
         [Required(ErrorMessage = "Giá phòng không được để trống")]
         public int Area { get; set; }
 
-        [Display(Name = "Giá điện (kW/h)")]
+        [Display(Name = "Giá điện(VND/kWh)")]
         [Required(ErrorMessage = "Giá điện không được để trống")]
         [Range(0, int.MaxValue, ErrorMessage = "Giá điện phải lớn hơn 0")]
         public int ElectricityPrice { get; set; }
 
-        [Display(Name = "Giá nước (/m3)")]
+        [Display(Name = "Giá nước(VND/m3)")]
         [Required(ErrorMessage = "Giá nước không được để trống")]
         [Range(0, int.MaxValue, ErrorMessage = "Giá nước phải lớn hơn 0")]
         public int WaterPrice { get; set; }
