@@ -3,53 +3,52 @@
 }
 
 @model EasyAccomod.Models.AccountModel
-<link href="~/Content/AdminPostManager.css" rel="stylesheet" />
-<link href="~/Content/HostManager.css" rel="stylesheet" />
-<div class="admin-page-container container rounded border mx-auto row" style="margin-top: 50px; margin-bottom: 50px;">
+<style>
 
-    <div class="col-3 web-sidebar" style="position: relative; border-right: 1px solid #eee;">
-        <div class="sticky-sidebar">
-            <div class="sidebar-header">
-                <h3>@Model.FullName</h3>
+    .homepage-container {
+        width: 75%;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+
+    .host-info {
+        display: block;
+    }
+
+
+
+    .host-name {
+        font-weight: 600;
+        cursor: pointer;
+    }
+</style>
+<div class="homepage-container container rounded border mx-auto my-5 row" style="min-height: 500px;">
+
+
+
+    <div class="host-info col-12 col-lg-4 order-1 order-lg-3" style="position: relative;">
+        <div id="host-name-sticky" class="container mt-3 rounded border py-3" style="position: sticky; top: 20px;">
+            <div class="row">
+                <div class="col-3 text-center"><i class="fa fa-user" style="font-size: 20px;"></i></div>
+                <div class="col-9"><span class="host-name">@Model.FullName</span></div>
             </div>
-            <nav id="sidebar">
-
-                <ul class="list-unstyled components">
-
-                    <li class="nav-item-big active">
-                        <a id="user-information" href="javascript:void(0)">Thông tin cá nhân</a>
-                    </li>
-
-                    <li class="nav-item-big">
-                        <a href="javascript:void(0)">Đổi mật khẩu</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <span><i class="fa fa-phone"></i> @Model.Phone</span>
+                </div>
+                <div class="col-12">
+                    <span>
+                        <i class="fa fa-envelope"></i>
+                        <a class="text-decoration-none text-dark" href="mailto:@Model.Email"> @Model.Email</a>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="content col-9" id="content-container" style="min-height:500px;">
-        @Html.Partial("UserInformation", Model)
+    <div class="homepage-post col-12 col-lg-8 bg-secondary order-2" style="height: 1300px;">
+        <h5>Bài đăng của @Model.FullName:</h5>
+
     </div>
-
 </div>
-<script>
-
-
-
-    $(".nav-item-big").click(function () {
-        if ($(this).attr("aria-expanded", "true")) {
-            $(this).find("a").removeClass("active");
-        }
-        $(this).siblings().find("a").attr("aria-expanded", "false");
-        //$(this).siblings().find("ul").removeClass("show");
-        if (!$(this).hasClass("active")) {
-            $(this).addClass("active");
-            $(this).siblings().removeClass("active");
-        }
-    });
-
-
-    $("#user-information").click(function () {
-        $("#content-container").load("/UserHomePage/UserInformation");
-    });
-</script>
+<hr>

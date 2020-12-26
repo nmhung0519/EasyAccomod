@@ -189,9 +189,10 @@
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdminManagerController.cs" />
+    <Compile Include="Controllers\UserHomePageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\HostManagerController.cs" />
-    <Compile Include="Controllers\UserHomePageController.cs" />
+    <Compile Include="Controllers\EditInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,6 +223,7 @@
     <Content Include="Content\PostList.css" />
     <Content Include="Content\signin.css" />
     <Content Include="Content\signup.css" />
+    <Content Include="Content\UserInfo.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -278,8 +280,10 @@
     <Content Include="Views\HostManager\Post.cshtml" />
     <Content Include="Views\AdminManager\RefusedPost.cshtml" />
     <Content Include="Views\Home\NotificationBody.cshtml" />
+    <Content Include="Views\EditInfo\Index.cshtml" />
+    <Content Include="Views\EditInfo\UserInformation.cshtml" />
+    <Content Include="Views\EditInfo\ChangePassword.cshtml" />
     <Content Include="Views\UserHomePage\Index.cshtml" />
-    <Content Include="Views\UserHomePage\UserInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
