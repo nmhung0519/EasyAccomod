@@ -7,6 +7,9 @@
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <script src="~/Scripts/address.control.js"></script>
+<script>
+    $(".city-filter").ready(function () { loadCity(); })
+</script>
 <div class="modal-content">
     @using (Ajax.BeginForm("CreatePost", "Post", new AjaxOptions { UpdateTargetId = "form-post-err-msg" }, new { enctype = "multipart/form-data" }))
     {

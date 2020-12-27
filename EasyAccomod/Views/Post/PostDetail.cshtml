@@ -172,12 +172,23 @@
         </div>
         <hr>
         <h4>Bình luận</h4>
+        
         <div class="comment-post-area">
             <div class="row mx-2 mb-2">
-                <textarea id="input-comment-content" oninput="auto_grow(this)" class="col-12 col-lg-9 form-control"></textarea>
-                <div class="col-12 col-lg-3 mt-2">
-                    <button type="submit" id="submit-comment" class="btn btn-primary" style="white-space:nowrap" data-id="@Model.Id">Gửi bình luận</button>
-                </div>
+                @if (Session["usertype"] == null)
+                {
+                    <span style="margin: 10px 0">
+                        <a href="/Account/SignIn">Đăng nhập </a>
+                        với tài khoản người thuê để có thể bình luận
+                    </span>
+                }
+                else if (Session["usertype"].ToString() == "3")
+                {
+                    <textarea id="input-comment-content" oninput="auto_grow(this)" class="col-12 col-lg-9 form-control"></textarea>
+                    <div class="col-12 col-lg-3 mt-2">
+                        <button type="submit" id="submit-comment" class="btn btn-primary" style="white-space:nowrap" data-id="@Model.Id">Gửi bình luận</button>
+                    </div>
+                }
 
             </div>
             <!--------->

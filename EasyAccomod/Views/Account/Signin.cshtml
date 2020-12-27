@@ -1,14 +1,18 @@
 ﻿@{
-    //Layout = "~/Views/Account/_LayoutAccount.cshtml";
+//Layout = "~/Views/Account/_LayoutAccount.cshtml";
 }
 @model EasyAccomod.Models.SignInModel
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <div class="page-container container-fluid w-100 vh-100 modal-content" style="overflow: hidden; border: none; background: none">
     <div class="form-container container mx-auto  bg-light mt-5 px-0 px-lg-5 rounded py-3" style="max-height: 80%; overflow: auto">
         <div style="overflow: hidden">
             <div id="account-header" class="container">
                 <h4 class="font-weight-bold text-center">Đăng nhập</h4>
                 <div id="login-form-container" class="container pt-3">
-                    @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+                    @using (Ajax.BeginForm("SignIn", "Account", new AjaxOptions { UpdateTargetId = "signin-form-err-msg" }))
                     {
                         <div class="form-group">
                             @Html.LabelFor(m => m.username)
@@ -37,7 +41,7 @@
                     }
                     <div id="guess-sign-up" class="container pt-2">
                         <div id="message" class="text-center text-danger">
-                            <span class="field-validation-valid err-msg" data-valmsg-for="err-msg"></span>
+                            <span id="signin-form-err-msg" class="field-validation-valid err-msg" data-valmsg-for="err-msg"></span>
                         </div>
                         <div class="text-center">
                             <span>Chưa có tài khoản? </span><span id="link-to-sign-up">
@@ -46,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </div>

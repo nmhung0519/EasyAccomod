@@ -19,7 +19,11 @@ namespace EasyAccomod.Controllers
         [HttpPost]
         public ActionResult SignIn(SignInModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                ModelError err = ModelState.Values.Where(x => x.Errors.Count() != 0).First().Errors[0];
+                return Content(err.ErrorMessage, "text/html");
+            }
             using (var db = new DBContext())
             {
                 string password = model.password.ToMD5();
@@ -28,14 +32,13 @@ namespace EasyAccomod.Controllers
                                select a).FirstOrDefault();
                 if (account == null)
                 {
-                    ModelState.AddModelError("err-msg", "Tài khoản hoặc mật khẩu không chính xác");
-                    return View(model);
+                    return Content("Tài khoản hoặc mật khẩu không chính xác. Đề nghị nhập lại", "text/html");
                 }
                 Session["usertype"] = account.Type;
                 Session["userid"] = account.Id;
                 Session["fullname"] = account.FullName;
             }
-            return RedirectToAction("Index", "Home");
+            return Content("<script>window.location.href='/';</script>", "text/javascript");
         }
 
         [HttpGet]
@@ -47,21 +50,25 @@ namespace EasyAccomod.Controllers
         [HttpPost]
         public ContentResult SignUp(SignUpModel model)
         {
-            if (!ModelState.IsValid) return Content("Dữ liệu không đúng định dạng", "text/html");
+            if (!ModelState.IsValid)
+            {
+                ModelError err = ModelState.Values.Where(x => x.Errors.Count() != 0).First().Errors[0];
+                return Content(err.ErrorMessage, "text/html");
+            }
             try
             {
                 AccountModel account = new AccountModel();
                 account.Accounts = new List<AccountModel>();
                 account.Posts = new List<PostModel>();
                 account.Notifications = new List<NotificationModel>();
-                account.Username = model.usernname;
-                account.Password = model.password.ToMD5();
-                account.FullName = model.fullname;
-                account.Phone = model.phone;
-                account.Email = model.email;
-                account.IdCard = model.idCard;
-                account.Address = model.address;
-                account.WardId = model.wardId;
+                account.Username = model.Usernname;
+                account.Password = model.Password.ToMD5();
+                account.FullName = model.Fullname;
+                account.Phone = model.Phone;
+                account.Email = model.Email;
+                account.IdCard = model.IdCard;
+                account.Address = model.Address;
+                account.WardId = model.WardId;
                 account.Type = model.UserType;
                 account.ApproverId = 1;
                 using (var db = new DBContext())
@@ -81,6 +88,7 @@ namespace EasyAccomod.Controllers
         public ActionResult SignOut()
         {
             Session["userid"] = null;
+            Session["usertype"] = null;
             Session["fullname"] = null;
             return RedirectToAction("SignIn");
         }

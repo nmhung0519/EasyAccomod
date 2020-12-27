@@ -1,7 +1,8 @@
 ﻿@model EasyAccomod.Models.SearchModel
 
+<script src="~/Scripts/address.control.js"></script>
+<script>$(".city-filter").ready(function () { loadCity(); })</script>
 <div id="top-search" class="container pt-2 px-2 px-sm-5">
-
     <div id="search-bar" class="mx-auto mt-5 px-2 py-3" style="min-height: 50%;">
         @using (Html.BeginForm("Search", "Home"))
         {
