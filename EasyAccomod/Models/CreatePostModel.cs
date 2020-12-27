@@ -54,7 +54,7 @@ namespace EasyAccomod.Models
         [Range(0, int.MaxValue, ErrorMessage = "Giá điện phải lớn hơn 0")]
         public int ElectricityPrice { get; set; }
 
-        [Display(Name = "Giá nước(VND/m3)")]
+        [Display(Name = "Giá nước(VND)")]
         [Required(ErrorMessage = "Giá nước không được để trống")]
         [Range(0, int.MaxValue, ErrorMessage = "Giá nước phải lớn hơn 0")]
         public int WaterPrice { get; set; }

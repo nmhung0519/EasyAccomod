@@ -10,55 +10,56 @@
                 <div id="login-form-container" class="container py-3">
                     @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Post))
                     {
-                    <div class="form-group row">
-                        <div class="col-12 col-md-4">
-                            @Html.LabelFor(m => m.CityId)
-                            @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Tỉnh/Thành phố", Value = "0" } }, new { @class = "form-control city-filter" })
-                        </div>
-                        <div class="col-12 col-md-4">
-                            @Html.LabelFor(m => m.DistrictId)
-                            @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Quận/Huyện", Value = "0" } }, new { @class = "form-control district-filter", @disabled = "disable" })
+                        <div class="form-group row">
+                            <div class="col-12 col-md-4">
+                                @Html.LabelFor(m => m.CityId)
+                                @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Tỉnh/Thành phố", Value = "0" } }, new { @class = "form-control city-filter" })
+                            </div>
+                            <div class="col-12 col-md-4">
+                                @Html.LabelFor(m => m.DistrictId)
+                                @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Quận/Huyện", Value = "0" } }, new { @class = "form-control district-filter", @disabled = "disable" })
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                @Html.LabelFor(m => m.WardId)
+                                @Html.DropDownListFor(m => m.WardId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Xã/Phường", Value = "0" } }, new { @class = "form-control ward-filter", @disabled = "disable" })
+
+                            </div>
+
+
                         </div>
 
-                        <div class="col-12 col-md-4">
-                            @Html.LabelFor(m => m.WardId)
-                            @Html.DropDownListFor(m => m.WardId, new List<SelectListItem> { new SelectListItem { Text = "Chọn Xã/Phường", Value = "0" } }, new { @class = "form-control ward-filter", @disabled = "disable" })
-
+                        <div class="form-group row">
+                            <div class="col-12 col-lg-6">
+                                @Html.LabelFor(m => m.Type, new { @style = "white-space: nowrap" })
+                                @Html.DropDownListFor(m => m.Type, Model.GetListType(), new { @class = "form-control" })
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="price-base">Giá tính theo</label>
+                                <select id="price-base" name="price-base" class="form-control">
+                                    <option>Tất cả</option>
+                                    <option>Tháng</option>
+                                    <option>Quý</option>
+                                    <option>Năm</option>
+                                </select>
+                            </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-12 col-lg-6">
+                                <label for="area" style="white-space: nowrap;">Giá từ(VND)</label>
 
+                                @Html.TextBoxFor(m => m.FromPrice, new { @class = "form-control", @type = "number" })
+                                <span>đến(VND)</span>
+                                @Html.TextBoxFor(m => m.ToPrice, new { @class = "form-control", @type = "number" })
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="area" style="white-space: nowrap;">Diện tích từ(m2)</label>
 
-                    </div>
-                        
-                    <div class="form-group row">
-                        <div class="col-12 col-lg-4">
-                            @Html.LabelFor(m => m.Type, new { @style = "white-space: nowrap" })
-                            @Html.DropDownListFor(m => m.Type, Model.GetListType(), new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.FromArea, new { @class = "form-control", @type = "number" })
+                                <span>đến(m2)</span>
+                                @Html.TextBoxFor(m => m.ToArea, new { @class = "form-control", @type = "number" })
+                            </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <label for="price-base">Giá tính theo</label>
-                            <select id="price-base" name="price-base" class="form-control">
-                                <option>Tháng</option>
-                                <option>Quý</option>
-                                <option>Năm</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-12 col-lg-6">
-                            <label for="area" style="white-space: nowrap;">Giá từ</label>
-
-                            @Html.TextBoxFor(m => m.FromPrice, new { @class = "form-control", @type = "number" })
-                            <span>đến</span>
-                            @Html.TextBoxFor(m => m.ToPrice, new { @class = "form-control", @type = "number" })
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <label for="area" style="white-space: nowrap;">Diện tích từ(m2)</label>
-
-                            @Html.TextBoxFor(m => m.FromArea, new { @class = "form-control", @type = "number" })
-                            <span>đến(m2)</span>
-                            @Html.TextBoxFor(m => m.ToArea, new { @class = "form-control", @type = "number" })
-                        </div>
-                    </div>
 
 
                         <h6>Điều kiện, cơ sở vật chất:</h6>
@@ -93,6 +94,7 @@
 
                             </div>
                         </div>
+                        
                         <div class="container text-center">
                             <button class="btn btn-primary">Tìm kiếm</button>
                         </div>
@@ -101,6 +103,7 @@
                 </div>
             </div>
         </div>
+
 
    
     <script src="~/Scripts/address.control.js"></script>

@@ -23,43 +23,41 @@
             <div id="login-form-container" class="container py-3">
 
                 <div class="form-group row">
-                    <div class="col-12 col-md-8">
+                    <div class="col-12">
                         @Html.LabelFor(m => m.Address)
                         @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
                     </div>
 
+                    
+                </div>
+                <div class="form-group row">
                     <div class="col-12 col-md-4">
                         @Html.LabelFor(m => m.CityId)
                         @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Tỉnh/Thành phố" } }, new { @class = "form-control city-filter" })
 
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         @Html.LabelFor(m => m.DistrictId)
                         @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Quận/Huyện" } }, new { @class = "form-control district-filter", @disabled = "disabled" })
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         @Html.LabelFor(m => m.WardId)
                         @Html.DropDownListFor(m => m.WardId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Phường/Xã" } }, new { @class = "form-control ward-filter", @disabled = "disabled" })
                     </div>
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-12 col-lg-3">
-                        @Html.LabelFor(m => m.Price)
-                        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @type = "number" })
-                    </div>
-                    <div class="col-12 col-lg-3">
+                    
+                    <div class="col-12 col-lg-4">
                         <label for="type" style="white-space: nowrap;">Loại phòng</label>
                         @Html.LabelFor(m => m.Type, new { @style = "white-space: nowrap" })
                         @Html.DropDownListFor(m => m.Type, Model.GetListType(), new { @class = "form-control" })
                     </div>
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-4">
                         @Html.LabelFor(m => m.NumOfRooms)
                         @Html.TextBoxFor(m => m.NumOfRooms, new { @type = "number", @class = "form-control" })
                     </div>
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-4">
                         @Html.LabelFor(m => m.Area)
                         @Html.TextBoxFor(m => m.Area, new { @type = "number", @class = "form-control" })
                     </div>
@@ -67,11 +65,44 @@
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-12 col-lg-3">
-                        @Html.LabelFor(m => m.ElectricityPrice)
-                        @Html.TextBoxFor(m => m.ElectricityPrice, new { @type = "number", @class = "form-control" })
+                    <div class="col-12 col-lg-4">
+                        <label for="price-base">Giá BĐS tính theo</label>
+                        <select id="price-base" name="price-base" class="form-control">
+                            <option>Tháng</option>
+                            <option>Quý</option>
+                            <option>Năm</option>
+                        </select>
                     </div>
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-4">
+                        @Html.LabelFor(m => m.Price)
+                        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @type = "number" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    
+                    <div class="col-12 col-lg-4">
+                        <label for="electricity-price-base">Giá điện tính theo</label>
+                        <select id="electricity-price-base" name="electricity-price-base" class="form-control" onchange="CheckPriceBase(this)">
+                            <option value="1">Giá dân</option>
+                            <option value="2">Giá riêng</option>
+                            
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        @Html.LabelFor(m => m.ElectricityPrice)
+                        @Html.TextBoxFor(m => m.ElectricityPrice, new { @type = "number", @class = "form-control", @id = "electricity-price" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-lg-4">
+                        <label for="water-price-base">Giá nước tính theo</label>
+                        <select id="water-price-base" name="water-price-base" class="form-control" >
+                            <option value="1">Người</option>
+                            <option value="2">m3 nước</option>
+
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-4">
                         @Html.LabelFor(m => m.WaterPrice)
                         @Html.TextBoxFor(m => m.WaterPrice, new { @type = "number", @class = "form-control" })
                     </div>
@@ -106,7 +137,34 @@
                         @Html.LabelFor(m => m.WithoutHost, new { @style = "white-space: nowrap" })
                     </div>
                 </div>
-                <h6>Hinh ảnh:</h6>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label for="post-title"><h6 style="display:inline">Tiêu đề </h6>(<span id="char-left">200</span>/200)</label>
+                        <textarea onkeyup="CountChar(this)" maxlength="200" id="post-title" class="w-100 mx-2 p-2" style="height:60px"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label for="post-description"><h6>Mô tả</h6></label>
+                        <textarea oninput="AutoGrow(this)" maxlength="1000" id="post-description" class="w-100 mx-2 p-2" style="min-height:100px; max-height:500px" placeholder="Mô tả bài viết của bạn"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-lg-4">
+                        <label for="post-time-base">Hiển thị bài viết tính theo</label>
+                        <select id="post-time-base" name="post-time-base" class="form-control">
+                            <option value="1">Ngày</option>
+                            <option value="2">Tháng</option>
+                            <option value="3">Năm</option>
+
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <label for="time-post-length">Số lượng</label>
+                       <input class="form-control" type="number" id="time-post-length" name="time-post-length"/>
+                    </div>
+                </div>
+                <h6>Hình ảnh:</h6>
                 <div class="col-12 col-lg-6">
                     <input type="file" id="img-url" name="UploadImages" accept="image/*" multiple>
                 </div>
@@ -141,5 +199,26 @@
         $("#WithoutHost").prop("disabled", false);
         $("#ClosedRoom").prop("checked", false);
         $("#ClosedRoom").prop("disabled", false);
-    })
+    });
+    function CountChar(val) {
+
+        var len = val.value.length;
+        $('#char-left').text(200 - len);
+
+    }
+    function AutoGrow(element) {
+        
+        element.style.height = (element.scrollHeight) + "px";
+    }
+    $("#electricity-price").val("4000");
+    function CheckPriceBase(selectedOption) {
+        var electricityBasedValue = selectedOption.value;
+        if (electricityBasedValue == 1) {
+            $("#electricity-price").val("4000");
+        }
+        else if (electricityBasedValue == 2) {
+            $("#electricity-price").val("");
+            $("#electricity-price").focus();
+        }
+    }
 </script>
