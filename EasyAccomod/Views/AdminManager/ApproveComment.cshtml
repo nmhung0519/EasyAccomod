@@ -1,7 +1,7 @@
 @model IEnumerable<EasyAccomod.Models.CommentModel>
 
 <link href="~/Content/ApproveComment.css" rel="stylesheet" />
-
+<div id="approve-comment-container">
         <h5 class="my-4">Phê duyệt bình luận</h5>
         @if (Model != null)
         {
@@ -60,7 +60,7 @@
         }
 
    
-
+    </div>
 <script>
     $("#approve-comment-container").delegate(".comment-approve", "click", function (e) {
         if ($(e.target).prop("disabled")) return;

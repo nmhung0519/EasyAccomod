@@ -12,6 +12,9 @@ namespace EasyAccomod.Controllers
         // GET: Manager
         public ActionResult Index()
         {
+            int usertype;
+            if (Session["userid"] == null || Session["usertype"] == null || !int.TryParse(Session["usertype"].ToString(), out usertype)) return RedirectToAction("SignIn", "Account");
+            if (usertype != 1) return Content("<a href='/Account/SignOut'>Đăng nhập lại</a> với tài khoản admin để sử dụng chức năng này", "text/html");
             return View();
         }
 

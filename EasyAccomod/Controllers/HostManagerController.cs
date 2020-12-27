@@ -65,5 +65,27 @@ namespace EasyAccomod.Controllers
                 return PartialView(model);
             }
         }
+
+        [HttpPost]
+        public JsonResult ChangePostStatus(int id, bool sold)
+        {
+            try
+            {
+                int userid;
+                if (Session["userid"] == null || !int.TryParse(Session["userid"].ToString(), out userid)) Json("SignInFirst");
+                using (var db = new DBContext())
+                {
+                    var post = (from p in db.Posts
+                                where p.Id == id
+                                select p).FirstOrDefault();
+                    if (post == null) return Json("PostNotFound");
+                    if (post.Sold == sold) return Json("Proccessed");
+                    post.Sold = sold;
+                    db.SaveChanges();
+                }
+                return Json("Success");
+            }
+            catch (Exception ex) { return Json(ex.Message); }
+        }
     }
 }

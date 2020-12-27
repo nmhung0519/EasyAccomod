@@ -1,5 +1,5 @@
 -- Tạo thông báo cho admin khi có bài đăng mới
-DROP TRIGGER IF EXISTS after_insert_account;
+DROP TRIGGER IF EXISTS after_post_insert;
 CREATE TRIGGER after_post_insert
 AFTER INSERT ON post
 FOR EACH ROW
@@ -49,3 +49,28 @@ BEGIN
 		VALUES (NEW.post_id, 5, 'Một bình luận về bài viết của bạn đã được phê duyệt', (SELECT p.posterid FROM post p WHERE p.id = NEW.post_id));
 	END IF;
 END;
+
+-- Tạo thông báo cho admin khi bài viết được đổi trạng thái
+DROP TRIGGER IF EXISTS after_post_update;
+CREATE TRIGGER after_post_update
+AFTER UPDATE ON `post`
+FOR EACH ROW
+	BEGIN
+		DECLARE postertype INT;
+		SELECT a.type INTO postertype FROM account a WHERE NEW.posterid = a.id;
+		IF (postertype != 1) THEN
+			IF (NEW.sold != OLD.sold) THEN
+				IF (NEW.sold = 1) THEN
+					INSERT INTO notification (targetid, type, user, action, receiverid)
+					SELECT NEW.id, 6, (SELECT a.fullname FROM account a WHERE a.id = NEW.posterid), 'vừa đổi trạng thái bài viết thành đã cho thuê', adm.id
+					FROM account adm
+					WHERE adm.type = 1;
+				ELSE
+					INSERT INTO notification (targetid, type, user, action, receiverid)
+					SELECT NEW.id, 6, (SELECT a.fullname FROM account a WHERE a.id = NEW.posterid), 'vừa đổi trạng thái bài viết thành chưa cho thuê', adm.id
+					FROM account adm
+					WHERE adm.type = 1;
+				END IF;
+			END IF;
+		END IF;
+	END;

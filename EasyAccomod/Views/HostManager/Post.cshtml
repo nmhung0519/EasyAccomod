@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="confirm-bar text-right">
-                            <div class="btn btn-primary host-mng-sold" data-postid="1">Đã cho thuê</div>
+                            <button class="btn btn-primary host-mng-sold-post" data-postid="@item.Id">Đã cho thuê</button>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="confirm-bar text-right">
-                            <div class="btn btn-primary">Hiển thị bài viết</div>
+                            <button class="btn btn-primary host-msg-unsold-post" data-postid="@item.Id">Hiển thị bài viết</button>
                         </div>
                     </div>
                 </div>
@@ -232,5 +232,26 @@
         cpn.classname = "confirm-bar text-right";
         ctc.appendChild(cpn);
         return item;
+    }
+
+    $("#posttab1").delegate(".host-mng-sold-post", "click", function (e) { changePostStatus(e, true); });
+    $("#posttab3").delegate(".host-mng-unsold-post", "click", function (e) { changePostStatus(e, true); });
+
+    function changePostStatus(e, status) {
+        console.log($(e.target).attr("data-id"));
+        if ($(e.target).prop("disabled")) return;
+        $(e.target).prop("disabled", true);
+        $.ajax({
+            url: "/HostManager/ChangePostStatus",
+            type: "POST",
+            data: { id: $(e.target).attr("data-postid"), sold: status },
+            success: function (data) {
+                if (data == "Success") {
+                    $(e.target).parents(".container").remove();
+                }
+                $(e.target).prop("disabled");
+                console.log(data);
+            }
+        })
     }
 </script>
