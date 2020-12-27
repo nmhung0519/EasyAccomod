@@ -32,6 +32,15 @@ namespace EasyAccomod.Controllers
                         db.Entry(item)
                                 .Collection(x => x.Images)
                                 .Load();
+                        db.Entry(item)
+                            .Reference(x => x.City)
+                            .Load();
+                        db.Entry(item)
+                            .Reference(x => x.District)
+                            .Load();
+                        db.Entry(item)
+                            .Reference(x => x.Ward)
+                            .Load();
                     }
                 return View("../Post/ListPost", new SearchResultModel(model, posts));
             }
@@ -67,6 +76,15 @@ namespace EasyAccomod.Controllers
                                 .Load();
                             db.Entry(item)
                                 .Collection(x => x.Images)
+                                .Load();
+                            db.Entry(item)
+                            .Reference(x => x.City)
+                            .Load();
+                            db.Entry(item)
+                                .Reference(x => x.District)
+                                .Load();
+                            db.Entry(item)
+                                .Reference(x => x.Ward)
                                 .Load();
                         }
                     return View("../Post/ListPost", new SearchResultModel(new SearchModel { CityId = cityId, DistrictId  = districtId, WardId = wardId }, posts));

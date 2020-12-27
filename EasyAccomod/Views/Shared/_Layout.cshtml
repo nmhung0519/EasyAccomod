@@ -72,7 +72,7 @@
                                     int usertype;
                                     if (int.TryParse(Session["usertype"].ToString(), out usertype) && (usertype == 1 || usertype == 2))
                                     {
-                                        <a class="dropdown-item" href="/UserHomePage">Trang cá nhân</a>
+                                        <a class="dropdown-item" href='/UserHomePage/@Session["userid"]'>Trang cá nhân</a>
                                         <a class="dropdown-item" href="/HostManager">Bài viết đã đăng</a>
                                     }
 

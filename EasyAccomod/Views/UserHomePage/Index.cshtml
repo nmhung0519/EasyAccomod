@@ -1,8 +1,8 @@
-﻿@{
-    ViewBag.Title = "Trang cá nhân";
+﻿@model EasyAccomod.Models.AccountModel
+@{
+    ViewBag.Title = "Trang cá nhân - " + Model.FullName;
 }
 
-@model EasyAccomod.Models.AccountModel
 <style>
 
     .homepage-container {
@@ -23,6 +23,7 @@
         cursor: pointer;
     }
 </style>
+<link href="~/Content/PostList.css" rel="stylesheet" />
 <div class="homepage-container container rounded border mx-auto my-5 row" style="min-height: 500px;">
 
 
@@ -40,15 +41,54 @@
                 <div class="col-12">
                     <span>
                         <i class="fa fa-envelope"></i>
-                        <a class="text-decoration-none text-dark" href="mailto:@Model.Email"> @Model.Email</a>
+                        @{ string sendMail = "mailto:" + Model.Email; }
+                        <a class="text-decoration-none text-dark" href="@sendMail"> @Model.Email</a>
                     </span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="homepage-post col-12 col-lg-8 bg-secondary order-2" style="height: 1300px;">
+    <div class="homepage-post col-12 col-lg-8 order-2">
         <h5>Bài đăng của @Model.FullName:</h5>
+        @foreach (var item in Model.Posts)
+        {
+            <div class="post-wrapper">
+                @if (item == null || item.Images == null || item.Images.Count == 0)
+                {
+                    <div class="post-image-thumb"></div>
+                }
+                else
+                {
+                    <div class="post-image-thumb" style="background: url('/UploadImage/@item.Images.First().Path'); background-size: 100% 100%"></div>
+                }
+                <div class="post-info">
+                    <div class="post-top-part">
+                        <span class="post-title"> <a href="/Post/PostDetail/@item.Id">@item.Title</a></span>
+                        @{ string area = item.Area + "m2"; }
+                        <span class="post-area">@area</span>
+                        @{
+                            string price = "";
+                            if (item.Price < 0 || item.PriceUnit == 0)
+                            {
+                                price = "Liên hệ";
+                                return;
+                            }
 
+                            price = price + item.Price;
+                            if (item.PriceUnit == 1) { price = price + "/tháng"; }
+                            if (item.PriceUnit == 2) { price = price + "/năm"; }
+                        }
+                        <span class="post-price">@price</span>
+                    </div>
+                    <span class="post-user">@item.Poster.FullName</span>
+                    <span class="post-datetime">@item.CreateTime.ToString() </span>
+
+                    <i class="far fa-star text-warning"></i>
+                    <span class="post-rating">7.5</span>
+                    <i class="far fa-heart text-danger"></i>
+                </div>
+            </div>
+        }
     </div>
 </div>
 <hr>

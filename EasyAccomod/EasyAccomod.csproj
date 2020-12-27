@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Helpers\Crypto.cs" />
     <Compile Include="Models\AdvancedSearchModel.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CreatePostModel.cs" />
     <Compile Include="Models\EditPostModel.cs" />
     <Compile Include="Models\DB.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Views\EditInfo\UserInformation.cshtml" />
     <Content Include="Views\EditInfo\ChangePassword.cshtml" />
     <Content Include="Views\UserHomePage\Index.cshtml" />
+    <Content Include="Views\AdminManager\ChartBasedOnTimePosting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
