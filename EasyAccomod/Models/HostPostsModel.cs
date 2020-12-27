@@ -10,7 +10,8 @@ namespace EasyAccomod.Models
         public List<PostModel> ShowingPost { get; set; }
         public List<PostModel> ApprovingPost { get; set; }
 
-        public List<PostModel> HidingPost { get; set; }
+        public List<PostModel> SoldPost { get; set; }
+        public List<PostModel> ExpiredPost { get; set; }
         public List<PostModel> RefusedPost { get; set; }
     }
 }

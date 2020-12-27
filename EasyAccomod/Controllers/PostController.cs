@@ -47,11 +47,13 @@ namespace EasyAccomod.Controllers
                 newPost.DistrictId = model.DistrictId;
                 newPost.WardId = model.WardId;
                 newPost.Price = model.Price;
-                newPost.PriceUnit = 1;
+                newPost.PriceUnit = model.PriceUnit;
                 newPost.Type = model.Type;
                 newPost.Area = model.Area;
-                newPost.ElectricityPrice = model.ElectricityPrice;
-                newPost.WaterPrice = model.WaterPrice;
+                if (model.ElectricityBase) newPost.ElectricityPrice = -1;
+                else newPost.ElectricityPrice = model.ElectricityPrice;
+                if (model.WaterBase) newPost.ElectricityPrice = -1;
+                else newPost.WaterPrice = model.WaterPrice;
                 newPost.AirConditioner = (model.AirConditioner) ? 1 : 0;
                 newPost.WaterHeater = (model.WaterHeater) ? 1 : 0;
                 newPost.PrivateKitchen = (model.PrivateKitchen) ? 1 : 0;
@@ -76,29 +78,13 @@ namespace EasyAccomod.Controllers
                         newPost.IsShow = true;
                     }
                 }
-                switch (newPost.Type)
-                {
-                    case 1:
-                        newPost.Title = "Phòng trọ";
-                        break;
-                    case 2:
-                        newPost.Title = "Chung cư mini";
-                        break;
-                    case 3:
-                        newPost.Title = "Nhà nguyên căn";
-                        break;
-                    case 4:
-                        newPost.Title = "Chung cư nguyên căn";
-                        break;
-                }
-
-                newPost.Title = newPost.Title + " - " + newPost.Address;
-                newPost.Content = newPost.Title;
+                newPost.Title = model.Title;
+                newPost.Content = model.Content;
                 TicketModel ticket = new TicketModel();
                 ticket.ApproverId = 0;
                 ticket.CreateTime = DateTime.Now;
-                ticket.Time = 1;
-                ticket.UnitTime = 1;
+                ticket.Time = model.TimeLength;
+                ticket.UnitTime = model.TimeUnit;
                 ticket.ApproverId = newPost.PosterId;
                 if (newPost.Approved == 1)
                 {

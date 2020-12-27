@@ -254,6 +254,7 @@
     <None Include="Views\AdminManager\ApprovePost.cshtml" />
     <None Include="Views\AdminManager\ApprovePurchase.cshtml" />
     <Content Include="database\trigger.txt" />
+    <Content Include="Scripts\readImg.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

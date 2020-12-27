@@ -53,12 +53,16 @@ namespace EasyAccomod.Controllers
                                             || (p.Approved == 1
                                             && !p.Sold
                                             && !p.IsShow
-                                            && p.EndTime.Year == 0)
+                                            && p.EndTime.Year < 2)
                                        select p).ToList();
-                model.HidingPost = (from p in posts
-                                    where p.Approved == 1
-                                        && (!p.IsShow || p.Sold)
+                model.SoldPost = (from p in posts
+                                    where p.Sold
                                     select p).ToList();
+                model.ExpiredPost = (from p in posts
+                                     where p.Approved == 1
+                                        && p.IsShow
+                                        && p.EndTime < DateTime.Now
+                                     select p).ToList();
                 model.RefusedPost = (from p in posts
                                     where p.Approved == -1
                                     select p).ToList();
@@ -71,16 +75,39 @@ namespace EasyAccomod.Controllers
         {
             try
             {
-                int userid;
+                int userid = 0;
                 if (Session["userid"] == null || !int.TryParse(Session["userid"].ToString(), out userid)) Json("SignInFirst");
                 using (var db = new DBContext())
                 {
                     var post = (from p in db.Posts
                                 where p.Id == id
                                 select p).FirstOrDefault();
+                    if (post.PosterId != userid) return Json("NotOwned");
                     if (post == null) return Json("PostNotFound");
                     if (post.Sold == sold) return Json("Proccessed");
                     post.Sold = sold;
+                    db.SaveChanges();
+                }
+                return Json("Success");
+            }
+            catch (Exception ex) { return Json(ex.Message); }
+        }
+
+        [HttpPost]
+        public JsonResult DeletePost(int id)
+        {
+            try
+            {
+                int userid = 0;
+                if (Session["userid"] == null || !int.TryParse(Session["userid"].ToString(), out userid)) Json("SignInFirst");
+                using (var db = new DBContext())
+                {
+                    var post = (from p in db.Posts
+                                where p.Id == id
+                                select p).FirstOrDefault();
+                    if (post.PosterId != userid) return Json("NotOwned");
+                    if (post == null) return Json("PostNotFound");
+                    db.Posts.Remove(post);
                     db.SaveChanges();
                 }
                 return Json("Success");

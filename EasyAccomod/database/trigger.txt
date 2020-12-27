@@ -74,3 +74,15 @@ FOR EACH ROW
 			END IF;
 		END IF;
 	END;
+
+-- Xoá các bản ghi liên quan khi xoá bài đăng
+DROP TRIGGER IF EXISTS before_delete_post;
+CREATE TRIGGER before_delete_post
+BEFORE DELETE ON post
+FOR EACH ROW
+BEGIN
+	DELETE FROM postimage WHERE post_id = OLD.id;
+	DELETE FROM favourite where post_id = OLD.id;
+	DELETE FROM comment WHERE post_id = OLD.id;
+	DELETE FROM ticket WHERE post_id = OLD.id;
+END;

@@ -3,7 +3,7 @@
 }
 @model EasyAccomod.Models.CreatePostModel
 
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <script src="~/Scripts/address.control.js"></script>
@@ -26,36 +26,40 @@
                     <div class="col-12">
                         @Html.LabelFor(m => m.Address)
                         @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Address, null, new { @class = "err-msg" })
                     </div>
-
-                    
                 </div>
                 <div class="form-group row">
                     <div class="col-12 col-md-4">
                         @Html.LabelFor(m => m.CityId)
                         @Html.DropDownListFor(m => m.CityId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Tỉnh/Thành phố" } }, new { @class = "form-control city-filter" })
+                        @Html.ValidationMessageFor(m => m.CityId, null, new { @class = "err-msg" })
 
                     </div>
                     <div class="col-12 col-md-4">
                         @Html.LabelFor(m => m.DistrictId)
                         @Html.DropDownListFor(m => m.DistrictId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Quận/Huyện" } }, new { @class = "form-control district-filter", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(m => m.DistrictId, null, new { @class = "err-msg" })
                     </div>
                     <div class="col-12 col-md-4">
                         @Html.LabelFor(m => m.WardId)
                         @Html.DropDownListFor(m => m.WardId, new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Chọn Phường/Xã" } }, new { @class = "form-control ward-filter", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(m => m.WardId, null, new { @class = "err-msg" })
                     </div>
 
                 </div>
                 <div class="form-group row">
-                    
+
                     <div class="col-12 col-lg-4">
                         <label for="type" style="white-space: nowrap;">Loại phòng</label>
                         @Html.LabelFor(m => m.Type, new { @style = "white-space: nowrap" })
                         @Html.DropDownListFor(m => m.Type, Model.GetListType(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Type, null, new { @class = "err-msg" })
                     </div>
                     <div class="col-12 col-lg-4">
                         @Html.LabelFor(m => m.NumOfRooms)
-                        @Html.TextBoxFor(m => m.NumOfRooms, new { @type = "number", @class = "form-control" })
+                        @Html.TextBoxFor(m => m.NumOfRooms, new { @type = "number", @class = "form-control", @value = "1" })
+                        @Html.ValidationMessageFor(m => m.NumOfRooms, null, new { @class = "err-msg" })
                     </div>
                     <div class="col-12 col-lg-4">
                         @Html.LabelFor(m => m.Area)
@@ -67,44 +71,49 @@
                 <div class="form-group row">
                     <div class="col-12 col-lg-4">
                         <label for="price-base">Giá BĐS tính theo</label>
-                        <select id="price-base" name="price-base" class="form-control">
-                            <option>Tháng</option>
-                            <option>Quý</option>
-                            <option>Năm</option>
+                        <select id="PriceUnit" name="PriceUnit" class="form-control">
+                            <option value="0">Liên hệ</option>
+                            <option value="1">Tháng</option>
+                            <option value="2">Quý</option>
+                            <option value="3">Năm</option>
                         </select>
+                        @Html.ValidationMessageFor(m => m.PriceUnit, null, new { @class = "err-msg" })
                     </div>
-                    <div class="col-12 col-lg-4">
+                    <div id="price-container" class="col-12 col-lg-4" hidden>
                         @Html.LabelFor(m => m.Price)
                         @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @type = "number" })
+                        @Html.ValidationMessageFor(m => m.Price, null, new { @class = "err-msg" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    
+
                     <div class="col-12 col-lg-4">
                         <label for="electricity-price-base">Giá điện tính theo</label>
-                        <select id="electricity-price-base" name="electricity-price-base" class="form-control" onchange="CheckPriceBase(this)">
-                            <option value="1">Giá dân</option>
-                            <option value="2">Giá riêng</option>
-                            
+                        <select id="electricity-price-base" name="ElectricityBase" class="form-control" onchange="CheckPriceBase(this)">
+                            <option value="true">Giá dân</option>
+                            <option value="false">Giá thuê(/kWh)</option>
                         </select>
+                        @Html.ValidationMessageFor(m => m.ElectricityBase, null, new { @class = "err-msg" })
                     </div>
-                    <div class="col-12 col-lg-4">
+                    <div id="electricity-price-container" class="col-12 col-lg-4" hidden>
                         @Html.LabelFor(m => m.ElectricityPrice)
                         @Html.TextBoxFor(m => m.ElectricityPrice, new { @type = "number", @class = "form-control", @id = "electricity-price" })
+                        @Html.ValidationMessageFor(m => m.ElectricityPrice, null, new { @class = "err-msg" })
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-12 col-lg-4">
-                        <label for="water-price-base">Giá nước tính theo</label>
-                        <select id="water-price-base" name="water-price-base" class="form-control" >
-                            <option value="1">Người</option>
-                            <option value="2">m3 nước</option>
-
+                        @Html.LabelFor(m => m.WaterBase)
+                        <select id="water-price-base" name="WaterBase" class="form-control">
+                            <option value="true">Giá dân</option>
+                            <option value="false">Giá thuê(/m3)</option>
                         </select>
+                        @Html.ValidationMessageFor(m => m.WaterBase, null, new { @class = "err-msg" })
                     </div>
-                    <div class="col-12 col-lg-4">
+                    <div id="water-price-container" class="col-12 col-lg-4" hidden>
                         @Html.LabelFor(m => m.WaterPrice)
                         @Html.TextBoxFor(m => m.WaterPrice, new { @type = "number", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.WaterPrice, null, new { @class = "err-msg" })
                     </div>
                 </div>
 
@@ -139,29 +148,34 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-12">
-                        <label for="post-title"><h6 style="display:inline">Tiêu đề </h6>(<span id="char-left">200</span>/200)</label>
-                        <textarea onkeyup="CountChar(this)" maxlength="200" id="post-title" class="w-100 mx-2 p-2" style="height:60px"></textarea>
+                        <h6 style="display:inline">Tiêu đề </h6>(<span id="char-left">200</span>/200)
+                        @Html.TextBoxFor(m => m.Title, new { @onkeyup = "CountChar(this)", @maxlength = "200", @class = "w-100 mx-2 p-2", @style = "height: 60px" })
+                        @Html.ValidationMessageFor(m => m.Title, null, new { @class = "err-msg" })
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-12">
-                        <label for="post-description"><h6>Mô tả</h6></label>
-                        <textarea oninput="AutoGrow(this)" maxlength="1000" id="post-description" class="w-100 mx-2 p-2" style="min-height:100px; max-height:500px" placeholder="Mô tả bài viết của bạn"></textarea>
+                        @Html.LabelFor(m => m.Content, new { @style = "font-weight:bold" })
+                        <textarea name="Content" oninput="AutoGrow(this)" maxlength="1000" id="post-description" class="w-100 mx-2 p-2" style="min-height:100px; max-height:500px" placeholder="Mô tả bài viết của bạn"></textarea>
+                        @Html.ValidationMessageFor(m => m.Content, null, new { @class = "err-msg" })
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-12 col-lg-4">
-                        <label for="post-time-base">Hiển thị bài viết tính theo</label>
-                        <select id="post-time-base" name="post-time-base" class="form-control">
-                            <option value="1">Ngày</option>
-                            <option value="2">Tháng</option>
-                            <option value="3">Năm</option>
-
-                        </select>
+                        <label for="post-time-base">Thời gian hiển thị</label>
+                        @Html.TextBoxFor(m => m.TimeLength, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.TimeLength, null, new { @class = "err-msg" })
                     </div>
                     <div class="col-12 col-lg-4">
-                        <label for="time-post-length">Số lượng</label>
-                       <input class="form-control" type="number" id="time-post-length" name="time-post-length"/>
+                        <label for="time-post-length">&nbsp;</label>
+                        @Html.DropDownListFor(m => m.TimeUnit, new List<SelectListItem>
+                        {
+                            new SelectListItem { Value = "1", Text = "Tuần"},
+                            new SelectListItem { Value = "2", Text = "Tháng"},
+                            new SelectListItem { Value = "3", Text = "Quý"},
+                            new SelectListItem { Value = "4", Text = "Năm"}
+                        }, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.TimeUnit, null, new { @class = "err-msg" })
                     </div>
                 </div>
                 <h6>Hình ảnh:</h6>
@@ -207,18 +221,37 @@
 
     }
     function AutoGrow(element) {
-        
+
         element.style.height = (element.scrollHeight) + "px";
     }
-    $("#electricity-price").val("4000");
-    function CheckPriceBase(selectedOption) {
-        var electricityBasedValue = selectedOption.value;
-        if (electricityBasedValue == 1) {
-            $("#electricity-price").val("4000");
+
+    $("#PriceUnit").change(function () {
+        if ($(this).val() == 0) {
+            $("#price-container").prop("hidden", true);
+            $("#Price").val("0");
+            return;
         }
-        else if (electricityBasedValue == 2) {
-            $("#electricity-price").val("");
-            $("#electricity-price").focus();
+
+        $("#price-container").prop("hidden", false);
+    });
+
+    $("#electricity-price-base").change(function () {
+        if ($(this).val() == "true") {
+            $("#electricity-price-container").prop("hidden", true);
+            $("#electricity-price").val("0");
+            return;
         }
-    }
+
+        $("#electricity-price-container").prop("hidden", false);
+    });
+
+    $("#water-price-base").change(function () {
+        if ($(this).val() == "true") {
+            $("#water-price-container").prop("hidden", true);
+            $("#water-price").val("0");
+            return;
+        }
+
+        $("#water-price-container").prop("hidden", false);
+    });
 </script>
