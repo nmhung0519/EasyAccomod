@@ -56,6 +56,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $(e.target).parents(".post-card").remove();
+                    ShowActionSuccessPopup("Hoàn tác bài đăng thành công");
                     return;
                 }
                 $(e.target).prop("disabled", false);

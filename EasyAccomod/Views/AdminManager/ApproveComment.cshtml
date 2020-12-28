@@ -73,6 +73,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $(e.target).parents(".comment-card").remove();
+                    ShowActionSuccessPopup("Phê duyệt bình luận thành công!");
                     return;
                 }
                 alert(data);
@@ -92,6 +93,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $(e.target).parents(".comment-card").remove();
+                    ShowActionSuccessPopup("Xoá bình luận thành công!");
                     return;
                 }
                 alert(data);

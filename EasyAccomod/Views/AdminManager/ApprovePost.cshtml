@@ -67,6 +67,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $(e.target).parents(".post-card").remove();
+                    ShowActionSuccessPopup("Phê duyệt bài đăng thành công!");
                     return;
                 }
                 $(e.target).prop("disabled", false);
@@ -84,6 +85,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $(e.target).parents(".post-card").remove();
+                    ShowActionSuccessPopup("Bạn đã từ chối bài đăng! Có thể hoàn tác tại mục Bài đăng đã huỷ");
                     return;
                 }
                 $(e.target).prop("disabled", false);

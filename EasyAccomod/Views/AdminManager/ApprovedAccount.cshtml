@@ -61,6 +61,7 @@
                     $(e.target).removeClass("authorize-account-button");
                     $(e.target).addClass("unauthorize-account-button");
                     $(e.target).prop("disabled", false);
+                    ShowActionSuccessPopup("Cấp quyền chỉnh sửa cho tài khoản thành công!");
                     return;
                 }
                 $(e.target).parents(".account-card").find(".err-container")[0].innerHTML = data;

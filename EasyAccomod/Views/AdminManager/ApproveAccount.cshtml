@@ -44,6 +44,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $(e.target).parents(".account-card").remove();
+                    ShowActionSuccessPopup("Phê duyệt tài khoản thành công!");
                     return;
                 }
                 console.log(data);
@@ -63,6 +64,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $(e.target).parents(".account-card").remove();
+                    ShowActionSuccessPopup("Từ chối tài khoản thành công!");
                     return;
                 }
                 $(e.target).parents(".account-card").find(".err-container")[0].innerText = data;

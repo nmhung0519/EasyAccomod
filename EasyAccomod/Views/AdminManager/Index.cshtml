@@ -105,10 +105,15 @@
         $(this).parents(".nav-item-big").siblings().find("a").removeClass("active");
     });
 
-    ////////////////////////////// Bài đăng
+   
+
+    // hiện thị giao duyệt duyệt bài tại index
+    $("#content-container").load("/AdminManager/ApprovePost");
+    $("#approve-post").addClass("active");
+
+     ////////////////////////////// Bài đăng
 
     //chưa duyệt
-
     $("#approve-post").click(function () {
         $("#content-container").load("/AdminManager/ApprovePost");
     });

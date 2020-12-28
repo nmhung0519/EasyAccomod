@@ -52,7 +52,7 @@
             data: { id: $(e.target).attr("data-id") },
             success: function (data) {
                 if (data == "Success") {
-                    alert("Success");
+                    ShowActionSuccessPopup("Phê duyệt bài đăng thành công!");
                     return;
                 }
                 $(e.target).attr("data-active", "true");
@@ -69,7 +69,7 @@
             data: { id: $(e.target).attr("data-id") },
             success: function (data) {
                 if (data == "Success") {
-                    alert("Success");
+                    ShowActionSuccessPopup("Bạn đã từ chối bài đăng! Có thể hoàn tác tại mục Bài đăng đã huỷ");
                     return;
                 }
                 $(e.target).attr("data-active", "true");
