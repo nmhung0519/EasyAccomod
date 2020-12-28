@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdminManagerController.cs" />
+    <Compile Include="Controllers\PostPriceController.cs" />
     <Compile Include="Controllers\UserHomePageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\HostManagerController.cs" />
@@ -197,6 +198,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Crypto.cs" />
+    <Compile Include="Helpers\Money.cs" />
     <Compile Include="Models\AdvancedSearchModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CreatePostModel.cs" />
@@ -208,6 +210,7 @@
     <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Models\SignInModel.cs" />
     <Compile Include="Models\SignUpModel.cs" />
+    <Compile Include="Models\UserInformationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +253,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <None Include="Views\AdminManager\ApproveAccount.cshtml" />
     <None Include="Views\AdminManager\ApproveComment.cshtml" />
+    <Content Include="Views\AdminManager\ApprovedAccount.cshtml" />
     <None Include="Views\AdminManager\ApprovedPost.cshtml" />
     <None Include="Views\AdminManager\ApprovePost.cshtml" />
     <None Include="Views\AdminManager\ApprovePurchase.cshtml" />
@@ -287,10 +291,12 @@
     <Content Include="Views\EditInfo\ChangePassword.cshtml" />
     <Content Include="Views\UserHomePage\Index.cshtml" />
     <Content Include="Views\AdminManager\ChartBasedOnTimePosting.cshtml" />
+    <Content Include="Views\HostManager\ExtendPostBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadImage\" />
+    <Folder Include="Views\PostPrice\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

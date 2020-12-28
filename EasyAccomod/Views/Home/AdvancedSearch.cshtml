@@ -2,8 +2,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model EasyAccomod.Models.AdvancedSearchModel
-    
-       
+       <script>
+           $(".city-filter").ready(function () {
+               loadCity();
+           })
+    </script >
         <div class="form-container container mx-auto  bg-light px-1  px-lg-2 py-3 rounded border my-3">
             <div id="header" class="container" style="display: contents">
                 <h4 class="font-weight-bold text-center">Tìm kiếm nâng cao</h4>

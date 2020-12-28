@@ -1,9 +1,4 @@
-@{
-    Layout = null;
-}
-
 @model IEnumerable<EasyAccomod.Models.AccountModel>
-
 
 <style>
     
@@ -11,13 +6,14 @@
         margin-bottom:0;
     }
 </style>
+<div id="approve-account-container">
 <h5 class="my-4">Phê duyệt tài khoản</h5>
 
 @if (Model != null)
 {
-    foreach (var item in Model.Where(x => x.ApprovalTime.Year == 1))
+    foreach (var item in Model)
     {
-        <div class="container">
+        <div class="container account-card">
             <div class=" rounded border mb-4 p-2">
                 <span style="display: inline-block;"><b>@item.Username</b></span>
                 <div class="user-info ml-5">
@@ -25,56 +21,52 @@
                     <p>Số điện thoại: @item.Phone</p>
                     <p>Email: @item.Email</p>
                     <p>CCCD: @item.IdCard</p>
-            
                 </div>
-
                 <div class="confirm-bar text-right">
-                    <div class="btn btn-primary approve-account-button" data-id="@item.Id" data-active="true">Phê duyệt</div>
-                    <div class="btn btn-secondary ml-3 refuse-account-button" data-id="@item.Id" data-active="true">Từ chối</div>
+                    <button class="btn btn-primary approve-account-button" data-accountid="@item.Id">Phê duyệt</button>
+                    <button class="btn btn-secondary ml-3 refuse-account-button" data-accountid="@item.Id">Từ chối</button>
                 </div>
+                <div class="err-container" style="color: red"></div>
             </div>
         </div>
     }
 }
-
-
-
-
+</div>
 
 <script>
     $("#approve-account-container").delegate(".approve-account-button", "click", function (e) {
-        if ($(e.target).attr("data-active") != "true") return;
-        $(e.target).attr("data-active", "false");
+        if ($(e.target).prop("disabled")) return;
+        $(e.target).prop("disabled", true);
         $.ajax({
             url: "/AdminManager/ApproveAccount",
             type: "POST",
-            data: { id: $(e.target).attr("data-id") },
+            data: { id: $(e.target).attr("data-accountid") },
             success: function (data) {
                 if (data == "Success") {
-                    alert("Succcess");
+                    $(e.target).parents(".account-card").remove();
                     return;
                 }
-
                 console.log(data);
-                $(e.target).attr("data-active", "true");
+                console.log($(e.target).parents(".account-card").find(".err-container"));
+                $(e.target).parents(".account-card").find(".err-container")[0].innerText = data;
+                $(e.target).prop("disabled", false);
             }
         });
     });
     $("#approve-account-container").delegate(".refuse-account-button", "click", function (e) {
-        if ($(e.target).attr("data-active") != "true") return;
-        $(e.target).attr("data-active", "false");
+        if ($(e.target).prop("disabled")) return;
+        $(e.target).prop("disabled", true);
         $.ajax({
             url: "/AdminManager/RefuseAccount",
             type: "POST",
-            data: { id: $(e.target).attr("data-id") },
+            data: { id: $(e.target).attr("data-accountid") },
             success: function (data) {
                 if (data == "Success") {
-                    alert("Succcess");
+                    $(e.target).parents(".account-card").remove();
                     return;
                 }
-
-                console.log(data);
-                $(e.target).attr("data-active", "true");
+                $(e.target).parents(".account-card").find(".err-container")[0].innerText = data;
+                $(e.target).prop("disabled", false);
             }
         });
     });

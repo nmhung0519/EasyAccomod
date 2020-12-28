@@ -43,9 +43,10 @@ namespace EasyAccomod.Models
         [Range(0, 3, ErrorMessage = "Đơn vị tính giá BĐS không hợp lệ")]
         public int PriceUnit { get; set; }
 
+
         [Display(Name = "Giá tiền(VND)")]
         [Required(ErrorMessage = "Giá điện không được để trống")]
-        public double Price { get; set; }
+        public int Price { get; set; }
         [Display(Name = "Loại BĐS")]
         [Range(1,4, ErrorMessage = "Loại BĐS không đúng định dạng")]
         public int Type { get; set; }
@@ -99,7 +100,7 @@ namespace EasyAccomod.Models
         public int TimeLength { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn đơn vị tính thời gian hiển thị")]
-        [Range(1, 3, ErrorMessage = "Đơn vị tính thời gian hiển thị không phù hợp")]
+        [Range(1, 4, ErrorMessage = "Đơn vị tính thời gian hiển thị không phù hợp")]
         public int TimeUnit { get; set; }
 
         [Display(Name = "Hình ảnh")]

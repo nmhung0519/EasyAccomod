@@ -1,78 +1,65 @@
 ﻿
-@model IEnumerable<EasyAccomod.Models.TicketModel>
+@model IEnumerable<EasyAccomod.Models.PostModel>
 
 <link href="~/Content/ApprovePost.css" rel="stylesheet" />
-<h5 class="my-4">Hoàn tác bài đăng</h5>
+<h5 class="my-4">Bài đăng đã từ chối</h5>
 
-<!--One card-->
-<div class="container">
-    <div class=" rounded border mb-4 p-2">
-        <div class="post-wrapper row px-3">
-            <div class="post-image-thumb"></div>
-            <div class="post-info col-12 col-lg-9">
-                <div class="post-top-part">
-                    <span class="post-title">
-                        Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abccc ddd xxxxuzz  hjsjsjsjs
-                        Phòng trọ ngõ 169 Cầu Giấy Hà Nội aaaa he lo woo hii abc
-                    </span>
-                    <span class="post-area">30m2</span>
-                    <span class="post-price">2,5 triệu/tháng</span>
+@foreach (var item in Model)
+{
+    <!--One card-->
+    <div class="container post-card">
+        <div class=" rounded border mb-4 p-2">
+            <div class="post-wrapper row px-3">
+                <div class="post-image-thumb"></div>
+                <div class="post-info col-12 col-lg-9">
+                    <div class="post-top-part">
+                        <span class="post-title">@item.Title</span>
+                        <span class="post-address">@item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName</span>
+                        @{
+                            string area = item.Area + "m2";
+                        }
+                        <span class="post-area">@area</span>
+                        <span class="post-price">@item.DisplayPrice()</span>
+                    </div>
+                    <span class="post-user">@item.Poster.FullName</span>
+                    <span class="post-datetime">@item.CreateTime</span>
+
+
                 </div>
-                <span class="post-user">Nguyễn Mạnh Hùng</span>
-                <span class="post-datetime">17/12/20 12:12 </span>
+            </div>
 
+            <div class="confirm-bar text-right">
+                @if (item.ApprovalTicket != null)
+                {
+                    <span>Người từ chối: </span>
+                    <span>@item.ApprovalTicket.Approver.FullName</span>
+                    <span> - @item.ApprovalTicket.ApprovalTime</span><br />
+                }
+                <div class="btn btn-primary text-right mt-2 undo-post-button" data-postid="@item.Id">Hoàn tác</div>
 
             </div>
-        </div>
-
-        <div class="confirm-bar text-right">
-            <span>Người từ chối: </span>
-            <span>Tên người từ chối</span>
-            <span> - dd/MM//yyyy hh:mm:ss</span><br />
-            <div class="btn btn-primary text-right mt-2">Hoàn tác</div>
-
+            <div class="err-container" style="text-align: left; color: red"></div>
         </div>
     </div>
-</div>
 
-<!--End card-->
-
-
-
-
+    <!--End card-->
+}
 
 <script>
-    $(".approve-post-button").click(function (e) {
-        if ($(e.target).attr("data-active") != "true") return;
-        $(e.target).attr("data-active", "false");
+    $(".undo-post-button").click(function (e) {
+        if ($(e.target).prop("disabled")) return;
+        $(e.target).prop("disabled", true);
         $.ajax({
-            url: "/AdminManager/ApprovePost",
+            url: "/AdminManager/UndoPost",
             type: 'POST',
-            data: { id: $(e.target).attr("data-id") },
+            data: { id: $(e.target).attr("data-postid") },
             success: function (data) {
                 if (data == "Success") {
-                    alert("Success");
+                    $(e.target).parents(".post-card").remove();
                     return;
                 }
-                $(e.target).attr("data-active", "true");
-                console.log(data);
-            }
-        })
-    })
-    $(".refuse-post-button").click(function (e) {
-        if ($(e.target).attr("data-active") != "true") return;
-        $(e.target).attr("data-active", "false");
-        $.ajax({
-            url: "/AdminManager/RefusePost",
-            type: 'POST',
-            data: { id: $(e.target).attr("data-id") },
-            success: function (data) {
-                if (data == "Success") {
-                    alert("Success");
-                    return;
-                }
-                $(e.target).attr("data-active", "true");
-                console.log(data);
+                $(e.target).prop("disabled", false);
+                $(e.target).parents(".post-card").find(".err-container")[0].innerHTML = data;
             }
         })
     })

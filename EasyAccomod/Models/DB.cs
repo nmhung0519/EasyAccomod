@@ -7,6 +7,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EasyAccomod.Helpers;
 
 namespace EasyAccomod.Models
 {
@@ -23,6 +24,7 @@ namespace EasyAccomod.Models
         public DbSet<ViewPostModel> ViewPosts { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
         public DbSet<NotificationModel> Notifications { get; set; }
+        public DbSet<PostPriceModel> PostPrices { get; set; }
     }
 
     [Table("district")]
@@ -156,7 +158,7 @@ namespace EasyAccomod.Models
         public DateTime LastChanged { get; set; }
 
         [Column("price")]
-        public double Price { get; set; }
+        public int Price { get; set; }
 
         [Column("price_unit")]
         public int PriceUnit { get; set; }
@@ -185,11 +187,15 @@ namespace EasyAccomod.Models
         public virtual ICollection<TicketModel> Tickets { get; set; }
         public virtual ICollection<CommentModel> Comments { get; set; }
 
+
+        [NotMapped]
+        public TicketModel ApprovalTicket { get; set; }
+
         public string DisplayPrice()
         {
             if (Price < 0) return "Liên hệ";
-            if (PriceUnit == 1) return Price + "/tháng";
-            if (PriceUnit == 2) return Price + "/năm";
+            if (PriceUnit == 1) return Price.ToVND() + "/tháng";
+            if (PriceUnit == 2) return Price.ToVND() + "/năm";
             return "Liên hệ";
         }
 
@@ -299,6 +305,9 @@ namespace EasyAccomod.Models
         [Column("approved")]
         public bool Approved { get; set; }
 
+        [Column("editrole")]
+        public bool EditRole { get; set; }
+
         public virtual ICollection<PostModel> Posts { get; set; }
         public virtual ICollection<AccountModel> Accounts { get; set; }
         public virtual ICollection<NotificationModel> Notifications { get; set; }
@@ -353,6 +362,8 @@ namespace EasyAccomod.Models
                     return "/AdminManager";
                 case 4:
                     return "/AdminManager";
+                case 7:
+                    return "/EditInfo";
             }
             return "/";
         }
@@ -428,5 +439,19 @@ namespace EasyAccomod.Models
 
         [Column("approval_time")]
         public DateTime ApprovalTime { get; set; }
+    }
+
+    [Table("postprice")]
+    public class PostPriceModel
+    {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("type")]
+        public int Type { get; set; }
+
+        [Column("price")]
+        public int Price { get; set; }
     }
 }

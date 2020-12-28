@@ -52,7 +52,7 @@ namespace EasyAccomod.Controllers
                 newPost.Area = model.Area;
                 if (model.ElectricityBase) newPost.ElectricityPrice = -1;
                 else newPost.ElectricityPrice = model.ElectricityPrice;
-                if (model.WaterBase) newPost.ElectricityPrice = -1;
+                if (model.WaterBase) newPost.WaterPrice = -1;
                 else newPost.WaterPrice = model.WaterPrice;
                 newPost.AirConditioner = (model.AirConditioner) ? 1 : 0;
                 newPost.WaterHeater = (model.WaterHeater) ? 1 : 0;

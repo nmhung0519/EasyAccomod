@@ -76,7 +76,7 @@
 
                                     if (usertype == 1)
                                     {
-                                        <a class="dropdown-item" href="/AdminManager">Quản lý/Phê duyệt bài đăng</a>
+                                        <a class="dropdown-item" href="/AdminManager">Quản lý/Phê duyệt</a>
                                     }
                                 }
                                 <a class="dropdown-item" href="/Account/SignOut">Đăng xuất</a>
@@ -95,8 +95,20 @@
 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="mini-username-display">
-                            <a class="dropdown-item" href="#">Trang cá nhân</a>
+                            <a href="/EditInfo" class="dropdown-item">Chỉnh sửa thông tin</a>
+                            @{
+                                int usertype;
+                                if (int.TryParse(Session["usertype"].ToString(), out usertype) && (usertype == 1 || usertype == 2))
+                                {
+                                    <a class="dropdown-item" href='/UserHomePage/@Session["userid"]'>Trang cá nhân</a>
+                                    <a class="dropdown-item" href="/HostManager">Bài viết đã đăng</a>
+                                }
 
+                                if (usertype == 1)
+                                {
+                                    <a class="dropdown-item" href="/AdminManager">Quản lý/Phê duyệt</a>
+                                }
+                            }
                             <a class="dropdown-item" href="/Account/SignOut">Đăng xuất</a>
                         </div>
                     </div>
@@ -110,7 +122,7 @@
                        {
                             <li class="col-3 col-sm-2 text-center align-self-center">
                                 <a href="/" class="text-decoration-none">
-                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-heart invisible"></i>
                                 </a>
                             </li>
                        }
@@ -120,8 +132,8 @@
                         <li class="col-4 col-sm-4 text-center align-self-center" style="padding:0!important; user-select: none; cursor: pointer;">
                             <a id="notification-bell" style="width:100%; height:100%">
                                 <i class="far fa-bell"></i>
-                                <span style="position: relative; top: -10px;
-                                right: 5px;" class="badge badge-danger">10</span>
+                               <!--- <span style="position: relative; top: -10px;
+                                right: 5px;" class="badge badge-danger">10</span>-->
                             </a>
                         </li>
                     }
@@ -198,7 +210,7 @@
             <div class="col-12 col-lg-9 order-lg-2">
                 <ul class="row text-center p-2" style="list-style-type: none;">
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Hà Nội</h3>
+                        <h3 class="footer-title"><a style="color: #262637; text-decoration: none" href="/ha-noi/tat-ca-bds">Thuê nhà Hà Nội</a></h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>
@@ -208,7 +220,7 @@
 
                     </li>
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà TPHCM</h3>
+                        <h3 class="footer-title"><a style="color: #262637; text-decoration: none" href="/ho-chi-minh/tat-ca-bds">Thuê nhà TPHCM</a></h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>
@@ -217,7 +229,7 @@
                         </ul>
                     </li>
                     <li class="footer-right-parent col-4">
-                        <h3 class="footer-title">Thuê nhà Đà Nẵng</h3>
+                        <h3 class="footer-title"><a style="color: #262637; text-decoration: none" href="/da-nang/tat-ca-bds">Thuê nhà Đà Nẵng</a></h3>
                         <ul class="footer-home-type">
                             <li>Phòng trọ</li>
                             <li>Chung cư mini</li>

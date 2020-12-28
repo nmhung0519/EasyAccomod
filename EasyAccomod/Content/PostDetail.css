@@ -38,6 +38,10 @@
         min-height: 350px;
         max-height: 350px;
     }
+
+    img.d-block {
+        max-height: 350px !important;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -45,6 +49,10 @@
     .post-images {
         min-height: 250px;
         max-height: 250px;
+    }
+
+    img.d-block {
+        max-height: 250px !important;
     }
 }
 
@@ -83,4 +91,8 @@ textarea {
 .post-rating-stars i {
     font-size: 30px;
     cursor: pointer;
+}
+
+img.d-block {
+    max-height: 400px;
 }

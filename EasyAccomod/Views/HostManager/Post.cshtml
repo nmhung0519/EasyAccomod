@@ -34,9 +34,9 @@
                             }
                             <div class="post-info col-12 col-lg-9">
                                 <div class="post-top-part">
-                                    <span class="post-title">
+                                    <a href="/Post/PostDetail/@item.Id" class="post-title">
                                         @item.Title
-                                    </span>
+                                    </a>
                                     <span class="post-address">
                                         @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
                                     </span>
@@ -56,6 +56,9 @@
                                 <span style="color: green">@item.StartTime - @item.EndTime</span>
                             </div>
                             <button class="btn btn-primary host-mng-sold-post" data-postid="@item.Id">Đã cho thuê</button>
+                        </div>
+                        <div class="err-conteiner" style="color: red; text-align: right">
+                            <!--Thông báo lỗi-->
                         </div>
                     </div>
                 </div>
@@ -82,9 +85,9 @@
                             }
                             <div class="post-info col-12 col-lg-9">
                                 <div class="post-top-part">
-                                    <span class="post-title">
+                                    <a href="/Post/PostDetail/@item.Id" class="post-title">
                                         @item.Title
-                                    </span>
+                                    </a>
                                     <span class="post-address">
                                         @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
                                     </span>
@@ -97,11 +100,16 @@
                         </div>
 
                         <div class="confirm-bar text-right">
-                            <div class="btn btn-primary">Sửa bài viết</div>
-                            @if (item.Approved == 0)
-                            {
-                                <div class="btn btn-primary host-mng-delete-post" data-postid="@item.Id">Xoá bài viết</div>
-                            }
+                            <div style="float: left; text-align: left">
+                                @if (item.ApprovalTicket != null) 
+                                {
+                                    <span style="color: darkgoldenrod">Thời gian hiển thị: @item.ApprovalTicket.GetTime()</span>
+                                }
+                            </div>
+                            <button class="btn btn-primary host-mng-delete-post" data-postid="@item.Id">Xoá bài viết</button>
+                        </div>
+                        <div class="err-conteiner" style="color: red; text-align: right">
+                            <!--Thông báo lỗi-->
                         </div>
                     </div>
                 </div>
@@ -128,9 +136,9 @@
                             }
                             <div class="post-info col-12 col-lg-9">
                                 <div class="post-top-part">
-                                    <span class="post-title">
+                                    <a href="/Post/PostDetail/@item.Id" class="post-title">
                                         @item.Title
-                                    </span>
+                                    </a>
                                     <span class="post-address">
                                         @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
                                     </span>
@@ -143,7 +151,28 @@
                         </div>
 
                         <div class="confirm-bar text-right">
-                            <button class="btn btn-primary host-msg-unsold-post" data-postid="@item.Id">Hiển thị bài viết</button>
+                            <div style="float: left; text-align: left">
+                                @if (item.EndTime > DateTime.Now)
+                                {
+                                    <span style="color: darkgoldenrod">Còn thời hạn hiển thị</span> <br />
+                                    <span style="color: darkgoldenrod">@item.StartTime - @item.EndTime</span>
+                                }
+                                else
+                                {
+                                    <span style="color: coral">Đã hết thời hạn hiển thị</span>
+                                }
+                            </div>
+                            @if (item.EndTime > DateTime.Now)
+                            {
+                                <button class="btn btn-primary host-mng-unsold-post" data-postid="@item.Id">Hiển thị bài viết</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary host-mng-extend-post" data-postid="@item.Id">Gia hạn và hiển thị bài viết</button>
+                            }
+                        </div>
+                        <div class="err-conteiner" style="color: red; text-align: right">
+                            <!--Thông báo lỗi-->
                         </div>
                     </div>
                 </div>
@@ -171,9 +200,9 @@
                             }
                             <div class="post-info col-12 col-lg-9">
                                 <div class="post-top-part">
-                                    <span class="post-title">
+                                    <a href="/Post/PostDetail/@item.Id" class="post-title">
                                         @item.Title
-                                    </span>
+                                    </a>
                                     <span class="post-address">
                                         @item.Address - @item.Ward.WardName - @item.District.DistrictName - @item.City.CityName
                                     </span>
@@ -185,7 +214,13 @@
                             </div>
                         </div>
                         <div class="confirm-bar text-right">
-                            <div class="btn btn-primary host-mng-extend-post" data-postid="@item.Id">Gia hạn</div>
+                            <div style="float: left; text-align: left">
+                                <span style="color: red">Thời điểm hết hạn: @item.EndTime</span>
+                            </div>
+                            <button class="btn btn-primary host-mng-extend-post" data-postid="@item.Id">Gia hạn</button>
+                        </div>
+                        <div class="err-conteiner" style="color: red; text-align: right">
+                            <!--Thông báo lỗi-->
                         </div>
                     </div>
                 </div>
@@ -227,8 +262,10 @@
                             </div>
                         </div>
                         <div class="confirm-bar text-right">
-                            <div class="btn btn-primary">Sửa và gửi duyệt</div>
-                            <div class="btn btn-primary host-mng-delete-post" data-postid="@item.Id">Xoá bài viết</div>
+                            <button class="btn btn-primary host-mng-delete-post" data-postid="@item.Id">Xoá bài viết</button>
+                        </div>
+                        <div class="err-conteiner" style="color: red; text-align: right">
+                            <!--Thông báo lỗi-->
                         </div>
                     </div>
                 </div>
@@ -284,31 +321,20 @@
     $("#posttab1").delegate(".host-mng-sold-post", "click", function (e) { changePostStatus(e, true); });
 
     //Event đổi trạng thái bài đăng thành chưa cho thuê
-    $("#posttab3").delegate(".host-mng-unsold-post", "click", function (e) { changePostStatus(e, true); });
+    $("#posttab3").delegate(".host-mng-unsold-post", "click", function (e) { changePostStatus(e, false); });
 
     //Event Xoá bài đăng
     $("#posttab2").delegate(".host-mng-delete-post", "click", function (e) { deletePost(e); });
     $("#posttab5").delegate(".host-mng-delete-post", "click", function (e) { deletePost(e); });
 
     //Event Gia hạn bài đăng
+    $("#posttab3").delegate(".host-mng-extend-post", "click", function (e) { extendPost(e); })
     $("#posttab4").delegate(".host-mng-extend-post", "click", function (e) { extendPost(e); })
 
     function extendPost(e) {
-        if ($(e.target).prop("disabled")) return;
-        $(e.target).prop("disabled", true);
-        $.ajax({
-            url: "/HostManager/ExtendPost",
-            type: "POST",
-            data: { id: $(e.target).attr("data-postid") },
-            success: function (data) {
-                if (data == "Success") {
-                    $(e.target).parents(".post-card").remove();
-                    return;
-                }
-                $(e.target).prop("disabled", false);
-                console.log(data);
-            }
-        })
+        console.log("a");
+        if ($("#extend-post-container").length == 0) $("body").append("<div id='extend-post-container'></div>");
+        $("#extend-post-container").load("/HostManager/ExtendPostBox/" + $(e.target).attr("data-postid"));
     }
 
     function deletePost(e) {
@@ -324,7 +350,7 @@
                     return;
                 }
                 $(e.target).prop("disabled", false);
-                console.log(data);
+                $(e.target).parents(".post-card").find("err-container")[0].innerHTML = data;
             }
         })
     }
@@ -341,7 +367,7 @@
                     $(e.target).parents(".post-card").remove();
                 }
                 $(e.target).prop("disabled");
-                console.log(data);
+                $(e.target).parents(".post-card").find("err-container")[0].innerHTML = data;
             }
         })
     }

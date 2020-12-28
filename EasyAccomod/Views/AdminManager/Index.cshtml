@@ -18,31 +18,31 @@
                             <li class="nav-item">
                                 <a id="approve-post" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Bài đăng chờ duyệt</span>
-                                    <span class="badge badge-danger badge-admin">100</span>
+                                    
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="approved-post" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Bài đăng đã duyệt</span>
-                                    <span class="badge badge-danger badge-admin">100</span>
+                                   
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="denied-post" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Bài đăng đã huỷ</span>
-                                    <span class="badge badge-danger badge-admin">101</span>
+                                   
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="approve-purchase" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Phê duyệt gia hạn</span>
-                                    <span class="badge badge-danger badge-admin">101</span>
+                                  
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="approve-comment" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Phê duyệt bình luận</span>
-                                    <span class="badge badge-danger badge-admin">101</span>
+                                   
                                 </a>
                             </li>
 
@@ -54,19 +54,13 @@
                             <li class="nav-item">
                                 <a id="approve-account" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Tài khoản chờ duyệt</span>
-                                    <span class="badge badge-danger badge-admin">101</span>
+                                    
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="approved-account" class="nav-link" data-toggle="pill" href="#">
                                     <span class="pill-span">Tài khoản đã duyệt</span>
-                                    <span class="badge badge-danger badge-admin">101</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="denied-account" class="nav-link" data-toggle="pill" href="#">
-                                    <span class="pill-span">Tài khoản đã xoá</span>
-                                    <span class="badge badge-danger badge-admin">101</span>
+                                    
                                 </a>
                             </li>
                         </ul>
@@ -87,12 +81,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item-big" style="position: relative;">
-                        <a id="report-post" href="#">
-                            <span class="pill-span">Báo cáo vi phạm </span>
-                            <span class="badge badge-danger badge-admin">50</span>
-                        </a>
-                    </li>
+                    
 
 
                 </ul>
@@ -153,7 +142,7 @@
 
     //đã duyệt
     $("#approved-account").click(function () {
-        $("#content-container").load("/AdminManager/ApproveAccount");
+        $("#content-container").load("/AdminManager/ApprovedAccount");
     });
     //đã từ chối
     $("#denied-account").click(function () {
@@ -183,15 +172,4 @@
     $("#messages").click(function () {
         $("#content-container").load("/AdminManager/ApproveAccount");
     });
-
-
-
-
-
-
-
-
-    
-
-    
 </script>

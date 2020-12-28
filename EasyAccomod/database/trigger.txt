@@ -86,3 +86,26 @@ BEGIN
 	DELETE FROM comment WHERE post_id = OLD.id;
 	DELETE FROM ticket WHERE post_id = OLD.id;
 END;
+
+-- Tạo thông báo khi cấp quyền chỉnh sửa thông tin cá nhân cho host và khi host cập nhật thông tin cá nhân
+DROP TRIGGER IF EXISTS after_update_account;
+CREATE TRIGGER after_update_account
+AFTER UPDATE ON `account`
+FOR EACH ROW
+BEGIN
+	IF (NEW.type = 2) THEN
+		IF (OLD.editrole = 0 AND NEW.editrole = 1) THEN
+		BEGIN
+			INSERT INTO notification (targetid, type, action, createdtime, receiverid)
+			VALUES (0, 7, 'Bạn vừa được cấp quyền chỉnh sửa thông tin cá nhân', CURRENT_TIMESTAMP, NEW.id);
+		END;
+		ELSEIF (OLD.approved = 1 AND NEW.approved = 0) THEN 
+		BEGIN
+			INSERT INTO notification (targetid, type, user, action, createdtime, receiverid)
+			SELECT NEW.id, type, 1, NEW.fullname, 'vừa cập nhật thông tin cá nhân. Xem và phê duyệt ngay', CURRENT_TIMESTAMP, adm.id
+			FROM account adm
+			WHERE adm.type = 1;
+		END;
+		END IF;
+	END IF;
+END;

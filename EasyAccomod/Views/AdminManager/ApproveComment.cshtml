@@ -8,7 +8,7 @@
             foreach (var item in Model)
             {
                 <!--One card-->
-                <div class="container">
+                <div class="container comment-card">
                     <div class=" rounded border mb-4 p-2">
                         <div class="post-wrapper row px-3">
                             @if (item == null || item.Post == null || item.Post.Images == null || item.Post.Images.Count == 0)
@@ -72,7 +72,7 @@
             data: { id: $(e.target).attr("data-id") },
             success: function (data) {
                 if (data == "Success") {
-                    $(e.target).parents(".container").remove();
+                    $(e.target).parents(".comment-card").remove();
                     return;
                 }
                 alert(data);
@@ -91,7 +91,7 @@
             data: { id: $(e.target).attr("data-id") },
             success: function (data) {
                 if (data == "Success") {
-                    $(e.target).parents(".container").remove();
+                    $(e.target).parents(".comment-card").remove();
                     return;
                 }
                 alert(data);

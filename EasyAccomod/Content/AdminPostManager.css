@@ -1,4 +1,7 @@
-﻿.admin-page-container {
+﻿.tab-pane a {
+    font-weight: bold
+}
+.admin-page-container {
     width: 95%;
     padding-right: 0 !important;
     padding-left: 0 !important;

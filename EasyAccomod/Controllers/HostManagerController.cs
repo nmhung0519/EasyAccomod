@@ -40,6 +40,9 @@ namespace EasyAccomod.Controllers
                     db.Entry(item)
                         .Collection(x => x.Images)
                         .Load();
+                    db.Entry(item)
+                        .Collection(x => x.Tickets)
+                        .Load();
                 }
                 HostPostsModel model = new HostPostsModel();
                 model.ShowingPost = (from p in posts
@@ -47,25 +50,33 @@ namespace EasyAccomod.Controllers
                                         && p.IsShow
                                         && !p.Sold
                                         && p.EndTime >= DateTime.Now
+                                     orderby p.EndTime
                                      select p).ToList();
                 model.ApprovingPost = (from p in posts
                                        where p.Approved == 0
-                                            || (p.Approved == 1
-                                            && !p.Sold
-                                            && !p.IsShow
-                                            && p.EndTime.Year < 2)
+                                            || (p.Approved == 1 && p.Tickets.Where(x => x.ApprovalTime.Year <= 2000).Count() > 0)
+                                        orderby p.CreateTime descending
                                        select p).ToList();
                 model.SoldPost = (from p in posts
                                     where p.Sold
+                                    orderby p.CreateTime
                                     select p).ToList();
                 model.ExpiredPost = (from p in posts
                                      where p.Approved == 1
                                         && p.IsShow
                                         && p.EndTime < DateTime.Now
+                                     orderby p.EndTime descending
                                      select p).ToList();
                 model.RefusedPost = (from p in posts
                                     where p.Approved == -1
+                                    orderby p.CreateTime descending
                                     select p).ToList();
+                foreach (var item in model.ApprovingPost)
+                {
+                    item.ApprovalTicket = (from t in item.Tickets
+                                           where t.Approved == 0 && t.ApprovalTime.Year <= 2000
+                                           select t).FirstOrDefault();
+                }
                 return PartialView(model);
             }
         }
@@ -113,6 +124,44 @@ namespace EasyAccomod.Controllers
                 return Json("Success");
             }
             catch (Exception ex) { return Json(ex.Message); }
+        }
+
+        [HttpPost]
+        public JsonResult ExtendPost(int id, int timeUnit, int timeLength)
+        {
+            try
+            {
+                int userid = 0;
+                if (Session["userid"] == null || !int.TryParse(Session["userid"].ToString(), out userid)) return Json("SignInFirst");
+                TicketModel ticket = new TicketModel();
+                ticket.PostId = id;
+                ticket.CreateTime = DateTime.Now;
+                ticket.Time = timeLength;
+                ticket.UnitTime = timeUnit;
+                ticket.ApproverId = userid;
+                using (var db = new DBContext())
+                {
+                    var account = (from a in db.Accounts
+                                   where a.Id == userid
+                                   select a).FirstOrDefault();
+                    if (account == null) return Json("SignInFirst");
+                    var post = (from p in db.Posts
+                                where p.Id == id
+                                select p).FirstOrDefault();
+                    if (post == null) return Json("PostNotFound");
+                    if (post.PosterId != userid) return Json("NotOwned");
+                    post.Sold = false;
+                    db.Tickets.Add(ticket);
+                    db.SaveChanges();
+                    return Json("Success");
+                }
+            }
+            catch (Exception ex) { return Json(ex.Message); }
+        }
+
+        public ActionResult ExtendPostBox(int id)
+        {
+            return PartialView("ExtendPostBox", id.ToString());
         }
     }
 }

@@ -42,7 +42,7 @@ namespace EasyAccomod.Controllers
                 db.Entry(account.Ward)
                     .Reference(x => x.District)
                     .Load();
-                SignUpModel model = new SignUpModel();
+                UserInformationModel model = new UserInformationModel();
                 model.Fullname = account.FullName;
                 model.Phone = account.Phone;
                 model.Email = account.Email;
@@ -51,12 +51,13 @@ namespace EasyAccomod.Controllers
                 model.WardId = account.WardId;
                 model.IdCard = account.IdCard;
                 model.Address = account.Address;
+                model.EditRole = account.EditRole;
                 return PartialView(model);
             }
         }
 
         [HttpPost]
-        public ContentResult UserInformation(SignUpModel model)
+        public ContentResult UserInformation(UserInformationModel model)
         {
             int userid;
             if (Session["userid"] == null || !int.TryParse(Session["userid"].ToString(), out userid)) return Content("<script>window.location.href='/Account/SignIn';</script>", "text/javascript");
@@ -68,6 +69,12 @@ namespace EasyAccomod.Controllers
                                    where a.Id == userid
                                    select a).FirstOrDefault();
                     if (account == null) return Content("<script>window.location.href='/Account/SignOut';</script>", "text/javascript");
+                    if (!account.EditRole) return Content("<span style='color: red'>Bạn phải được admin cấp quyền chỉnh sửa để có thể chỉnh sửa thông tin cá nhân</span>", "text/html");
+                    if (account.Type == 2)
+                    {
+                        account.Approved = false;
+                        account.ApprovalTime = DateTime.MinValue.AddYears(1999);
+                    }
                     account.FullName = model.Fullname;
                     account.Phone = model.Phone;
                     account.Email = model.Email;
@@ -75,6 +82,7 @@ namespace EasyAccomod.Controllers
                     account.WardId = model.WardId;
                     account.Address = model.Address;
                     db.SaveChanges();
+                    if (account.Type == 2) return Content("Cập nhật thông tin cá nhân thành công. Bạn sẽ không được đăng bài cho đến khi admin duyệt.", "text/html");
                 }
                 return Content("Cập nhật thông tin cá nhân thành công", "text/html");
             }

@@ -163,7 +163,7 @@
                 <div class="form-group row">
                     <div class="col-12 col-lg-4">
                         <label for="post-time-base">Thời gian hiển thị</label>
-                        @Html.TextBoxFor(m => m.TimeLength, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.TimeLength, new { @class = "form-control", @value="1" })
                         @Html.ValidationMessageFor(m => m.TimeLength, null, new { @class = "err-msg" })
                     </div>
                     <div class="col-12 col-lg-4">
@@ -177,13 +177,15 @@
                         }, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.TimeUnit, null, new { @class = "err-msg" })
                     </div>
+                    <div class="col-12 col-lg-4">
+                        <label>Số tiền cần thanh toán:</label>
+                        <span class="form-control" id="extend-price" style="color: red">0đ</span>
+                    </div>
                 </div>
                 <h6>Hình ảnh:</h6>
                 <div class="col-12 col-lg-6">
                     <input type="file" id="img-url" name="UploadImages" accept="image/*" multiple>
                 </div>
-
-
                 <div class="col-3 col-lg-6 mt-3">
                     <img id="word-img" src="#" style="width: 100%; max-width: 200px; max-height: 200px;">
                 </div>
@@ -254,4 +256,20 @@
 
         $("#water-price-container").prop("hidden", false);
     });
+    $("#TimeLength").change(function () {
+        updatePrice();
+    });
+    $("#TimeUnit").change(function () {
+        updatePrice();
+    })
+    function updatePrice() {
+        $.ajax({
+            url: "/PostPrice",
+            type: "POST",
+            data: { TimeLength: $("#TimeLength").val(), TimeUnit: $("#TimeUnit").val() },
+            success: function (data) {
+                $("#extend-price")[0].innerHTML = data;
+            }
+        })
+    }s
 </script>
