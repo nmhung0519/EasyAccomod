@@ -258,6 +258,7 @@
             success: function (data) {
                 if (data == "Success") {
                     $("#input-comment-content").val("");
+                    ShowActionSuccessPopup("Bình luận của bạn sẽ được kiểm duyệt trước khi được hiển thị.");
                     ActiveComment();
                     return;
                 }
